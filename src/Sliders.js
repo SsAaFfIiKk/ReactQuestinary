@@ -31,7 +31,7 @@ export default class Sliders extends Component {
         return (
             <div>
                 <div>
-                    <p> Нет {100 - this.state.firstSliderValue}
+                    <p> Нет {100 - this.state.firstSliderValue}%
                         <input
                             name="first"
                             className="slider"

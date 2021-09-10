@@ -1,12 +1,21 @@
-// import './index.css';
-import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'semantic-ui-css/semantic.min.css';
+import { AppContainer } from 'react-hot-loader';
+import App from './App';
 
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const renderApp = () => {
+    ReactDOM.render(
+        <AppContainer>
+            <App />
+        </AppContainer>,
+        document.getElementById('root')
+    );
+};
+
+renderApp();
+
+if (module.hot) {
+    module.hot.accept('./App', renderApp);
+}

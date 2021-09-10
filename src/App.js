@@ -1,14 +1,18 @@
-// import './App.css';
-import Logo from './Logo';
-import Sliders from './Sliders'
+import React from 'react';
+import Main from './Main';
+import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
+import Login from './Login';
 
-function App() {
-    return (
-        <div className="App">
-            <Logo />
-             <Sliders />
-        </div>
-    );
-}
+const App = () => (
+    <div className="app-routes">
+        <BrowserRouter>
+            <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/menu" component={Main} />
+                <Redirect to="/login"/>
+            </Switch>
+        </BrowserRouter>
+    </div>
+);
 
 export default App;
