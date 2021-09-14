@@ -9,11 +9,11 @@ export default class AboutSelf extends Component {
                     <div>
                         <textarea name="aboutSelf"></textarea>
                     </div>
-                    <button type="submit"></button>
+                    <div>
+                        <Sliders />
+                    </div>
+                    <button type="submit"> Отправить</button>
                 </form>
-                <div>
-                    <Sliders />
-                </div>
             </div>
         )
     }

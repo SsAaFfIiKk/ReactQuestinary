@@ -1,4 +1,4 @@
-import "./css/Sliders.css";
+import "../css/Sliders.css";
 import React, { Component } from 'react'
 
 export default class Sliders extends Component {

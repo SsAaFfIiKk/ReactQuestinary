@@ -1,18 +1,32 @@
-import React from 'react';
-import Main from './Main';
-import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
-import Login from './Login';
+import React from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
-const App = () => (
-    <div className="app-routes">
-        <BrowserRouter>
+import Login from "./pages/Login";
+import Sidemenu from "./SideMenu"
+
+export default function App() {
+    return (
+        <Router>
             <Switch>
-                <Route path="/login" component={Login} />
-                <Route path="/menu" component={Main} />
-                <Redirect to="/login"/>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <ProtectedRoute path="/menu">
+                    <Sidemenu/>
+                </ProtectedRoute>
+                <Route exact path="/">
+                    <Redirect exact from="/" to="menu" />
+                </Route>
+                <Route path="*">
+                    <Redirect from="/" to="menu" />
+                </Route>
             </Switch>
-        </BrowserRouter>
-    </div>
-);
-
-export default App;
+        </Router>
+    )
+}
