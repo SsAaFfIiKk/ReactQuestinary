@@ -3,7 +3,8 @@ import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import About from "./pages/AboutSelf"
 import Omo from "./pages/OMO"
-import Inter from "./pages/InterInstruction"
+import Vos from "./pages/Vospriytie.js"
+// import Inter from "./pages/InterInstruction"
 import "./css/SideMenu.css"
 import exit from "./img/logout.png"
 
@@ -38,13 +39,16 @@ class SideMenu extends Component {
                             <Link to={`${match.path}/omo`}>Опрос межличностных орентаций</Link>
                         </li>
                         <li>
-                            <Link to={`${match.path}/self`}>Опрос самоконтроля</Link>
+                            <Link to={`${match.path}/zaslon`}>Заслон</Link>
                         </li>
                         <li>
-                            <Link to={`${match.path}/komp`}>Тест на компетенции</Link>
+                            <Link to={`${match.path}/self`}>Опрос самовосприятия</Link>
                         </li>
                         <li>
                             <Link to={`${match.path}/lusher`}>Тест Люшера</Link>
+                        </li>
+                        <li>
+                            <Link to={`${match.path}/komp`}>Тест на компетенции</Link>
                         </li>
                         {/* <li>
                             <Link to={`${match.path}/inter`}>Интервью</Link>
@@ -60,14 +64,17 @@ class SideMenu extends Component {
                             <Route path={`${match.path}/omo`}>
                                 <Omo />
                             </Route>
-                            <Route path={`${match.path}/self`}>
-                                Самоконтроль
+                            <Route path={`${match.path}/zaslon`}>
+                                Заслон
                             </Route>
-                            <Route path={`${match.path}/komp`}>
-                                Компетенции
+                            <Route path={`${match.path}/self`}>
+                                <Vos />
                             </Route>
                             <Route path={`${match.path}/lusher`}>
                                 lusher
+                            </Route>
+                            <Route path={`${match.path}/komp`}>
+                                Компетенции
                             </Route>
                             {/* <Route path={`${match.path}/inter`}>
                                 <Inter />

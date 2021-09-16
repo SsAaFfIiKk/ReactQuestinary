@@ -1,9 +1,6 @@
-import "../css/OMO.css"
 import React, { Component } from 'react'
 
-import Timer from "../Timer"
-
-export default class OMO extends Component {
+export default class Zaslon extends Component {
     constructor(props) {
         super(props);
 
@@ -15,9 +12,7 @@ export default class OMO extends Component {
             sesion: 69
         };
 
-        this.createQuestions = this.createQuestions.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.sendData = this.sendData.bind(this);
     }
 
     handleChange(event) {
@@ -25,8 +20,7 @@ export default class OMO extends Component {
     }
 
     async componentDidMount() {
-        const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
-        // const ses_link = "http://10.64.34.105:8050/create_session"
+        const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_zaslon_questions"
         const res = await fetch(ses_link, {
             method: "POST",
             body: JSON.stringify({
@@ -37,9 +31,8 @@ export default class OMO extends Component {
         const out = await res.json();
         console.log(out)
         this.setState({ sesion: out })
-        
-        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_omo"
-        // const get_link = "http://10.64.34.105:8050/get_omo"
+
+        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_zaslon_questions"
         fetch(get_link)
             .then(async res => {
                 const data = await res.json();
@@ -63,29 +56,6 @@ export default class OMO extends Component {
                 console.error('There was an error!', error);
             });
     }
-
-    async sendData() {
-        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/calculate_answers_degree"
-        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_omo"
-        // const save_link = 'http://10.64.34.105:8050/save_omo';
-
-        const data = {
-            "answers": this.state.values,
-            "session_id": this.state.sesion,
-            "type": "omo"
-        };
-
-        console.log(data)
-
-        const body = {
-            method: 'POST',
-            mode: "no-cors",
-            body: JSON.stringify(data)
-        };
-
-        fetch(save_link, body)
-        fetch(iter_link, body)
-    };
 
     creteButtons(num, qwNum) {
         let buttons = []
@@ -126,13 +96,8 @@ export default class OMO extends Component {
     render() {
         return (
             <div>
-                <Timer />
-                <form onSubmit={this.sendData}>
-                    {this.createQuestions()}
-                </form>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+
             </div>
         )
     }
-
 }

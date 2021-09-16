@@ -2,6 +2,8 @@ import React from 'react';
 import { Message } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import "../css/Login.css"
+import Arrow from "../img/arrow.svg"
+import Ava from "../img/Ava.svg"
 
 class Login extends React.Component {
     constructor(props) {
@@ -77,7 +79,9 @@ class Login extends React.Component {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa amet augue mattis eleifend elit eros fermentum. Tellus pellentesque nunc id nisl mauris vitae, quis tincidunt pharetra. Ultricies eget nibh nunc leo morbi lacus tempor urna purus. Amet, dui mauris, molestie nunc, sit ut. Vivamus semper id amet mauris. Nunc urna et consequat fames sit. Morbi urna, dapibus euismod nulla sem sem morbi dui. In sapien fames integer morbi eget. Leo nulla eros ac elementum gravida enim vestibulum porttitor faucibus.
                 </div>
                 <div className="autification">
+            
                     <form error={error}>
+                        <img src={Ava} alt="Вход"></img>
                         <header>
                         {error && <Message
                             error={error}
@@ -97,7 +101,7 @@ class Login extends React.Component {
                         </div>
                     </form>
                 </div>
-                <button className="login" onClick={this.onSubmit}>Вход в систему</button>
+                <button className="login" onClick={this.onSubmit}>Вход в систему <img src={Arrow} alt=">"></img></button>
             </div>
         );
     }
