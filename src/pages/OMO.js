@@ -65,8 +65,8 @@ export default class OMO extends Component {
     }
 
     async sendData() {
-        // const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_omo"
-        const save_link = 'http://10.64.34.105:8050/save_omo';
+        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_omo"
+        // const save_link = 'http://10.64.34.105:8050/save_omo';
         const data = {
             "answers": this.state.values,
             "session_id": this.state.sesion,

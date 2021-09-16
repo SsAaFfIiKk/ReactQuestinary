@@ -29,7 +29,7 @@
 
 .buttons {
     display: flex;
-    width: 50%;
+    width: 80%;
     margin: auto;
     align-items: center;
     justify-content: space-around;
@@ -62,8 +62,8 @@ input:hover+.radio, input:checked+.radio {
 
 .buttonsLabels {
     display: flex;
-    justify-content: space-around;
-    width: 50%;
+    justify-content: space-between;
+    width: 80%;
     align-items: center;
     margin: auto;
     font-size: 18px;
