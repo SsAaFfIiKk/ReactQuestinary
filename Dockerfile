@@ -8,7 +8,10 @@ WORKDIR /app
 # RUN cd /app && npm install --pure-lockfile
 COPY . .
 RUN npm install
-RUN npm run-script build
-EXPOSE 7373
-ENV HOST 0.0.0.0
-CMD npm start
+RUN npm run build
+RUN npm install -g serve
+RUN serve -s build
+CMD serve -l 7373 -s build
+# EXPOSE 7373
+# ENV HOST 0.0.0.0
+# CMD npm start
