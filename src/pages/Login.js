@@ -1,6 +1,7 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
+import "../css/Login.css"
 
 class Login extends React.Component {
     constructor(props) {
@@ -22,7 +23,8 @@ class Login extends React.Component {
         e.preventDefault();
         this.setState({ error: false });
 
-        const link = 'http://10.64.34.105:8050/check_user';
+        const link = 'https://mycandidate.onti.actcognitive.org/questionnaires/backend//check_user';
+        // const link = 'http://10.64.34.105:8050/check_user';
         const data = {
             "id": this.state.id,
             "name": this.state.name,
@@ -43,7 +45,6 @@ class Login extends React.Component {
                     localStorage.setItem("id", this.state.id)
                     localStorage.setItem("name", this.state.name)
                     localStorage.setItem("surname", this.state.surname)
-                    // fetch()
                     this.setState({ isLogged: true })
                 }
 
@@ -65,7 +66,7 @@ class Login extends React.Component {
         const { error } = this.state;
         return (
             <div>
-                <div className="titile">
+                <div className="title">
                     <div className="titleText">
                         Cogninitive Neverbal
                         <p>Аунтефикация</p>
@@ -76,26 +77,27 @@ class Login extends React.Component {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa amet augue mattis eleifend elit eros fermentum. Tellus pellentesque nunc id nisl mauris vitae, quis tincidunt pharetra. Ultricies eget nibh nunc leo morbi lacus tempor urna purus. Amet, dui mauris, molestie nunc, sit ut. Vivamus semper id amet mauris. Nunc urna et consequat fames sit. Morbi urna, dapibus euismod nulla sem sem morbi dui. In sapien fames integer morbi eget. Leo nulla eros ac elementum gravida enim vestibulum porttitor faucibus.
                 </div>
                 <div className="autification">
-                    <form error={error} onSubmit={this.onSubmit}>
-                        <header></header>
+                    <form error={error}>
+                        <header>
                         {error && <Message
                             error={error}
-                            content="Не верный данные для входа" />}
-                        <div>Имя</div>
+                            content="Неверный данные для входа" />}
+                        </header>
+                        <div className="ftitle">Имя</div>
                         <div>
                             <input placeholder="введите ваше имя" name="name" onChange={this.handleChange}></input>
                         </div>
-                        <div>Фамилия</div>
+                        <div className="ftitle"> Фамилия</div>
                         <div>
                             <input placeholder="введите вашу Фамилию" name="surname" onChange={this.handleChange}></input>
                         </div>
-                        <div>Номер ИСУ</div>
+                        <div className="ftitle">Номер ИСУ</div>
                         <div>
                             <input placeholder="введите ваш табельный номер ИСУ" name="id" onChange={this.handleChange}></input>
                         </div>
-                        <button type="submit">Вход в систему</button>
                     </form>
                 </div>
+                <button className="login" onClick={this.onSubmit}>Вход в систему</button>
             </div>
         );
     }

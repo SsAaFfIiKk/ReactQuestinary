@@ -6,21 +6,16 @@ export default class OMO extends Component {
         super(props);
 
         this.state = {
-            ids: [1],
-            questions: ["Стремлюсь быть вместе со всеми."],
-            answers: [["Обычно",
-                "Часто",
-                "Иногда",
-                "По случаю",
-                "Редко",
-                "Никогда"]],
+            ids: [],
+            questions: [],
+            answers: [],
             error: null,
-            values: {}
+            values: {},
+            sesion: 69
         };
 
         this.createQuestions = this.createQuestions.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        // this.getData = this.getData.bind(this);
         this.sendData = this.sendData.bind(this);
     }
 
@@ -28,8 +23,24 @@ export default class OMO extends Component {
         this.setState({ values: { ...this.state.values, [event.target.name]: event.target.value } })
     }
 
-    componentDidMount() {
-        fetch("http://10.64.34.105:8050/get_omo")
+    async componentDidMount() {
+        const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+        // const ses_link = "http://10.64.34.105:8050/create_session"
+        const res = await fetch(ses_link, {
+            method: "POST",
+            body: JSON.stringify({
+                "isu_id": localStorage.getItem("id"),
+                "test_name": "omo"
+            })
+        })
+        const out = await res.json();
+        console.log(out)
+        this.setState({ sesion: out })
+        
+
+        // const get_link = "http://10.64.34.105:8050/get_omo"
+        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_omo"
+        fetch(get_link)
             .then(async res => {
                 const data = await res.json();
 
@@ -53,16 +64,13 @@ export default class OMO extends Component {
             });
     }
 
-
-    sendData() {
-        const link = 'http://10.64.34.105:8050/save_omo';
+    async sendData() {
+        // const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_omo"
+        const save_link = 'http://10.64.34.105:8050/save_omo';
         const data = {
-            "id_isu": localStorage.getItem("id"),
-            "name": localStorage.getItem("name"),
-            "surname": localStorage.getItem("surname"),
             "answers": this.state.values,
-            "timestamp": new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
-            "session_id": 123
+            "session_id": this.state.sesion,
+            "type": "omo"
         };
 
         console.log(data)
@@ -71,13 +79,14 @@ export default class OMO extends Component {
             body: JSON.stringify(data)
         };
 
-        fetch(link, body)
+        fetch(save_link, body)
     }
 
     creteButtons(num, qwNum) {
         let buttons = []
         for (let i = 0; i < num; i++) {
             buttons.push(<input
+                className = "radio"
                 key={i + qwNum}
                 type="radio"
                 name={qwNum}
@@ -90,18 +99,18 @@ export default class OMO extends Component {
 
     createQuestions() {
         const questions = []
-        console.log(this.state.questions.length)
         for (let i = 0; i < this.state.questions.length; i++) {
+            const blabels = this.state.answers[i]
             questions.push(
-                <div key={this.state.ids[i]}>
-                    <div className="question">
+                <div key={this.state.ids[i]} className="question">
+                    <div className="questionLabel">
                         {this.state.questions[i]}
                     </div>
                     <div className="buttons">
                         {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
                     </div>
                     <div className="buttonsLabels">
-                        {this.state.answers[i]}
+                        {blabels.map((blabels) => <p>{blabels}</p>)}
                     </div>
                 </div>
             )
@@ -115,7 +124,7 @@ export default class OMO extends Component {
                 <form onSubmit={this.sendData}>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.sendData}>print</button>
+                <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )
     }

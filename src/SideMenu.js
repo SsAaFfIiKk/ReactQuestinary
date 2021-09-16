@@ -3,6 +3,9 @@ import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import About from "./pages/AboutSelf"
 import Omo from "./pages/OMO"
+import Inter from "./pages/InterInstruction"
+import "./css/SideMenu.css"
+import exit from "./img/logout.png"
 
 class SideMenu extends Component {
     constructor(props) {
@@ -25,32 +28,50 @@ class SideMenu extends Component {
         }
         const { match } = this.props;
         return (
-            <div>
-                <ul>
-                    <li>
-                        <Link to={`${match.path}`}>Главная</Link>
-                    </li>
-                    <li>
-                        <Link to={`${match.path}/omo`}>Опрос межличностных орентаций</Link>
-                    </li>
-                    <li>
-                        <Link to={`${match.path}/lusher`}>Тест Люшера</Link>
-                    </li>
-                    <li className="push-right">
-                        <button onClick={this.signOut} href="#">
-                            Выйти
-                        </button>
-                    </li>
-                </ul>
+            <div className="main-flex">
+                <div className="sidenav">
+                    <ul>
+                        <li>
+                            <Link to={`${match.path}`}>Главная</Link>
+                        </li>
+                        <li>
+                            <Link to={`${match.path}/omo`}>Опрос межличностных орентаций</Link>
+                        </li>
+                        <li>
+                            <Link to={`${match.path}/self`}>Опрос самоконтроля</Link>
+                        </li>
+                        <li>
+                            <Link to={`${match.path}/komp`}>Тест на компетенции</Link>
+                        </li>
+                        <li>
+                            <Link to={`${match.path}/lusher`}>Тест Люшера</Link>
+                        </li>
+                        {/* <li>
+                            <Link to={`${match.path}/inter`}>Интервью</Link>
+                        </li> */}
+                        <li>
+                            <button onClick={this.signOut}><img src={exit} alt="Выход" /> Выход</button>
+                        </li>
+                    </ul>
+                </div>
                 <main role="main">
                     <div className="main">
                         <Switch>
                             <Route path={`${match.path}/omo`}>
                                 <Omo />
                             </Route>
+                            <Route path={`${match.path}/self`}>
+                                Самоконтроль
+                            </Route>
+                            <Route path={`${match.path}/komp`}>
+                                Компетенции
+                            </Route>
                             <Route path={`${match.path}/lusher`}>
                                 lusher
                             </Route>
+                            {/* <Route path={`${match.path}/inter`}>
+                                <Inter />
+                            </Route> */}
                             <Route exact path={`${match.path}`}>
                                 <About />
                             </Route>
