@@ -13,7 +13,7 @@ import Sidemenu from "./SideMenu"
 
 export default function App() {
     return (
-        <Router>
+        <Router basename="/questionnaires">
             <Switch>
                 <Route path="/login">
                     <Login />
