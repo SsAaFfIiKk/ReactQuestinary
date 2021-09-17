@@ -9,7 +9,7 @@ import Zas from "./pages/Zaslon"
 import Vosi from "./pages/VosIns"
 import Vos from "./pages/Vospriytie.js"
 import Lusheri from "./pages/LusherIns"
-// import Lusher from "./pages/SecondTest"
+import Lusher from "./pages/SecondTest"
 import Kompi from "./pages/KompIns"
 import Komp from "./pages/Kompetision"
 import "./css/SideMenu.css"
@@ -114,7 +114,7 @@ class SideMenu extends Component {
                                 <Lusheri/>
                             </Route>
                             <Route path={`${match.path}/luscher`}>
-                                {/* <Lusher /> */}
+                                <Lusher />
                             </Route>
                             <Route path={`${match.path}/kompins`}>
                                 <Kompi/>
