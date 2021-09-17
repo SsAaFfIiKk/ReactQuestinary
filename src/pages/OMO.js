@@ -1,5 +1,7 @@
 import "../css/OMO.css"
 import React, { Component } from 'react'
+import {Link} from "react-router-dom"
+import Modal from "../Modal"
 
 export default class OMO extends Component {
     constructor(props) {
@@ -11,12 +13,17 @@ export default class OMO extends Component {
             answers: [],
             values: {},
             sesion: 69,
-            type : "omo"
+            type: "omo",
+            activei: false,
+            activee: false
         };
 
         this.createQuestions = this.createQuestions.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.openEND = this.openEND.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleChange(event) {
@@ -34,7 +41,7 @@ export default class OMO extends Component {
         })
         const out = await res.json();
         this.setState({ sesion: out })
-        
+
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_omo"
         fetch(get_link)
             .then(async res => {
@@ -74,49 +81,102 @@ export default class OMO extends Component {
         fetch(iter_link, body)
     };
 
-    creteButtons(num, qwNum) {
+    // creteButtons(num, qwNum) {
+    //     let buttons = []
+    //     for (let i = 0; i < num; i++) {
+    //         buttons.push(<input
+    //             className="radio"
+    //             key={i + qwNum}
+    //             type="radio"
+    //             name={qwNum}
+    //             value={i}
+    //             onChange={this.handleChange}
+    //         ></input>)
+    //     }
+    //     return buttons
+    // }
+
+    // createQuestions() {
+    //     const questions = []
+    //     for (let i = 0; i < this.state.questions.length; i++) {
+    //         const blabels = this.state.answers[i]
+    //         questions.push(
+    //             <div key={this.state.ids[i]} className="question">
+    //                 <div className="questionLabel">
+    //                     {this.state.questions[i]}
+    //                 </div>
+    //                 <div className="buttons">
+    //                     {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
+    //                 </div>
+    //                 <div className="buttonsLabels">
+    //                     {blabels.map((blabels) => <p>{blabels}</p>)}
+    //                 </div>
+    //             </div>
+    //         )
+    //     }
+    //     return questions
+    // }
+
+    createButtons(num, qwNum, index) {
         let buttons = []
         for (let i = 0; i < num; i++) {
-            buttons.push(<input
-                className="radio"
-                key={i + qwNum}
-                type="radio"
-                name={qwNum}
-                value={i}
-                onChange={this.handleChange}
-            ></input>)
+            buttons.push(
+                <div>
+                    <p>{this.state.answers[index][i]}
+                        <input
+                            key={i + qwNum}
+                            type="radio"
+                            name={qwNum}
+                            value={i}
+                            onChange={this.handleChange}
+                        ></input></p>
+                </div>)
         }
         return buttons
     }
 
     createQuestions() {
-        const questions = []
+        const question = []
         for (let i = 0; i < this.state.questions.length; i++) {
-            const blabels = this.state.answers[i]
-            questions.push(
+            const buttons = this.createButtons(this.state.answers[i].length, this.state.ids[i], i)
+            question.push(
                 <div key={this.state.ids[i]} className="question">
                     <div className="questionLabel">
                         {this.state.questions[i]}
                     </div>
-                    <div className="buttons">
-                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
-                    </div>
-                    <div className="buttonsLabels">
-                        {blabels.map((blabels) => <p>{blabels}</p>)}
+                    <div>
+                        {buttons}
                     </div>
                 </div>
             )
         }
-        return questions
+        return question
+    }
+
+    openModal() {
+        this.setState({ active: true })
+    }
+
+    openEND() {
+        this.setState({ active1: true })
+    }
+
+
+    closeModal() {
+        this.setState({ active: false })
     }
 
     render() {
         return (
             <div>
+                <button onClick={this.openModal}>Инструкция</button>
+                <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Modal from "../Modal"
 
 export default class Vospriytie extends Component {
     constructor(props) {
@@ -133,10 +134,16 @@ export default class Vospriytie extends Component {
     render() {
         return (
             <div>
-                <form>
-                    {this.createQuestions()}
-                </form>
-                <button onClick={this.sendData}>Отправить результаты</button>
+                <div>
+                    <button onClick={this.openModal}>Инструкция</button>
+                    <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                    </Modal>
+                    <form>
+                        {this.createQuestions()}
+                    </form>
+                    <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                    <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
+                </div>
             </div>
         )
     }

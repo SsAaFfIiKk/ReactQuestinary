@@ -8,7 +8,6 @@ import {
 import ProtectedRoute from "./ProtectedRoute";
 
 import Login from "./pages/Login";
-import Signup from "./pages/Signup"
 import Sidemenu from "./SideMenu"
 
 export default function App() {
@@ -17,9 +16,6 @@ export default function App() {
             <Switch>
                 <Route path="/login">
                     <Login />
-                </Route>
-                <Route path="/signup">
-                    <Signup />
                 </Route>
                 <ProtectedRoute path="/menu">
                     <Sidemenu/>

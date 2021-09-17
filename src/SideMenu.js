@@ -19,11 +19,10 @@ class SideMenu extends Component {
         super(props);
         this.state = {
             islogout: false,
-            tests:{}
+            tests: {}
         };
         this.signOut = this.signOut.bind(this)
     }
-
 
     async componentDidMount() {
         const link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/check_user_tests"
@@ -34,7 +33,7 @@ class SideMenu extends Component {
             })
         })
         const out = await res.json();
-        this.setState({ tests: out});
+        this.setState({ tests: out });
     }
 
     signOut() {
@@ -58,10 +57,11 @@ class SideMenu extends Component {
                             Индивидуальные особенности
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/zaslonins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Определение индивидуальных особенностей</Link>
+                                    {/* style={this.state.tests["omo"] ? null : { pointerEvents: "none" }} */}
+                                    <Link to={`${match.path}/zaslonins`}>Определение индивидуальных особенностей</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none" }}>Тест Люшера</Link>
+                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Тест Люшера</Link>
                                 </li>
                             </ul>
                         </li>
@@ -69,10 +69,10 @@ class SideMenu extends Component {
                             Команда
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/omoins`} style={this.state.tests["user_state"] ? null : { pointerEvents: "none" }}>Опрос межличностных орентаций</Link>
+                                    <Link to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" }}>Опрос самовосприятия</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/vosins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Опрос самовосприятия</Link>
+                                    <Link to={`${match.path}/omoins`} style={this.state.tests["vos"] ? null : { pointerEvents: "none" }}>Опрос межличностных орентаций</Link>
                                 </li>
                             </ul>
                         </li>
@@ -80,7 +80,8 @@ class SideMenu extends Component {
                             Профессиональные интересоы
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/kompins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" } }>Тест на компетенции</Link>
+
+                                    <Link to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Тест на компетенции</Link>
                                 </li>
                             </ul>
                         </li>
@@ -111,13 +112,13 @@ class SideMenu extends Component {
                                 <Vos />
                             </Route>
                             <Route path={`${match.path}/luscherins`}>
-                                <Lusheri/>
+                                <Lusheri />
                             </Route>
                             <Route path={`${match.path}/luscher`}>
                                 <Lusher />
                             </Route>
                             <Route path={`${match.path}/kompins`}>
-                                <Kompi/>
+                                <Kompi />
                             </Route>
                             <Route path={`${match.path}/komp`}>
                                 <Komp />

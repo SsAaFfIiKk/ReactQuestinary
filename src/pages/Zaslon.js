@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// import Timer from "../Timer"
+import Timer from "../Timer"
+import Modal from "../Modal"
 
 export default class Zaslon extends Component {
     constructor(props) {
@@ -11,12 +12,9 @@ export default class Zaslon extends Component {
             answers: [],
             values: {},
             sesion: 69,
-            time: {},
-            seconds: 5
+            activei: false,
+            activee: false
         };
-
-        this.timer = 0;
-        // this.countDown = this.countDown.bind(this);
 
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
@@ -28,7 +26,7 @@ export default class Zaslon extends Component {
 
     async componentDidMount() {
         const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
-        
+
         const res = await fetch(ses_link, {
             method: "POST",
             body: JSON.stringify({
@@ -36,7 +34,7 @@ export default class Zaslon extends Component {
                 "test_name": "zaslon"
             })
         })
-        
+
         const out = await res.json();
         this.setState({ sesion: out })
 
@@ -78,45 +76,6 @@ export default class Zaslon extends Component {
         // fetch(iter_link, body)
     };
 
-    // secondsToTime(secs) {
-    //     let hours = Math.floor(secs / (60 * 60));
-
-    //     let divisor_for_minutes = secs % (60 * 60);
-    //     let minutes = Math.floor(divisor_for_minutes / 60);
-
-    //     let divisor_for_seconds = divisor_for_minutes % 60;
-    //     let seconds = Math.ceil(divisor_for_seconds);
-
-    //     let obj = {
-    //         "h": hours,
-    //         "m": minutes,
-    //         "s": seconds
-    //     };
-    //     return obj;
-    // }
-
-    // componentDidMount() {
-    //     let timeLeftVar = this.secondsToTime(this.state.seconds);
-    //     this.setState({ time: timeLeftVar });
-    //     if (this.timer == 0 && this.state.seconds > 0) {
-    //         this.timer = setInterval(this.countDown, 1000);
-    //     }
-    // }
-
-    // countDown() {
-    //     // Remove one second, set state so a re-render happens.
-    //     let seconds = this.state.seconds - 1;
-    //     this.setState({
-    //         time: this.secondsToTime(seconds),
-    //         seconds: seconds,
-    //     });
-
-    //     // Check if we're at zero.
-    //     if (seconds == 0) {
-    //         clearInterval(this.timer);
-    //     }
-    // }
-
     creteButtons(num, qwNum) {
         let buttons = []
         for (let i = 0; i < num; i++) {
@@ -156,11 +115,16 @@ export default class Zaslon extends Component {
     render() {
         return (
             <div>
-                {/* <Timer/> */}
-                <form onSubmit={this.sendData}>
+                <Timer send={this.sendData} />
+                <button onClick={this.openModal}>Инструкция</button>
+                <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                </Modal>
+                <form>
                     {this.createQuestions()}
+                    <button onClick={this.sendData}>Отпрпваить результаты</button>
                 </form>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
             </div>
         )
     }

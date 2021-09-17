@@ -171,12 +171,24 @@ const Card2 = [
     },
 ];
 const cards = [0]
+let out
+
+async function componentDidMount() {
+    const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+    const res = await fetch(ses_link, {
+        method: "POST",
+        body: JSON.stringify({
+            "isu_id": localStorage.getItem("id"),
+            "test_name": this.state.type
+        })
+    })
+    out = await res.json();
+}
 
 function handleClick(item, answerType) {
     if (!answers[answerType].includes(item.id_color)) {
         answers[answerType].push(item.id_color);
     }
-    console.log(answers);
 }
 
 let answers = { first: [], second: [] }
@@ -206,10 +218,9 @@ function SecondTest() {
     }
 
     return (
-        
         <main className={classes.luscherMain}>
             <Modal active={modalActive} setActive={setModalActive}>
-<button>124</button>
+                <button>124</button>
             </Modal>
             <div className={classes.mainContent}>
                 <Container maxWidth="md">
@@ -243,7 +254,7 @@ function SecondTest() {
             <div className={classes.mainButtons}>
                 <Grid container spacing={5} justify="center">
                     <Button variant="contained" color="second" component={RouterLink} to="/finish"> Завершить тестирование </Button>
-                    <Button variant="contained" color="second" onClick={()=>setModalActive(true)}> Модальное окно </Button>
+                    <Button variant="contained" color="second" onClick={() => setModalActive(true)}> Модальное окно </Button>
                 </Grid>
             </div>
         </main>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import "../css/Login.css"
 import Arrow from "../img/arrow.svg"
 import Ava from "../img/Ava.svg"
@@ -92,7 +92,6 @@ class Login extends React.Component {
                         </div>
                     </form>
                 </div>
-                <Link to='/signup'><button>Регистрация</button></Link>
                 <button className="login" onClick={this.onSubmit}>Вход в систему <img src={Arrow} alt=">"></img></button>
             </div>
         );

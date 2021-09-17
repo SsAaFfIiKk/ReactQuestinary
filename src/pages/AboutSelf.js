@@ -2,6 +2,21 @@ import React, { Component } from 'react'
 import "../css/AboutSelf.css"
 
 export default class AboutSelf extends Component {
+
+    async sendData() {
+        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/update_profile"
+        const data = {
+
+        };
+
+        const body = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        };
+
+        fetch(save_link, body)
+    };
+
     render() {
         return (
             <div>
@@ -9,14 +24,14 @@ export default class AboutSelf extends Component {
                     Для участия в исследовании заполните, пожалуйста, следующие поля:
                 </div>
                 <form>
-                    <div>
+                    {/* <div>
                         <p>Имя</p>
                         <input required type="text"></input>
                     </div>
                     <div>
                         <p>Фамилия</p>
                         <input required type="text"></input>
-                    </div>
+                    </div> */}
                     <div>
                         <p>Пол</p>
                         <label htmlFor="1">Мужкской</label>
@@ -26,12 +41,12 @@ export default class AboutSelf extends Component {
                     </div>
                     <div>
                         <p>Возраст</p>
-                        <input type="number" min="1" max="100"></input>
+                        <input type="text" maxlength="3"></input>
                     </div>
-                    <div>
+                    {/* <div>
                         <p>Табельный номер ИСУ</p>
-                        <input required type="number" min="1" max="999999"></input>
-                    </div>
+                        <input required type="text" maxLength="6"></input>
+                    </div> */}
                     <div>
                         <p>Ссылка на VK</p>
                         <input type="text"></input>
@@ -58,7 +73,6 @@ export default class AboutSelf extends Component {
                     </div>
                     <button type="submit"> Отправить</button>
                 </form>
-                <button>Обновить данные для входа</button>
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Modal from "../Modal"
 
 export default class Kompetision extends Component {
     constructor(props) {
@@ -10,7 +11,8 @@ export default class Kompetision extends Component {
             answers: [],
             is_qustoms: [],
             values: {},
-            sesion: 69
+            sesion: 69,
+            type: "competence"
         };
 
         this.createQuestions = this.createQuestions.bind(this);
@@ -24,7 +26,7 @@ export default class Kompetision extends Component {
             method: "POST",
             body: JSON.stringify({
                 "isu_id": localStorage.getItem("id"),
-                "test_name": "competence"
+                "test_name": this.state.type
             })
         })
         const out = await res.json();
@@ -57,7 +59,7 @@ export default class Kompetision extends Component {
         const data = {
             "answers": this.state.values,
             "session_id": this.state.sesion,
-            "type": "competence"
+            "type": this.state.compitions
         };
 
         const body = {
@@ -77,32 +79,66 @@ export default class Kompetision extends Component {
         }
     };
 
+    updateVal(event) {
+        const tar = event.target
+        const check = "c" + document.getElementById(tar.id).id
+        document.getElementById(check).value = tar.value
+    }
+
+    createCheckBox(num, qwNum, index) {
+        let buttons = []
+        for (let i = 0; i < num; i++) {
+            buttons.push(
+                <div>
+                    <p>{this.state.answers[index][i]}
+                        <input
+                            key={i + qwNum}
+                            type="checkbox"
+                            name={qwNum}
+                            value={this.state.answers[index][i]}
+                            onChange={this.handleChange}
+                        ></input></p>
+                </div>)
+        }
+        if (this.state.is_qustoms[index]) {
+            buttons.push(<div>
+                <p>Свой вариант:
+                    <input id={index} type="text" onChange={this.updateVal}></input>
+                    <input id={"c"+index} type="checkbox" onChange={this.handleChange}></input></p>
+            </div>)
+        }
+        return buttons
+    }
+
     createQuestions() {
         const questions = []
         for (let i = 0; i < this.state.compitions.length; i++) {
+            const buttons = this.createCheckBox(this.state.answers[i].length, this.state.ids[i], i)
             questions.push(
                 <div key={this.state.ids[i]} className="question">
-                    <input type="checkbox" value={this.state.compitions[i]} onChange={this.handleChange}></input>{this.state.compitions[i]}
+                    <div className="questionLabel">
+                        {this.state.compitions[i]}
+                    </div>
+                    <div>
+                        {buttons}
+                    </div>
                 </div>
             )
         }
         return questions
     }
 
-    createComp() {
-        const cname = document.getElementById("custom").value
-        document.getElementsByClassName("question").appendChild = `<input type = "checkbox" value = ${ cname } onChange = { this.handleChange } ></input > ${ cname }`
-    }
-    
     render() {
         return (
             <div>
+                <button onClick={this.openModal}>Инструкция</button>
+                <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
-                <input type="text" id="custom"></input>
-                <button onClick={this.createComp}>Добавить свою тему</button>
+                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
             </div>
         )
     }
