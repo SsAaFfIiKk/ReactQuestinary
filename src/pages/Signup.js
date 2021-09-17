@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Message } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 export default class Registr extends Component {
     constructor(props) {
@@ -20,13 +21,12 @@ export default class Registr extends Component {
         e.preventDefault();
         this.setState({ error: false });
 
-        // const link = `http://10.64.34.105:8050/registration?isu_id=${this.state.id}&name=${this.state.name}&surname=${this.state.surname}`;
         const link = `https://mycandidate.onti.actcognitive.org/questionnaires/backend//registration?isu_id=${this.state.id}&name=${this.state.name}&surname=${this.state.surname}`;
         fetch(link,
             { method: "POST" })
             .then(res => res.json())
             .then(out => {
-                console.log(out);
+                if (!out) { this.setState({ error: true }) };
             })
     };
 
@@ -48,7 +48,7 @@ export default class Registr extends Component {
                         <header>
                             {error && <Message
                                 error={error}
-                                content="Вы уже зарегистрированы" />}
+                                content="Пользователь с такими данными уже зарегистрирован" />}
                         </header>
                         <div>Имя</div>
                         <div>
@@ -62,6 +62,7 @@ export default class Registr extends Component {
                         <div>
                             <input required placeholder="введите ваш табельный номер ИСУ" name="id" onChange={this.handleChange}></input>
                         </div>
+                        <Link to='/login'><button>Вход</button></Link>
                         <button type="submit">Зарегистрироваться</button>
                     </form>
                 </div>

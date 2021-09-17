@@ -1,27 +1,22 @@
-import "../css/OMO.css"
 import React, { Component } from 'react'
 
-export default class OMO extends Component {
+export default class Kompetision extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             ids: [],
-            questions: [],
+            compitions: [],
             answers: [],
+            is_qustoms: [],
             values: {},
-            sesion: 69,
-            type : "omo"
+            sesion: 69
         };
 
         this.createQuestions = this.createQuestions.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({ values: { ...this.state.values, [event.target.name]: event.target.value } })
-    }
 
     async componentDidMount() {
         const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
@@ -29,13 +24,13 @@ export default class OMO extends Component {
             method: "POST",
             body: JSON.stringify({
                 "isu_id": localStorage.getItem("id"),
-                "test_name": this.state.type
+                "test_name": "competence"
             })
         })
         const out = await res.json();
         this.setState({ sesion: out })
-        
-        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_omo"
+
+        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_competence_questions"
         fetch(get_link)
             .then(async res => {
                 const data = await res.json();
@@ -48,21 +43,21 @@ export default class OMO extends Component {
                 for (let i in data) {
                     this.setState({
                         ids: [...this.state.ids, data[i]["id"]],
-                        questions: [...this.state.questions, data[i]["text"]],
-                        answers: [...this.state.answers, Object.values(data[i]["answers"])]
+                        compitions: [...this.state.compitions, data[i]["q_text"]],
+                        answers: [...this.state.answers, data[i]["answers"]],
+                        is_qustoms: [...this.state.is_qustoms, data[i]["is_custom"]]
                     })
                 }
             })
     }
 
-    async sendData() {
-        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/calculate_answers_degree"
-        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_omo"
 
+    async sendData() {
+        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_competence"
         const data = {
             "answers": this.state.values,
             "session_id": this.state.sesion,
-            "type": this.state.type
+            "type": "competence"
         };
 
         const body = {
@@ -70,46 +65,35 @@ export default class OMO extends Component {
             body: JSON.stringify(data)
         };
 
+        console.log(data)
         fetch(save_link, body)
-        fetch(iter_link, body)
     };
 
-    creteButtons(num, qwNum) {
-        let buttons = []
-        for (let i = 0; i < num; i++) {
-            buttons.push(<input
-                className="radio"
-                key={i + qwNum}
-                type="radio"
-                name={qwNum}
-                value={i}
-                onChange={this.handleChange}
-            ></input>)
+    handleChange = ({ target: { checked, value } }) => {
+        if (checked) {
+            this.setState(({ values }) => ({ values: [...values, value] }));
+        } else {
+            this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
         }
-        return buttons
-    }
+    };
 
     createQuestions() {
         const questions = []
-        for (let i = 0; i < this.state.questions.length; i++) {
-            const blabels = this.state.answers[i]
+        for (let i = 0; i < this.state.compitions.length; i++) {
             questions.push(
                 <div key={this.state.ids[i]} className="question">
-                    <div className="questionLabel">
-                        {this.state.questions[i]}
-                    </div>
-                    <div className="buttons">
-                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
-                    </div>
-                    <div className="buttonsLabels">
-                        {blabels.map((blabels) => <p>{blabels}</p>)}
-                    </div>
+                    <input type="checkbox" value={this.state.compitions[i]} onChange={this.handleChange}></input>{this.state.compitions[i]}
                 </div>
             )
         }
         return questions
     }
 
+    createComp() {
+        const cname = document.getElementById("custom").value
+        document.getElementsByClassName("question").appendChild = `<input type = "checkbox" value = ${ cname } onChange = { this.handleChange } ></input > ${ cname }`
+    }
+    
     render() {
         return (
             <div>
@@ -117,8 +101,9 @@ export default class OMO extends Component {
                     {this.createQuestions()}
                 </form>
                 <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <input type="text" id="custom"></input>
+                <button onClick={this.createComp}>Добавить свою тему</button>
             </div>
         )
     }
-
 }

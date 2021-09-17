@@ -1,6 +1,6 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import "../css/Login.css"
 import Arrow from "../img/arrow.svg"
 import Ava from "../img/Ava.svg"
@@ -25,8 +25,7 @@ class Login extends React.Component {
         e.preventDefault();
         this.setState({ error: false });
 
-        const link = 'https://mycandidate.onti.actcognitive.org/questionnaires/backend//check_user';
-        // const link = 'http://10.64.34.105:8050/check_user';
+        const link = 'https://mycandidate.onti.actcognitive.org/questionnaires/backend/check_user';
         const data = {
             "id": this.state.id,
             "name": this.state.name,
@@ -68,18 +67,10 @@ class Login extends React.Component {
         const { error } = this.state;
         return (
             <div>
-                <div className="title">
-                    <div className="titleText">
-                        Cogninitive Neverbal
-                        <p>Аунтефикация</p>
-                    </div>
+                <div className="nstruction">
+                    «Исследование личностных и профессиональных характеристик сотрудников и обучающихся» проводится для того, чтобы помочь студентам выбрать наиболее подходящие для них направления научно-исследовательской работы, а также сформировать из студентов коллективы на основании их индивидуальных особенностей и научных интересов.
                 </div>
-                <div className="instruction">
-                    <p>Инструкция: </p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa amet augue mattis eleifend elit eros fermentum. Tellus pellentesque nunc id nisl mauris vitae, quis tincidunt pharetra. Ultricies eget nibh nunc leo morbi lacus tempor urna purus. Amet, dui mauris, molestie nunc, sit ut. Vivamus semper id amet mauris. Nunc urna et consequat fames sit. Morbi urna, dapibus euismod nulla sem sem morbi dui. In sapien fames integer morbi eget. Leo nulla eros ac elementum gravida enim vestibulum porttitor faucibus.
-                </div>
-                <div className="autification">
-            
+                <div className="loginform">
                     <form error={error}>
                         <img src={Ava} alt="Вход"></img>
                         <header>
@@ -101,6 +92,7 @@ class Login extends React.Component {
                         </div>
                     </form>
                 </div>
+                <Link to='/signup'><button>Регистрация</button></Link>
                 <button className="login" onClick={this.onSubmit}>Вход в систему <img src={Arrow} alt=">"></img></button>
             </div>
         );

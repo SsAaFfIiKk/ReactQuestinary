@@ -17,7 +17,7 @@
     border-radius: 8px;
 }
 
-.autification {
+.loginform {
     margin: auto;
     margin-top: 100px;
     width: 655px;
@@ -54,11 +54,11 @@
     /* height: 0px;
     left: 392px;
     right: 436px;*/
-    top: calc(50% - 0px/2 + 17px);
-    border: 2px solid #222291;
+    /* top: calc(50% - 0px/2 + 17px); */
+    /* border: 2px solid #222291; */
 }
 
-.autification input {
+.loginform input {
     width: 600px;
     left: 392px;
     right: 436px;

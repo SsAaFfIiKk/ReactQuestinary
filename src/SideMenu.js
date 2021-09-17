@@ -2,26 +2,45 @@ import React, { Component } from "react";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import About from "./pages/AboutSelf"
+import Omoi from "./pages/OmoIns"
 import Omo from "./pages/OMO"
+import Zasi from "./pages/ZaslonIns"
+import Zas from "./pages/Zaslon"
+import Vosi from "./pages/VosIns"
 import Vos from "./pages/Vospriytie.js"
-// import Inter from "./pages/InterInstruction"
+import Lusheri from "./pages/LusherIns"
+// import Lusher from "./pages/SecondTest"
+import Kompi from "./pages/KompIns"
+import Komp from "./pages/Kompetision"
 import "./css/SideMenu.css"
-import exit from "./img/logout.png"
 
 class SideMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            islogout: false
+            islogout: false,
+            tests:{}
         };
+        this.signOut = this.signOut.bind(this)
     }
 
-    signOut = () => {
+
+    async componentDidMount() {
+        const link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/check_user_tests"
+        const res = await fetch(link, {
+            method: "POST",
+            body: JSON.stringify({
+                "id": localStorage.getItem("id"),
+            })
+        })
+        const out = await res.json();
+        this.setState({ tests: out});
+    }
+
+    signOut() {
         localStorage.removeItem("token");
-        this.setState({
-            islogout: true
-        });
-    };
+        this.setState({ islogout: true });
+    }
 
     render() {
         if (this.state.islogout) {
@@ -36,49 +55,73 @@ class SideMenu extends Component {
                             <Link to={`${match.path}`}>Главная</Link>
                         </li>
                         <li>
-                            <Link to={`${match.path}/omo`}>Опрос межличностных орентаций</Link>
+                            Индивидуальные особенности
+                            <ul>
+                                <li>
+                                    <Link to={`${match.path}/zaslonins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Определение индивидуальных особенностей</Link>
+                                </li>
+                                <li>
+                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none" }}>Тест Люшера</Link>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <Link to={`${match.path}/zaslon`}>Заслон</Link>
+                            Команда
+                            <ul>
+                                <li>
+                                    <Link to={`${match.path}/omoins`} style={this.state.tests["user_state"] ? null : { pointerEvents: "none" }}>Опрос межличностных орентаций</Link>
+                                </li>
+                                <li>
+                                    <Link to={`${match.path}/vosins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Опрос самовосприятия</Link>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <Link to={`${match.path}/self`}>Опрос самовосприятия</Link>
+                            Профессиональные интересоы
+                            <ul>
+                                <li>
+                                    <Link to={`${match.path}/kompins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" } }>Тест на компетенции</Link>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <Link to={`${match.path}/lusher`}>Тест Люшера</Link>
-                        </li>
-                        <li>
-                            <Link to={`${match.path}/komp`}>Тест на компетенции</Link>
-                        </li>
-                        {/* <li>
-                            <Link to={`${match.path}/inter`}>Интервью</Link>
-                        </li> */}
-                        <li>
-                            <button onClick={this.signOut}><img src={exit} alt="Выход" /> Выход</button>
+                            <button onClick={this.signOut}>Выход</button>
                         </li>
                     </ul>
                 </div>
                 <main role="main">
                     <div className="main">
                         <Switch>
+                            <Route path={`${match.path}/omoins`}>
+                                <Omoi />
+                            </Route>
                             <Route path={`${match.path}/omo`}>
                                 <Omo />
                             </Route>
-                            <Route path={`${match.path}/zaslon`}>
-                                Заслон
+                            <Route path={`${match.path}/zaslonins`}>
+                                <Zasi />
                             </Route>
-                            <Route path={`${match.path}/self`}>
+                            <Route path={`${match.path}/zaslon`}>
+                                <Zas />
+                            </Route>
+                            <Route path={`${match.path}/vosins`}>
+                                <Vosi />
+                            </Route>
+                            <Route path={`${match.path}/vos`}>
                                 <Vos />
                             </Route>
-                            <Route path={`${match.path}/lusher`}>
-                                lusher
+                            <Route path={`${match.path}/luscherins`}>
+                                <Lusheri/>
+                            </Route>
+                            <Route path={`${match.path}/luscher`}>
+                                {/* <Lusher /> */}
+                            </Route>
+                            <Route path={`${match.path}/kompins`}>
+                                <Kompi/>
                             </Route>
                             <Route path={`${match.path}/komp`}>
-                                Компетенции
+                                <Komp />
                             </Route>
-                            {/* <Route path={`${match.path}/inter`}>
-                                <Inter />
-                            </Route> */}
                             <Route exact path={`${match.path}`}>
                                 <About />
                             </Route>

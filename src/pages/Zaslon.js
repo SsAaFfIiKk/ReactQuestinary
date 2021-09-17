@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import Timer from "../Timer"
 
 export default class Zaslon extends Component {
     constructor(props) {
@@ -9,10 +10,16 @@ export default class Zaslon extends Component {
             questions: [],
             answers: [],
             values: {},
-            sesion: 69
+            sesion: 69,
+            time: {},
+            seconds: 5
         };
 
+        this.timer = 0;
+        // this.countDown = this.countDown.bind(this);
+
         this.handleChange = this.handleChange.bind(this);
+        this.sendData = this.sendData.bind(this);
     }
 
     handleChange(event) {
@@ -20,23 +27,23 @@ export default class Zaslon extends Component {
     }
 
     async componentDidMount() {
-        const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_zaslon_questions"
+        const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+        
         const res = await fetch(ses_link, {
             method: "POST",
             body: JSON.stringify({
                 "isu_id": localStorage.getItem("id"),
-                "test_name": "omo"
+                "test_name": "zaslon"
             })
         })
+        
         const out = await res.json();
-        console.log(out)
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_zaslon_questions"
         fetch(get_link)
             .then(async res => {
                 const data = await res.json();
-
                 if (!res.ok) {
                     const er = res.statusText;
                     return Promise.reject(er)
@@ -50,12 +57,65 @@ export default class Zaslon extends Component {
                     })
                 }
             })
-
-            .catch(error => {
-                this.setState({ error: error.toString() });
-                console.error('There was an error!', error);
-            });
     }
+
+    async sendData() {
+        // const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/calculate_answers_degree"
+        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_zaslon"
+
+        const data = {
+            "answers": this.state.values,
+            "session_id": this.state.sesion,
+            "type": "zaslon"
+        };
+
+        const body = {
+            method: 'POST',
+            body: JSON.stringify(data)
+        };
+
+        fetch(save_link, body)
+        // fetch(iter_link, body)
+    };
+
+    // secondsToTime(secs) {
+    //     let hours = Math.floor(secs / (60 * 60));
+
+    //     let divisor_for_minutes = secs % (60 * 60);
+    //     let minutes = Math.floor(divisor_for_minutes / 60);
+
+    //     let divisor_for_seconds = divisor_for_minutes % 60;
+    //     let seconds = Math.ceil(divisor_for_seconds);
+
+    //     let obj = {
+    //         "h": hours,
+    //         "m": minutes,
+    //         "s": seconds
+    //     };
+    //     return obj;
+    // }
+
+    // componentDidMount() {
+    //     let timeLeftVar = this.secondsToTime(this.state.seconds);
+    //     this.setState({ time: timeLeftVar });
+    //     if (this.timer == 0 && this.state.seconds > 0) {
+    //         this.timer = setInterval(this.countDown, 1000);
+    //     }
+    // }
+
+    // countDown() {
+    //     // Remove one second, set state so a re-render happens.
+    //     let seconds = this.state.seconds - 1;
+    //     this.setState({
+    //         time: this.secondsToTime(seconds),
+    //         seconds: seconds,
+    //     });
+
+    //     // Check if we're at zero.
+    //     if (seconds == 0) {
+    //         clearInterval(this.timer);
+    //     }
+    // }
 
     creteButtons(num, qwNum) {
         let buttons = []
@@ -96,7 +156,11 @@ export default class Zaslon extends Component {
     render() {
         return (
             <div>
-
+                {/* <Timer/> */}
+                <form onSubmit={this.sendData}>
+                    {this.createQuestions()}
+                </form>
+                <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )
     }

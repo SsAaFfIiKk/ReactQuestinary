@@ -3,6 +3,8 @@
     flex-direction: row;
 }
 
+
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -24,7 +26,7 @@ ul {
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14px;
     color: #FFFFFF;
     display: block;
 }
@@ -39,13 +41,13 @@ main {
     margin-left: 20%;
 }
 
-.sidenav button {
+/* .sidenav button {
     background-color: #342C9F;
     border: 0;
     cursor: pointer;
-}
+} */
 
-img {
+/* img {
     width: 40px;
     height: 40px;
-}
+} */
