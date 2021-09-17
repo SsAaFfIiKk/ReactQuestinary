@@ -41,7 +41,7 @@ export default class AboutSelf extends Component {
                     </div>
                     <div>
                         <p>Возраст</p>
-                        <input type="text" maxlength="3"></input>
+                        <input type="text" maxLength="3"></input>
                     </div>
                     {/* <div>
                         <p>Табельный номер ИСУ</p>

@@ -34,6 +34,7 @@ class SideMenu extends Component {
         })
         const out = await res.json();
         this.setState({ tests: out });
+        console.log(out)
     }
 
     signOut() {
@@ -72,7 +73,7 @@ class SideMenu extends Component {
                                     <Link to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" }}>Опрос самовосприятия</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/omoins`} style={this.state.tests["vos"] ? null : { pointerEvents: "none" }}>Опрос межличностных орентаций</Link>
+                                    <Link to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none" }}>Опрос межличностных орентаций</Link>
                                 </li>
                             </ul>
                         </li>

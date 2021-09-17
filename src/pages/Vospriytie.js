@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Modal from "../Modal"
+import { Link } from "react-router-dom"
 
 export default class Vospriytie extends Component {
     constructor(props) {
@@ -12,11 +13,16 @@ export default class Vospriytie extends Component {
             count: [],
             values: {},
             sesion: 69,
-            type: "self_perception"
+            type: "self_perception",
+            activei: false,
+            activee: false
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.openEND = this.openEND.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleChange(event) {
@@ -131,12 +137,25 @@ export default class Vospriytie extends Component {
         return questions
     }
 
+    openModal() {
+        this.setState({ active: true })
+    }
+
+    openEND() {
+        this.setState({ active1: true })
+    }
+
+
+    closeModal() {
+        this.setState({ active: false })
+    }
+
     render() {
         return (
             <div>
                 <div>
                     <button onClick={this.openModal}>Инструкция</button>
-                    <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                    <Modal active={this.state.active} setActive={this.closeModal}>  Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
                     </Modal>
                     <form>
                         {this.createQuestions()}

@@ -170,21 +170,22 @@ const Card2 = [
         width: '50%',
     },
 ];
-const cards = [0]
-let out
+const cards = [0];
+let ses;
 
-async function componentDidMount() {
-    const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
-    const res = await fetch(ses_link, {
-        method: "POST",
-        body: JSON.stringify({
-            "isu_id": localStorage.getItem("id"),
-            "test_name": this.state.type
-        })
+const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+fetch(ses_link, {
+    method: "POST",
+    body: JSON.stringify({
+        "isu_id": localStorage.getItem("id"),
+        "test_name": "luscher"
     })
-    out = await res.json();
-}
+})
+    .then((response) => response.json())
+    .then(myJson => console.log(myJson))
 
+
+console.log(ses)
 function handleClick(item, answerType) {
     if (!answers[answerType].includes(item.id_color)) {
         answers[answerType].push(item.id_color);
@@ -220,7 +221,9 @@ function SecondTest() {
     return (
         <main className={classes.luscherMain}>
             <Modal active={modalActive} setActive={setModalActive}>
-                <button>124</button>
+                Тест Люшера с высокой степенью достоверности продиагностирует Ваше психофизиологическое состояние, стрессоустойчивость, активность и коммуникативные способности. Процедура тестирования состоит в упорядочивании цветов по степени их субъективной приятности. Тестирование проводится при естественном освещении -
+                Вам необходимо отвлечься от ассоциаций, связанных с модой, традициями, общепринятыми вкусами и постараться выбирать цвета только исходя из своего личного отношения.
+                Во время прохождения теста Вам необходимо выбрать из предложенных восьми цветов тот, который больше всего нравится. Вы должны выбрать цвет как таковой, не пытаясь соотнести его с любимым цветом в одежде, цветом глаз и т. п. Выберите наиболее приятный цвет из восьми и нажмите на него. После нажатия прямоугольник сменит цвет на белый. Повторяйте эту процедуру до тех пор, пока все прямоугольники не перекрасятся в белый.
             </Modal>
             <div className={classes.mainContent}>
                 <Container maxWidth="md">

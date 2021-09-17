@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Timer from "../Timer"
 import Modal from "../Modal"
+import { Link } from "react-router-dom"
 
 export default class Zaslon extends Component {
     constructor(props) {
@@ -18,6 +19,9 @@ export default class Zaslon extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.openEND = this.openEND.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleChange(event) {
@@ -112,19 +116,32 @@ export default class Zaslon extends Component {
         return questions
     }
 
+    openModal() {
+        this.setState({ active: true })
+    }
+
+    openEND() {
+        this.setState({ active1: true })
+    }
+
+
+    closeModal() {
+        this.setState({ active: false })
+    }
+
     render() {
         return (
             <div>
                 <Timer send={this.sendData} />
                 <button onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                <Modal active={this.state.active} setActive={this.closeModal}>  ограничение по времени: 15 минут
+                    В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы, что крайне важно для командной работы. Отвечая на вопрос, Вы можете выбрать только один из четырех предложенных вариантов ответов.
                 </Modal>
                 <form>
                     {this.createQuestions()}
-                    <button onClick={this.sendData}>Отпрпваить результаты</button>
                 </form>
-                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
                 <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
+                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
             </div>
         )
     }

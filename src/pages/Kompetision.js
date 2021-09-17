@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Modal from "../Modal"
+import { Link } from "react-router-dom"
 
 export default class Kompetision extends Component {
     constructor(props) {
@@ -12,11 +13,16 @@ export default class Kompetision extends Component {
             is_qustoms: [],
             values: {},
             sesion: 69,
-            type: "competence"
+            type: "competence",
+            activei: false,
+            activee: false
         };
 
         this.createQuestions = this.createQuestions.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.openEND = this.openEND.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
 
@@ -104,7 +110,7 @@ export default class Kompetision extends Component {
             buttons.push(<div>
                 <p>Свой вариант:
                     <input id={index} type="text" onChange={this.updateVal}></input>
-                    <input id={"c"+index} type="checkbox" onChange={this.handleChange}></input></p>
+                    <input id={"c" + index} type="checkbox" onChange={this.handleChange}></input></p>
             </div>)
         }
         return buttons
@@ -128,12 +134,24 @@ export default class Kompetision extends Component {
         return questions
     }
 
+    openModal() {
+        this.setState({ active: true })
+    }
+
+    openEND() {
+        this.setState({ active1: true })
+    }
+
+
+    closeModal() {
+        this.setState({ active: false })
+    }
+
     render() {
         return (
             <div>
                 <button onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
-                </Modal>
+                <Modal active={this.state.active} setActive={this.closeModal}> Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на перечень тем научных работ, предложенных испытуемому.  </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>
