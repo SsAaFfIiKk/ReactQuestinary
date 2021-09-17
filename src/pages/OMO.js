@@ -130,7 +130,7 @@ export default class OMO extends Component {
                 <form onSubmit={this.sendData}>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <button onClick={this.sendData}>Отправить результаты</button>
             </div>
         )
     }
