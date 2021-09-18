@@ -81,77 +81,77 @@ export default class OMO extends Component {
         fetch(iter_link, body)
     };
 
-    // creteButtons(num, qwNum) {
-    //     let buttons = []
-    //     for (let i = 0; i < num; i++) {
-    //         buttons.push(<input
-    //             className="radio"
-    //             key={i + qwNum}
-    //             type="radio"
-    //             name={qwNum}
-    //             value={i}
-    //             onChange={this.handleChange}
-    //         ></input>)
-    //     }
-    //     return buttons
-    // }
-
-    // createQuestions() {
-    //     const questions = []
-    //     for (let i = 0; i < this.state.questions.length; i++) {
-    //         const blabels = this.state.answers[i]
-    //         questions.push(
-    //             <div key={this.state.ids[i]} className="question">
-    //                 <div className="questionLabel">
-    //                     {this.state.questions[i]}
-    //                 </div>
-    //                 <div className="buttons">
-    //                     {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
-    //                 </div>
-    //                 <div className="buttonsLabels">
-    //                     {blabels.map((blabels) => <p>{blabels}</p>)}
-    //                 </div>
-    //             </div>
-    //         )
-    //     }
-    //     return questions
-    // }
-
-    createButtons(num, qwNum, index) {
+    creteButtons(num, qwNum) {
         let buttons = []
         for (let i = 0; i < num; i++) {
-            buttons.push(
-                <div>
-                    <p>{this.state.answers[index][i]}
-                        <input
-                            key={i + qwNum}
-                            type="radio"
-                            name={qwNum}
-                            value={i}
-                            onChange={this.handleChange}
-                        ></input></p>
-                </div>)
+            buttons.push(<input
+                className="radio"
+                key={i + qwNum}
+                type="radio"
+                name={qwNum}
+                value={i}
+                onChange={this.handleChange}
+            ></input>)
         }
         return buttons
     }
 
     createQuestions() {
-        const question = []
+        const questions = []
         for (let i = 0; i < this.state.questions.length; i++) {
-            const buttons = this.createButtons(this.state.answers[i].length, this.state.ids[i], i)
-            question.push(
+            const blabels = this.state.answers[i]
+            questions.push(
                 <div key={this.state.ids[i]} className="question">
                     <div className="questionLabel">
                         {this.state.questions[i]}
                     </div>
-                    <div>
-                        {buttons}
+                    <div className="buttons">
+                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
+                    </div>
+                    <div className="buttonsLabels">
+                        {blabels.map((blabels) => <p>{blabels}</p>)}
                     </div>
                 </div>
             )
         }
-        return question
+        return questions
     }
+
+    // createButtons(num, qwNum, index) {
+    //     let buttons = []
+    //     for (let i = 0; i < num; i++) {
+    //         buttons.push(
+    //             <div>
+    //                 <p>{this.state.answers[index][i]}
+    //                     <input
+    //                         key={i + qwNum}
+    //                         type="radio"
+    //                         name={qwNum}
+    //                         value={i}
+    //                         onChange={this.handleChange}
+    //                     ></input></p>
+    //             </div>)
+    //     }
+    //     return buttons
+    // }
+
+    // createQuestions() {
+    //     const question = []
+    //     for (let i = 0; i < this.state.questions.length; i++) {
+    //         const buttons = this.createButtons(this.state.answers[i].length, this.state.ids[i], i)
+    //         question.push(
+    //             <div key={this.state.ids[i]} className="question">
+    //                 <div className="questionLabel">
+    //                     {this.state.questions[i]}
+    //                 </div>
+    //                 <div>
+    //                     {buttons}
+    //                 </div>
+    //             </div>
+    //         )
+    //     }
+    //     return question
+    // }
 
     openModal() {
         this.setState({ active: true })
@@ -159,6 +159,7 @@ export default class OMO extends Component {
 
     openEND() {
         this.setState({ active1: true })
+        this.props.updateTest()
     }
 
 
@@ -170,7 +171,12 @@ export default class OMO extends Component {
         return (
             <div>
                 <button className="insbutton" onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}>  Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести. Однако в данном случае нас интересует, как Вы ведете себя при взаимодействии с коллективом. Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.</Modal>
+                <Modal active={this.state.active} setActive={this.closeModal}>
+                    <p><span>Время прохождения не ограничено</span></p>
+                    <p>
+                        Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести.Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
+                    </p>
+                </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>

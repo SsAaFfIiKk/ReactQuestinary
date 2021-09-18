@@ -140,6 +140,7 @@ export default class Kompetision extends Component {
 
     openEND() {
         this.setState({ active1: true })
+        this.props.updateTest()
     }
 
 
@@ -151,7 +152,11 @@ export default class Kompetision extends Component {
         return (
             <div>
                 <button className="insbutton" onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}> Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на перечень тем научных работ, предложенных испытуемому.  </Modal>
+                <Modal active={this.state.active} setActive={this.closeModal}>
+                    <p><span>Время прохождения не ограничено</span></p>
+                    <p>Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на порядок расположения тем научных работ в перечне, предложенном испытуемому.
+                    </p>
+                </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>

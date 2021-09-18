@@ -143,7 +143,9 @@ export default class Vospriytie extends Component {
 
     openEND() {
         this.setState({ active1: true })
+        this.props.updateTest()
     }
+
 
     closeModal() {
         this.setState({ active: false })
@@ -154,12 +156,15 @@ export default class Vospriytie extends Component {
             <div>
                 <div>
                     <button className="insbutton" onClick={this.openModal}>Инструкция</button>
-                    <Modal active={this.state.active} setActive={this.closeModal}>  Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
+                    <Modal active={this.state.active} setActive={this.closeModal}>
+                        <p><span>Время прохождения не ограничено</span></p>
+                        <p>Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
+                        </p>
                     </Modal>
                     <form>
                         {this.createQuestions()}
                     </form>
-                    <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                    <Modal active={this.state.active1} setActive={this.openEND}><Link to='/omoins'><button>Следующий тест</button></Link></Modal>
                     <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import Lusheri from "./pages/LusherIns"
 import Lusher from "./pages/SecondTest"
 import Kompi from "./pages/KompIns"
 import Komp from "./pages/Kompetision"
+import Inter from "./pages/InterIns"
 import "./css/SideMenu.css"
 
 class SideMenu extends Component {
@@ -22,9 +23,14 @@ class SideMenu extends Component {
             tests: {}
         };
         this.signOut = this.signOut.bind(this)
+        this.getTestStatus = this.getTestStatus.bind(this)
+    }
+    
+    componentDidMount() {
+        this.getTestStatus()
     }
 
-    async componentDidMount() {
+    async getTestStatus() {
         const link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/check_user_tests"
         const res = await fetch(link, {
             method: "POST",
@@ -33,6 +39,7 @@ class SideMenu extends Component {
             })
         })
         const out = await res.json();
+        console.log(out)
         this.setState({ tests: out });
     }
 
@@ -84,9 +91,12 @@ class SideMenu extends Component {
                             <ul>
                                 <li>
 
-                                    <Link to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Тест на компетенции</Link>
+                                    <Link to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Мои профессиональные интересы</Link>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <Link to={`${match.path}/inter`}>Интервью</Link>
                         </li>
                         <li>
                             <button onClick={this.signOut}>Выход</button>
@@ -100,31 +110,34 @@ class SideMenu extends Component {
                                 <Omoi />
                             </Route>
                             <Route path={`${match.path}/omo`}>
-                                <Omo />
+                                <Omo updateTest={this.getTestStatus}/>
                             </Route>
                             <Route path={`${match.path}/zaslonins`}>
                                 <Zasi />
                             </Route>
                             <Route path={`${match.path}/zaslon`}>
-                                <Zas />
+                                <Zas updateTest={this.getTestStatus}/>
                             </Route>
                             <Route path={`${match.path}/vosins`}>
                                 <Vosi />
                             </Route>
                             <Route path={`${match.path}/vos`}>
-                                <Vos />
+                                <Vos updateTest={this.getTestStatus}/>
                             </Route>
                             <Route path={`${match.path}/luscherins`}>
                                 <Lusheri />
                             </Route>
                             <Route path={`${match.path}/luscher`}>
-                                <Lusher />
+                                <Lusher updateTest={this.getTestStatus}/>
                             </Route>
                             <Route path={`${match.path}/kompins`}>
                                 <Kompi />
                             </Route>
                             <Route path={`${match.path}/komp`}>
-                                <Komp />
+                                <Komp updateTest={this.getTestStatus}/>
+                            </Route>
+                            <Route path={`${match.path}/inter`}>
+                                <Inter/>
                             </Route>
                             <Route exact path={`${match.path}`}>
                                 <About />

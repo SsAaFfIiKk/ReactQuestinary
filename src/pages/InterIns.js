@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class InterInstruction extends Component {
+export default class InterIns extends Component {
     constructor(props) {
         super(props);
 
@@ -16,7 +16,8 @@ export default class InterInstruction extends Component {
     render() {
         return (
             <div>
-                <div className="instruction">
+                Прохождение интервию станет доступным 27 сентября 2021 года
+                {/* <div className="instruction">
                     Для корректной работы сервиса необходимо придерживаться следующих условий:
                     <ol>
                         <li>необходимо качественное освещение;</li>
@@ -40,7 +41,7 @@ export default class InterInstruction extends Component {
                     <form id="fio" target="_blank" method="post">
                         <button className="start" id="start" onClick={this.createAction}>Начать интервью</button>
                     </form>
-                </div>
+                </div> */}
             </div>
         )
     }

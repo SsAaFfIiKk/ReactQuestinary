@@ -4,10 +4,16 @@ import "./css/Timer.css"
 export default class Timer extends Component {
     constructor(props) {
         super(props);
-        this.state = { time: {}, seconds: 15, stop: false };
+        this.state = {
+            time: {},
+            seconds: 900,
+            stop: false
+        };
+
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
     }
 
     secondsToTime(secs) {
@@ -37,6 +43,10 @@ export default class Timer extends Component {
         if (this.timer === 0 && this.state.seconds > 0) {
             this.timer = setInterval(this.countDown, 1000);
         }
+    }
+
+    stopTimer() {
+        this.setState({stop: true})
     }
 
     countDown() {

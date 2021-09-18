@@ -182,7 +182,7 @@ fetch(ses_link, {
     .then(out => sesion = out)
 
 
-function sendData() {
+function sendData(props) {
     const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_luscher"
 
     const data = {
@@ -198,12 +198,14 @@ function sendData() {
     };
 
     fetch(save_link, body)
+    props.updateTest()
 }
 
 let answers = { first: [], second: [] }
 
-function SecondTest() {
-    function handleClick(item, answerType) {
+function SecondTest(props) {
+
+    function handleClick(item, answerType, props) {
         if (!answers[answerType].includes(item.id_color)) {
             answers[answerType].push(item.id_color);
         }
@@ -217,7 +219,7 @@ function SecondTest() {
             document.getElementById("1").hidden = true
             document.getElementById("2").hidden = true
             setEndActive(true)
-            sendData()
+            sendData(props)
         }
     }
 
@@ -232,10 +234,11 @@ function SecondTest() {
                 focusVisibleClassName={classes.focusVisible}
                 style={{ width: image.width, }}
                 onClick={(event) => {
-                    handleClick(image, answerType);
+                    handleClick(image, answerType, props);
                     event.target.style.backgroundColor = '#ffffff';
                     event.target.parentNode.style.cursor = 'auto';
                     event.target.parentNode.disabled = true
+                    event.target.parentNode.innerHTML = ''
                 }}
             >
                 <span className={classes.imageSrc}

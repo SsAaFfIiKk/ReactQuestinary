@@ -43,7 +43,7 @@ export default class AboutSelf extends Component {
                     const er = res.statusText;
                     return Promise.reject(er)
                 }
-                console.log(data)
+                
                 this.setState({
                     name: data["name"],
                     surname: data["surname"],

@@ -17,6 +17,7 @@ export default class Zaslon extends Component {
             activee: false
         };
 
+        this.child = React.createRef();
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -76,8 +77,8 @@ export default class Zaslon extends Component {
         };
 
         console.log(data)
-        fetch(save_link, body)
-        this.openEND(   )
+        await fetch(save_link, body)
+        this.openEND()
     };
 
     creteButtons(num, qwNum) {
@@ -121,9 +122,10 @@ export default class Zaslon extends Component {
     }
 
     openEND() {
-        this.setState({ activee: true})
+        this.setState({ activee: true })
+        this.child.current.stopTimer()
+        this.props.updateTest()
     }
-
 
     closeModal() {
         this.setState({ activei: false })
@@ -132,14 +134,15 @@ export default class Zaslon extends Component {
     render() {
         return (
             <div>
-                <Timer send={this.sendData} open={this.openEND} stop={false}/>
+                <Timer ref={this.child} send={this.sendData} open={this.openEND} />
                 <button className="insbutton" onClick={this.openModal}>Инструкция</button>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
                     <p><span>Ограничение по времени: 15 минут</span></p>
-                    В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы,что крайне важно для командной работы.
-                    <br />
-                    Отвечая на вопрос, Вы можете выбрать только один из четырех предложенных вариантов ответов.
-                    <br /></Modal>
+                    <p>В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы,что крайне важно для командной работы.
+                    </p>
+                    <p>Отвечая на вопрос, Вы можете выбрать только один из четырех предложенных вариантов ответов.
+                    </p>
+                </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>
