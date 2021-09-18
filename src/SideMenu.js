@@ -60,33 +60,28 @@ class SideMenu extends Component {
                 <div className="sidenav">
                     <ul>
                         <li>
-                            <Link to={`${match.path}`}>Главная</Link>
+                            <Link to={`${match.path}`}>О себе</Link>
                         </li>
                         <li>
                             Определение индивидуальных особенностей
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/zaslonins`}>Тест на определение личных интересов</Link>
+                                    <Link to={`${match.path}/zaslonins`}>Мои взгляды и интересы</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Тестирование “Тест Люшера”</Link>
+                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Мои состояние и особенности</Link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            Команда
+                            Оценка роли в команде
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" }}>Опрос самовосприятия</Link>
+                                    <Link to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" }}>Моя роль в команде</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none" }}>Опрос межличностных орентаций</Link>
+                                    <Link to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none" }}>Межличностные отношения</Link>
                                 </li>
-                            </ul>
-                        </li>
-                        <li>
-                            Профессиональные интересоы
-                            <ul>
                                 <li>
 
                                     <Link to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Мои профессиональные интересы</Link>

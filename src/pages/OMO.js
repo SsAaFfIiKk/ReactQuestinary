@@ -80,6 +80,7 @@ export default class OMO extends Component {
 
         await fetch(save_link, body)
         await fetch(iter_link, body)
+        this.openEND()
     };
 
     creteButtons(num, qwNum) {
@@ -181,7 +182,7 @@ export default class OMO extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
-                <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
+                <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )
     }

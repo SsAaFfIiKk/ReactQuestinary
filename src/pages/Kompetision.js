@@ -23,6 +23,7 @@ export default class Kompetision extends Component {
         this.openModal = this.openModal.bind(this);
         this.openEND = this.openEND.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.handleChange = this.handleChange.bind(this)
     }
 
 
@@ -66,25 +67,34 @@ export default class Kompetision extends Component {
         const data = {
             "answers": this.state.values,
             "session_id": this.state.sesion,
-            "type": this.state.compitions
+            "type": this.state.type
         };
 
         const body = {
             method: 'POST',
             body: JSON.stringify(data)
         };
-
         console.log(data)
         await fetch(save_link, body)
+        this.openEND()
     };
 
-    handleChange = ({ target: { checked, value } }) => {
+    handleChange = ({ target: {name, checked, value } }) => {
         if (checked) {
-            this.setState(({ values }) => ({ values: [...values, value] }));
+            this.setState(({ values }) => ({ values: [...values, { [name]: value }] }));    
         } else {
             this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
         }
     };
+
+    // handleChange(event) {
+    //     if (event.target.checked) {
+    //         this.setState({ values: { ...this.state.values, [event.target.name]: newAns } })
+    //     }
+    //     else {
+    //         this.setState({ values: { ...this.state.values.filter(e => e !== event.target.value)}})
+    //     }
+    // }
 
     updateVal(event) {
         const tar = event.target
@@ -136,24 +146,24 @@ export default class Kompetision extends Component {
     }
 
     openModal() {
-        this.setState({ active: true })
+        this.setState({ activei: true })
     }
 
     openEND() {
-        this.setState({ active1: true })
+        this.setState({ activee: true })
         this.props.updateTest()
     }
 
 
     closeModal() {
-        this.setState({ active: false })
+        this.setState({ activei: false })
     }
 
     render() {
         return (
             <div>
                 <button className="insbutton" onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}>
+                <Modal active={this.state.activei} setActive={this.closeModal}>
                     <p><span>Время прохождения не ограничено</span></p>
                     <p>Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на порядок расположения тем научных работ в перечне, предложенном испытуемому.
                     </p>
@@ -161,8 +171,11 @@ export default class Kompetision extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
-                <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
+                <Modal active={this.state.activee} setActive={this.openEND}>
+                    Вы прошли все тесты, спасибо
+                    <Link to='/menu'>
+                    <button>На главную</button></Link></Modal>
+                <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )
     }

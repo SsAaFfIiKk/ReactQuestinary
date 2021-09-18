@@ -30,7 +30,7 @@ export default class AboutSelf extends Component {
 
     async componentDidMount() {
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_user_info"
-        fetch(get_link, {
+        await fetch(get_link, {
             method: "POST",
             body: JSON.stringify({
                 "id": localStorage.getItem("id")
