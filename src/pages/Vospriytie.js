@@ -165,7 +165,7 @@ export default class Vospriytie extends Component {
                     <form>
                         {this.createQuestions()}
                     </form>
-                    <Modal active={this.state.activee} setActive={this.openEND}><Link to='/omoins'><button>Следующий тест</button></Link></Modal>
+                    <Modal active={this.state.activee} setActive={this.openEND}><Link to='./omoins'><button>Следующий тест</button></Link></Modal>
                     <button onClick={this.sendData}>Отпрпваить результаты</button>
                 </div>
             </div>

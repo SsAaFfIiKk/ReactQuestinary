@@ -65,16 +65,16 @@ export default class AboutSelf extends Component {
     insertFilds() {
         document.getElementById("male").checked = this.state.gender === 'm' ? true : false
         document.getElementById("female").checked = this.state.gender === 'f' ? true : false
-        document.getElementById("age").value = this.state.age 
-        document.getElementById("vk").value = this.state.vk 
-        document.getElementById("inst").value = this.state.inst 
-        document.getElementById("facebook").value = this.state.facebook 
-        document.getElementById("elib").value = this.state.elib 
+        document.getElementById("age").value = this.state.age
+        document.getElementById("vk").value = this.state.vk
+        document.getElementById("inst").value = this.state.inst
+        document.getElementById("facebook").value = this.state.facebook
+        document.getElementById("elib").value = this.state.elib
         document.getElementById("scopus").value = this.state.scopus
         document.getElementById("orcid").value = this.state.orcid
     }
 
-    async sendData() {
+    sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/update_profile"
         const data = {
             "isu_id": localStorage.getItem("id"),
@@ -87,13 +87,13 @@ export default class AboutSelf extends Component {
             "scpous_id": this.state.scopus,
             "orcid_id": this.state.orcid
         };
-
+        console.log(data)
         const body = {
             method: 'POST',
             body: JSON.stringify(data)
         };
 
-        await fetch(save_link, body)
+        fetch(save_link, body)
     };
 
     render() {

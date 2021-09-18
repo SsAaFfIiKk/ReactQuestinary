@@ -79,22 +79,19 @@ export default class Kompetision extends Component {
         this.openEND()
     };
 
-    handleChange = ({ target: {name, checked, value } }) => {
-        if (checked) {
-            this.setState(({ values }) => ({ values: [...values, { [name]: value }] }));    
-        } else {
-            this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
-        }
-    };
+    // handleChange = ({ target: {name, checked, value } }) => {
+    //     if (checked) {
+    //         this.setState(({ values }) => ({ values: [...values, { [name]: value }] }));    
+    //     } else {
+    //         this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
+    //     }
+    // };
 
-    // handleChange(event) {
-    //     if (event.target.checked) {
-    //         this.setState({ values: { ...this.state.values, [event.target.name]: newAns } })
-    //     }
-    //     else {
-    //         this.setState({ values: { ...this.state.values.filter(e => e !== event.target.value)}})
-    //     }
-    // }
+    handleChange(event) {
+        if (event.target.checked) {
+            // this.setState({values: [...this.state.values,{[event.target.name]: event.target.value} ]})
+        }
+    }
 
     updateVal(event) {
         const tar = event.target
