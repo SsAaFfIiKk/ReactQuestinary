@@ -91,7 +91,7 @@ export default class Vospriytie extends Component {
         };
         
         await fetch(save_link, body)
-        this.openEND
+        this.openEND();
     }
 
     creteButtons(num, qwNum, index) {
