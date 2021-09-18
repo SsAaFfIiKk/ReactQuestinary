@@ -239,10 +239,12 @@ function SecondTest(props) {
                 style={{ width: image.width, }}
                 onClick={(event) => {
                     handleClick(image, answerType, props);
+                    const buttonToFuckUp = event.target.tagName === 'BUTTON' ? event.target : event.target.parentNode;
+                    // console.log(event.target.tagName)
                     event.target.style.backgroundColor = '#ffffff';
-                    event.target.parentNode.style.cursor = 'auto';
-                    event.target.parentNode.disabled = true
-                    event.target.parentNode.innerHTML = ''
+                    buttonToFuckUp.style.cursor = 'auto';
+                    buttonToFuckUp.disabled = true
+                    buttonToFuckUp.innerHTML = ''
                 }}
             >
                 <span className={classes.imageSrc}
