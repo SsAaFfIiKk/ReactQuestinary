@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export default class LusherIns extends Component {
 
-
     render() {
         return (
             <div>
@@ -14,7 +13,7 @@ export default class LusherIns extends Component {
                 </p>
                 <p>Во время прохождения теста Вам необходимо выбрать из предложенных восьми цветов тот, который больше всего нравится. Вы должны выбрать цвет как таковой, не пытаясь соотнести его с любимым цветом в одежде, цветом глаз и т. п. Выберите наиболее приятный цвет из восьми и нажмите на него. После нажатия прямоугольник сменит цвет на белый. Повторяйте эту процедуру до тех пор, пока все прямоугольники не перекрасятся в белый.
                 </p>
-                <Link to='./luscher'><button>Начать тест</button></Link>
+                <Link to='./luscher'><button onClick={this.getSesion}>Начать тест</button></Link>
             </div>
         )
     }

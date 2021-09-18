@@ -155,24 +155,23 @@ export default class OMO extends Component {
     // }
 
     openModal() {
-        this.setState({ active: true })
+        this.setState({ activei: true })
     }
 
     openEND() {
-        this.setState({ active1: true })
+        this.setState({ activee: true })
         this.props.updateTest()
     }
 
-
     closeModal() {
-        this.setState({ active: false })
+        this.setState({ activei: false })
     }
 
     render() {
         return (
             <div>
                 <button className="insbutton" onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}>
+                <Modal active={this.state.activei} setActive={this.closeModal}>
                     <p><span>Время прохождения не ограничено</span></p>
                     <p>
                         Опросник межличностных ориентаций предназначен для оценки типичных способов Вашего взаимодействия с коллегами. В сущности, здесь нет правильных и неправильных ответов, правилен каждый правдивый ответ. Иногда люди стремятся отвечать на вопросы так, как, по их мнению, они должны были бы себя вести.Некоторые вопросы очень похожи друг на друга. Но все-таки они подразумевают разные вещи. Отвечайте, пожалуйста, на каждый вопрос отдельно, без оглядки на другие вопросы. Время ответа на вопросы не ограничено, но не размышляйте слишком долго над отдельными вопросами.
@@ -181,7 +180,7 @@ export default class OMO extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                <Modal active={this.state.activee} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
                 <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
             </div>
         )

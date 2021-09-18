@@ -144,8 +144,8 @@ export default class AboutSelf extends Component {
                         <p>Orcid id</p>
                         <input id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
                     </div>
+                    <button onClick={this.sendData}> Отправить</button>
                 </form>
-                <button onClick={this.sendData}> Отправить</button>
             </div>
         )
     }

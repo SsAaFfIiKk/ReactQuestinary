@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardActions, Container, Typography, Grid, Card } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -170,17 +170,21 @@ const Card2 = [
 const cards = [0];
 
 let sesion;
-const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
-fetch(ses_link, {
-    method: "POST",
-    body: JSON.stringify({
-        "isu_id": localStorage.getItem("id"),
-        "test_name": "luscher"
-    })
-})
-    .then(res => res.json())
-    .then(out => sesion = out)
-
+async function getSesion() {
+    const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+    if (!sesion) {
+        await fetch(ses_link, {
+            method: "POST",
+            body: JSON.stringify({
+                "isu_id": localStorage.getItem("id"),
+                "test_name": "luscher"
+            })
+        })
+            .then(res => res.json())
+            .then(out => sesion = out)
+        console.log(sesion)
+    }
+}
 
 async function sendData(props) {
     const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_luscher"
@@ -202,8 +206,8 @@ async function sendData(props) {
 }
 
 let answers = { first: [], second: [] }
-
 function SecondTest(props) {
+    useEffect(() => { getSesion() })
 
     function handleClick(item, answerType, props) {
         if (!answers[answerType].includes(item.id_color)) {
@@ -247,7 +251,7 @@ function SecondTest(props) {
             </ButtonBase>
         )
     }
-
+    
     return (
         <div>
             <button className="insbutton" onClick={() => setModalActive(true)}> Инструкция</button>
