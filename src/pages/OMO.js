@@ -1,6 +1,6 @@
 import "../css/OMO.css"
 import React, { Component } from 'react'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import Modal from "../Modal"
 
 export default class OMO extends Component {
@@ -43,7 +43,7 @@ export default class OMO extends Component {
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_omo"
-        
+
         await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
@@ -171,7 +171,9 @@ export default class OMO extends Component {
     render() {
         return (
             <div>
-                <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                <div className="float">
+                    <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                </div>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
                     <p><span>Время прохождения не ограничено</span></p>
                     <p>
@@ -181,7 +183,11 @@ export default class OMO extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <Modal active={this.state.activee} setActive={this.openEND}><Link to='./kompins'><button>Следующий тест</button></Link></Modal>
+                <Modal active={this.state.activee} setActive={this.openEND}>
+                    Спасибо за прохождение теста. Теперь вам доступен тест "Мои профессиональные интересы".
+                    <br />
+                    <Link to='./kompins'><button>Следующий тест</button></Link>
+                </Modal>
                 <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )

@@ -40,7 +40,7 @@ export default class Kompetision extends Component {
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_competence_questions"
-        
+
         await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
@@ -79,19 +79,25 @@ export default class Kompetision extends Component {
         this.openEND()
     };
 
-    // handleChange = ({ target: {name, checked, value } }) => {
-    //     if (checked) {
-    //         this.setState(({ values }) => ({ values: [...values, { [name]: value }] }));    
-    //     } else {
-    //         this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
-    //     }
-    // };
-
-    handleChange(event) {
-        if (event.target.checked) {
-            // this.setState({values: [...this.state.values,{[event.target.name]: event.target.value} ]})
+    handleChange = ({ target: { name, checked, value } }) => {
+        if (checked) {
+            this.setState(({ values }) => ({ values: [...values, { [name]: [...value] }] }));
+        } else {
+            this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
         }
-    }
+    };
+
+    // handleChange(event) {
+    //     const name = event.target.name
+    //     const value = event.target.value
+    //     const checked = event.target.checked
+
+    //     if (checked) {
+    //         const newAns = { ...this.state.values.name, [name]: value }
+    //         const newVal = { ...this.state.values, value: newAns }
+    //         this.setState({ values: newVal})
+    //     }
+    // }
 
     updateVal(event) {
         const tar = event.target
@@ -159,7 +165,9 @@ export default class Kompetision extends Component {
     render() {
         return (
             <div>
-                <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                <div className="float">
+                    <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                </div>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
                     <p><span>Время прохождения не ограничено</span></p>
                     <p>Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на порядок расположения тем научных работ в перечне, предложенном испытуемому.
@@ -170,8 +178,8 @@ export default class Kompetision extends Component {
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     Вы прошли все тесты, спасибо
-                    <Link to='/menu'>
-                    <button>На главную</button></Link></Modal>
+                    <Link to='/menu'><button>На главную</button></Link>
+                </Modal>
                 <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )

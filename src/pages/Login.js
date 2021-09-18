@@ -92,7 +92,7 @@ class Login extends React.Component {
                             </div>
                         </form>
                     </div>
-                    <div>
+                    <div className="loginbtn">
                         <button className="login" onClick={this.onSubmit}>Вход в систему {/*<img className="arrow" src={Arrow} alt=">"></img>*/} </button>
                     </div>
                 </div>

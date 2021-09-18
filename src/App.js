@@ -15,9 +15,6 @@ export default function App() {
                 <ProtectedRoute path="/menu">
                     <Sidemenu />
                 </ProtectedRoute>
-                <Route exact path="/">
-                    <Redirect exact from="/" to="menu" />
-                </Route>
                 <Route path="*">
                     <Redirect from="/" to="menu" />
                 </Route>

@@ -1,15 +1,3 @@
-.question {
-    border: 1px solid #342C9F;
-    box-sizing: border-box;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    /* margin-left: 25%; */
-}
-
-.question div {
-    margin-bottom: 20px;
-}
-
 .questionLabel {
     margin-top: 20px;
     margin-left: 30px;
@@ -27,33 +15,6 @@
     text-transform: uppercase;
 }
 
-input[type='radio'] {
-    -webkit-appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    outline: none;
-    border: 3px solid #342c9f;
-}
-
-input[type='radio']:before {
-    content: ''; 
-    display: block;
-    width: 60%;
-    height: 60%;
-    /* vertical-align: middle; */
-    margin: 20% auto;
-    border-radius: 50%;
-}
-
-input[type="radio"]:checked:before {
-    background: #342c9f;
-    
-}
-
-input[type="radio"]:checked {
-  border-color: #342c9f;
-}
 
 .buttons {
     display: flex;

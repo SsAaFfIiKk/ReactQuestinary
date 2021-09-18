@@ -60,16 +60,16 @@ class SideMenu extends Component {
                 <div className="sidenav">
                     <ul>
                         <li>
-                            <Link to={`${match.path}`}>О себе</Link>
+                            <Link className="single" to={`${match.path}`}>О себе</Link>
                         </li>
                         <li>
                             Определение индивидуальных особенностей
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/zaslonins`}>Мои взгляды и интересы</Link>
+                                    <Link className="inslink" to={`${match.path}/zaslonins`}>Мои взгляды и интересы</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Мои состояние и особенности</Link>
+                                    <Link className="inslink" to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none", color: "black" }}>Мои состояние и особенности</Link>
                                 </li>
                             </ul>
                         </li>
@@ -77,22 +77,21 @@ class SideMenu extends Component {
                             Оценка роли в команде
                             <ul>
                                 <li>
-                                    <Link to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none" }}>Моя роль в команде</Link>
+                                    <Link className="inslink" to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "black" }}>Моя роль в команде</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none" }}>Межличностные отношения</Link>
+                                    <Link className="inslink" to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "black" }}>Межличностные отношения</Link>
                                 </li>
                                 <li>
-
-                                    <Link to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none" }}>Мои профессиональные интересы</Link>
+                                    <Link className="inslink" to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none", color: "black" }}>Мои профессиональные интересы</Link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link to={`${match.path}/inter`}>Интервью</Link>
+                            <Link className="single" to={`${match.path}/inter`}>Интервью</Link>
                         </li>
                         <li>
-                            <button onClick={this.signOut}>Выход</button>
+                            <Link className="single" onClick={this.signOut}>Выход</Link>
                         </li>
                     </ul>
                 </div>

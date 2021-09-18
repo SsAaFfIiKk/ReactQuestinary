@@ -32,6 +32,7 @@ export default class Vospriytie extends Component {
         if ((this.state.values[value_id][id] !== 0) && (this.state.values[value_id][id] > event.target.value)) {
             this.state.values[value_id][id] -= 1
             this.state.values[value_id][0] -= 1
+
         } else if (this.state.values[value_id][0] >= 10) {
             event.target.value -= 1
         } else if ((Number(this.state.values[value_id][id]) === 0) && (Number(event.target.value) === 0)) {
@@ -74,6 +75,7 @@ export default class Vospriytie extends Component {
                     })
                 }
             })
+        // console.log(this.state)
     }
 
     async sendData() {
@@ -89,7 +91,7 @@ export default class Vospriytie extends Component {
             method: 'POST',
             body: JSON.stringify(data)
         };
-        
+
         await fetch(save_link, body)
         this.openEND();
     }
@@ -155,19 +157,23 @@ export default class Vospriytie extends Component {
     render() {
         return (
             <div>
-                <div>
+                <div className="float">
                     <button className="insbutton" onClick={this.openModal}>Инструкция</button>
-                    <Modal active={this.state.activei} setActive={this.closeModal}>
-                        <p><span>Время прохождения не ограничено</span></p>
-                        <p>Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
-                        </p>
-                    </Modal>
-                    <form>
-                        {this.createQuestions()}
-                    </form>
-                    <Modal active={this.state.activee} setActive={this.openEND}><Link to='./omoins'><button>Следующий тест</button></Link></Modal>
-                    <button onClick={this.sendData}>Отпрпваить результаты</button>
                 </div>
+                <Modal active={this.state.activei} setActive={this.closeModal}>
+                    <p><span>Время прохождения не ограничено</span></p>
+                    <p>Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
+                    </p>
+                </Modal>
+                <form>
+                    {this.createQuestions()}
+                </form>
+                <Modal active={this.state.activee} setActive={this.openEND}>
+                    Спасибо за прохождение теста. Теперь вам доступен тест "Межличностные отношения".
+                    <br />
+                    <Link to='./omoins'><button>Следующий тест</button></Link>
+                </Modal>
+                <button onClick={this.sendData}>Отпрпваить результаты</button>
             </div>
         )
     }

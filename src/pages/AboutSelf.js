@@ -30,36 +30,30 @@ export default class AboutSelf extends Component {
 
     async componentDidMount() {
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_user_info"
-        await fetch(get_link, {
+        const res = await fetch(get_link, {
             method: "POST",
             body: JSON.stringify({
-                "id": localStorage.getItem("id")
+                "isu_id": localStorage.getItem("id"),
             })
         })
-            .then(async res => {
-                const data = await res.json();
 
-                if (!res.ok) {
-                    const er = res.statusText;
-                    return Promise.reject(er)
-                }
-
-                this.setState({
-                    name: data["name"],
-                    surname: data["surname"],
-                    middlename: data["middlename"],
-                    isu_id: data["isu_id"],
-                    gender: data["sex"],
-                    age: data["age"],
-                    vk: data["vk_url"],
-                    inst: data["instagram_url"],
-                    facebook: data["facebook_url"],
-                    elib: data["elibrary_id"],
-                    scopus: data["scpous_id"],
-                    orcid: data["orcid_id"]
-                })
-                this.insertFilds()
-            })
+        const data = await res.json()
+        
+        this.setState({
+            name: data["name"],
+            surname: data["surname"],
+            middlename: data["middlename"],
+            isu_id: data["isu_id"],
+            gender: data["sex"],
+            age: data["age"],
+            vk: data["vk_url"],
+            inst: data["instagram_url"],
+            facebook: data["facebook_url"],
+            elib: data["elibrary_id"],
+            scopus: data["scpous_id"],
+            orcid: data["orcid_id"]
+        })
+        this.insertFilds()
     }
 
     insertFilds() {

@@ -135,8 +135,10 @@ export default class Zaslon extends Component {
     render() {
         return (
             <div>
-                <Timer ref={this.child} send={this.sendData} open={this.openEND} />
-                <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                <div className="float">
+                    <Timer ref={this.child} send={this.sendData} open={this.openEND} />
+                    <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                </div>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
                     <p><span>Ограничение по времени: 15 минут</span></p>
                     <p>В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы,что крайне важно для командной работы.
@@ -148,7 +150,11 @@ export default class Zaslon extends Component {
                     {this.createQuestions()}
                 </form>
                 <button onClick={this.sendData}>Отпрпваить результаты</button>
-                <Modal active={this.state.activee} setActive={this.openEND}><Link to='./luscherins'><button>Следующий тест</button></Link></Modal>
+                <Modal active={this.state.activee} setActive={this.openEND}>
+                    Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".
+                    <br/>
+                    <Link to='./luscherins'><button>Следующий тест</button></Link>
+                </Modal>
             </div>
         )
     }
