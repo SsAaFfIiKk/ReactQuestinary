@@ -50,3 +50,9 @@ img {
     width: 40px;
     height: 40px;
 }
+
+.insbutton {
+    position: sticky;
+    top: 50px;
+    width: 80px;
+}

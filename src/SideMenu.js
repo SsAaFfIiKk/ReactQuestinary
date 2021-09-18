@@ -34,11 +34,13 @@ class SideMenu extends Component {
         })
         const out = await res.json();
         this.setState({ tests: out });
-        console.log(out)
     }
 
     signOut() {
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("name");
+        localStorage.removeItem("surname");
         this.setState({ islogout: true });
     }
 
@@ -55,14 +57,14 @@ class SideMenu extends Component {
                             <Link to={`${match.path}`}>Главная</Link>
                         </li>
                         <li>
-                            Индивидуальные особенности
+                            Определение индивидуальных особенностей
                             <ul>
                                 <li>
                                     {/* style={this.state.tests["omo"] ? null : { pointerEvents: "none" }} */}
-                                    <Link to={`${match.path}/zaslonins`}>Определение индивидуальных особенностей</Link>
+                                    <Link to={`${match.path}/zaslonins`}>Тест на определение личных интересов</Link>
                                 </li>
                                 <li>
-                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Тест Люшера</Link>
+                                    <Link to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none" }}>Тестирование “Тест Люшера”</Link>
                                 </li>
                             </ul>
                         </li>

@@ -150,7 +150,7 @@ export default class Kompetision extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.openModal}>Инструкция</button>
+                <button className="insbutton" onClick={this.openModal}>Инструкция</button>
                 <Modal active={this.state.active} setActive={this.closeModal}> Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на перечень тем научных работ, предложенных испытуемому.  </Modal>
                 <form>
                     {this.createQuestions()}

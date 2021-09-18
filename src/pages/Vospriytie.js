@@ -145,7 +145,6 @@ export default class Vospriytie extends Component {
         this.setState({ active1: true })
     }
 
-
     closeModal() {
         this.setState({ active: false })
     }
@@ -154,7 +153,7 @@ export default class Vospriytie extends Component {
         return (
             <div>
                 <div>
-                    <button onClick={this.openModal}>Инструкция</button>
+                    <button className="insbutton" onClick={this.openModal}>Инструкция</button>
                     <Modal active={this.state.active} setActive={this.closeModal}>  Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
                     </Modal>
                     <form>

@@ -4,7 +4,7 @@ import "./css/Timer.css"
 export default class Timer extends Component {
     constructor(props) {
         super(props);
-        this.state = { time: {}, seconds: 900 };
+        this.state = { time: {}, seconds: 15, stop: false };
         this.timer = 0;
         this.startTimer = this.startTimer.bind(this);
         this.countDown = this.countDown.bind(this);
@@ -40,6 +40,11 @@ export default class Timer extends Component {
     }
 
     countDown() {
+        if (this.state.stop) {
+            clearInterval(this.timer);
+            return
+        }
+
         let seconds = this.state.seconds - 1;
         this.setState({
             time: this.secondsToTime(seconds),
@@ -49,13 +54,14 @@ export default class Timer extends Component {
         if (seconds === 0) {
             clearInterval(this.timer);
             this.props.send()
+            this.props.open()
         }
     }
 
     render() {
         return (
             <div className="Timer">
-                минут: {this.state.time.m} секунд: {this.state.time.s}
+                Осталось {this.state.time.m} минут {this.state.time.s} секунд
             </div>
         );
     }

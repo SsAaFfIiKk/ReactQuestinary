@@ -62,7 +62,6 @@ export default class Zaslon extends Component {
     }
 
     async sendData() {
-        // const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/calculate_answers_degree"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_zaslon"
 
         const data = {
@@ -76,8 +75,9 @@ export default class Zaslon extends Component {
             body: JSON.stringify(data)
         };
 
+        console.log(data)
         fetch(save_link, body)
-        // fetch(iter_link, body)
+        this.openEND(   )
     };
 
     creteButtons(num, qwNum) {
@@ -117,31 +117,34 @@ export default class Zaslon extends Component {
     }
 
     openModal() {
-        this.setState({ active: true })
+        this.setState({ activei: true })
     }
 
     openEND() {
-        this.setState({ active1: true })
+        this.setState({ activee: true})
     }
 
 
     closeModal() {
-        this.setState({ active: false })
+        this.setState({ activei: false })
     }
 
     render() {
         return (
             <div>
-                <Timer send={this.sendData} />
-                <button onClick={this.openModal}>Инструкция</button>
-                <Modal active={this.state.active} setActive={this.closeModal}>  ограничение по времени: 15 минут
-                    В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы, что крайне важно для командной работы. Отвечая на вопрос, Вы можете выбрать только один из четырех предложенных вариантов ответов.
-                </Modal>
+                <Timer send={this.sendData} open={this.openEND} stop={false}/>
+                <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                <Modal active={this.state.activei} setActive={this.closeModal}>
+                    <p><span>Ограничение по времени: 15 минут</span></p>
+                    В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы,что крайне важно для командной работы.
+                    <br />
+                    Отвечая на вопрос, Вы можете выбрать только один из четырех предложенных вариантов ответов.
+                    <br /></Modal>
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.sendData, this.openEND}>Отпрпваить результаты</button>
-                <Modal active={this.state.active1} setActive={this.openEND}><Link to='/menu'><button>На главную</button></Link></Modal>
+                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <Modal active={this.state.activee} setActive={this.openEND}><Link to='./luscherins'><button>Следующий тест</button></Link></Modal>
             </div>
         )
     }

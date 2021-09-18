@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { CardActions, Container, Typography, Grid, Card } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Modal from '../Modal';
 
 const useStyles = makeStyles((theme) => ({
     luscherMain: {
-        display: 'flex',
-        'flex-direction': 'column',
-        border: '1px solid #000',
+        flexGrow: 1,
+        marginLeft: 160
     },
     root: {
         flexGrow: 1,
@@ -171,8 +168,8 @@ const Card2 = [
     },
 ];
 const cards = [0];
-let ses;
 
+let sesion;
 const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
 fetch(ses_link, {
     method: "POST",
@@ -181,22 +178,52 @@ fetch(ses_link, {
         "test_name": "luscher"
     })
 })
-    .then((response) => response.json())
-    .then(myJson => console.log(myJson))
+    .then(res => res.json())
+    .then(out => sesion = out)
 
 
-console.log(ses)
-function handleClick(item, answerType) {
-    if (!answers[answerType].includes(item.id_color)) {
-        answers[answerType].push(item.id_color);
-    }
+function sendData() {
+    const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_luscher"
+
+    const data = {
+        "answers": answers,
+        "session_id": sesion,
+        "type": "luscher"
+    };
+
+    console.log(data);
+    const body = {
+        method: 'POST',
+        body: JSON.stringify(data)
+    };
+
+    fetch(save_link, body)
 }
 
 let answers = { first: [], second: [] }
 
 function SecondTest() {
+    function handleClick(item, answerType) {
+        if (!answers[answerType].includes(item.id_color)) {
+            answers[answerType].push(item.id_color);
+        }
+
+        if (answers[answerType].length === 8) {
+            document.getElementById("1").hidden = true
+            document.getElementById("2").hidden = false
+        }
+
+        if (answers["first"].length === 8 && answers["second"].length === 8) {
+            document.getElementById("1").hidden = true
+            document.getElementById("2").hidden = true
+            setEndActive(true)
+            sendData()
+        }
+    }
+
     const classes = useStyles();
     const [modalActive, setModalActive] = useState(false)
+    const [modalEnd, setEndActive] = useState(false)
 
     function createButton(image, answerType) {
         return (
@@ -219,11 +246,19 @@ function SecondTest() {
     }
 
     return (
-        <main className={classes.luscherMain}>
+        <div>
+            <button className="insbutton" onClick={() => setModalActive(true)}> Инструкция</button>
             <Modal active={modalActive} setActive={setModalActive}>
-                Тест Люшера с высокой степенью достоверности продиагностирует Ваше психофизиологическое состояние, стрессоустойчивость, активность и коммуникативные способности. Процедура тестирования состоит в упорядочивании цветов по степени их субъективной приятности. Тестирование проводится при естественном освещении -
-                Вам необходимо отвлечься от ассоциаций, связанных с модой, традициями, общепринятыми вкусами и постараться выбирать цвета только исходя из своего личного отношения.
-                Во время прохождения теста Вам необходимо выбрать из предложенных восьми цветов тот, который больше всего нравится. Вы должны выбрать цвет как таковой, не пытаясь соотнести его с любимым цветом в одежде, цветом глаз и т. п. Выберите наиболее приятный цвет из восьми и нажмите на него. После нажатия прямоугольник сменит цвет на белый. Повторяйте эту процедуру до тех пор, пока все прямоугольники не перекрасятся в белый.
+                <p><span>Время прохождения не ограничено</span></p>
+                <p>Тест Люшера с высокой степенью достоверности продиагностирует Ваше психофизиологическое состояние, стрессоустойчивость, активность и коммуникативные способности. Процедура тестирования состоит в упорядочивании цветов по степени их субъективной приятности. Тестирование проводится при естественном освещении -
+                </p>
+                <p>Вам необходимо отвлечься от ассоциаций, связанных с модой, традициями, общепринятыми вкусами и постараться выбирать цвета только исходя из своего личного отношения.
+                </p>
+                <p>Во время прохождения теста Вам необходимо выбрать из предложенных восьми цветов тот, который больше всего нравится. Вы должны выбрать цвет как таковой, не пытаясь соотнести его с любимым цветом в одежде, цветом глаз и т. п. Выберите наиболее приятный цвет из восьми и нажмите на него. После нажатия прямоугольник сменит цвет на белый. Повторяйте эту процедуру до тех пор, пока все прямоугольники не перекрасятся в белый.
+                </p>
+            </Modal>
+            <Modal id="end" active={modalEnd} setActive={setEndActive}>
+                <Link to='./vosins'><button>Следующий тест</button></Link>
             </Modal>
             <div className={classes.mainContent}>
                 <Container maxWidth="md">
@@ -235,14 +270,14 @@ function SecondTest() {
                 <Grid container spacing={9} >
                     {cards.map((card) => (
                         <Grid item key={card} xs={12} >
-                            <Card className={classes.card}>
+                            <Card id="1" className={classes.card}>
                                 <CardActions>
                                     <div className={classes.root}>
                                         {Card1.map((image) => createButton(image, 'first'))}
                                     </div>
                                 </CardActions>
                             </Card>
-                            <Card className={classes.card}>
+                            <Card id="2" className={classes.card} hidden>
                                 <Typography variant="h6" align="center" color="#000000" gutterBottom> Перевернем карточку с цветами </Typography>
                                 <CardActions>
                                     <div className={classes.root}>
@@ -254,13 +289,7 @@ function SecondTest() {
                     ))}
                 </Grid>
             </Container>
-            <div className={classes.mainButtons}>
-                <Grid container spacing={5} justify="center">
-                    <Button variant="contained" color="second" component={RouterLink} to="/finish"> Завершить тестирование </Button>
-                    <Button variant="contained" color="second" onClick={() => setModalActive(true)}> Модальное окно </Button>
-                </Grid>
-            </div>
-        </main>
+        </div>
     );
 }
 

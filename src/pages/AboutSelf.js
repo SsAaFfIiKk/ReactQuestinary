@@ -2,11 +2,90 @@ import React, { Component } from 'react'
 import "../css/AboutSelf.css"
 
 export default class AboutSelf extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            name: "",
+            surname: "",
+            midlename: "",
+            isu_id: "",
+            gender: "",
+            age: "",
+            vk: "",
+            inst: "",
+            facebook: "",
+            elib: "",
+            scopus: "",
+            orcid: ""
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.sendData = this.sendData.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value })
+    };
+
+    async componentDidMount() {
+        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_user_info"
+        fetch(get_link, {
+            method: "POST",
+            body: JSON.stringify({
+                "id": localStorage.getItem("id")
+            })
+        })
+            .then(async res => {
+                const data = await res.json();
+
+                if (!res.ok) {
+                    const er = res.statusText;
+                    return Promise.reject(er)
+                }
+                console.log(data)
+                this.setState({
+                    name: data["name"],
+                    surname: data["surname"],
+                    midlename: data["midlename"],
+                    isu_id: data["isu_id"],
+                    gender: data["sex"],
+                    age: data["age"],
+                    vk: data["vk_url"],
+                    inst: data["instagram_url"],
+                    facebook: data["facebook_url"],
+                    elib: data["elibrary_id"],
+                    scopus: data["scpous_id"],
+                    orcid: data["orcid_id"]
+                })
+                this.insertFilds()
+            })
+    }
+
+    insertFilds() {
+        document.getElementById("male").checked = this.state.gender === 'm' ? true : false
+        document.getElementById("female").checked = this.state.gender === 'f' ? true : false
+        document.getElementById("age").value = this.state.age 
+        document.getElementById("vk").value = this.state.vk 
+        document.getElementById("inst").value = this.state.inst 
+        document.getElementById("facebook").value = this.state.facebook 
+        document.getElementById("elib").value = this.state.elib 
+        document.getElementById("scopus").value = this.state.scopus
+        document.getElementById("orcid").value = this.state.orcid
+    }
 
     async sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/update_profile"
         const data = {
-
+            "isu_id": localStorage.getItem("id"),
+            "sex": this.state.gender,
+            "age": this.state.age,
+            "vk_url": this.state.vk,
+            "instagram_url": this.state.inst,
+            "facebook_url": this.state.facebook,
+            "elibrary_id": this.state.elib,
+            "scpous_id": this.state.scopus,
+            "orcid_id": this.state.orcid
         };
 
         const body = {
@@ -21,57 +100,51 @@ export default class AboutSelf extends Component {
         return (
             <div>
                 <div>
+                    Пользователь {this.state.surname} {this.state.name} {this.state.midlename}
+                </div>
+                <div>
+                    Табельный номер {this.state.isu_id}
+                </div>
+                <div>
                     Для участия в исследовании заполните, пожалуйста, следующие поля:
                 </div>
                 <form>
-                    {/* <div>
-                        <p>Имя</p>
-                        <input required type="text"></input>
-                    </div>
-                    <div>
-                        <p>Фамилия</p>
-                        <input required type="text"></input>
-                    </div> */}
                     <div>
                         <p>Пол</p>
-                        <label htmlFor="1">Мужкской</label>
-                        <input type="radio" name="gender" value="male" id="1"></input>
-                        <label htmlFor="2">Женский</label>
-                        <input type="radio" name="gender" value="female" id="2"></input>
+                        <label htmlFor="male">Мужкской</label>
+                        <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
+                        <label htmlFor="female">Женский</label>
+                        <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
                     </div>
                     <div>
                         <p>Возраст</p>
-                        <input type="text" maxLength="3"></input>
+                        <input id="age" type="text" name="age" maxLength="3" onChange={this.handleChange}></input>
                     </div>
-                    {/* <div>
-                        <p>Табельный номер ИСУ</p>
-                        <input required type="text" maxLength="6"></input>
-                    </div> */}
                     <div>
                         <p>Ссылка на VK</p>
-                        <input type="text"></input>
+                        <input id="vk" type="text" name="vk" onChange={this.handleChange}></input>
                     </div>
                     <div>
                         <p>Ссылка на Instagram</p>
-                        <input type="text"></input>
+                        <input id="inst" type="text" name="inst" onChange={this.handleChange}></input>
                     </div>
                     <div>
                         <p>Ссылка на Facebook</p>
-                        <input type="text"></input>
+                        <input id="facebook" type="text" name="facebook" onChange={this.handleChange}></input>
                     </div>
                     <div>
                         <p>Elibray id</p>
-                        <input type="text"></input>
+                        <input id="elib" type="text" name="elib" onChange={this.handleChange}></input>
                     </div>
                     <div>
                         <p>Scopus id</p>
-                        <input type="text"></input>
+                        <input id="scopus" type="text" name="scopus" onChange={this.handleChange}></input>
                     </div>
                     <div>
                         <p>Orcid id</p>
-                        <input type="text"></input>
+                        <input id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
                     </div>
-                    <button type="submit"> Отправить</button>
+                    <button onClick={this.sendData}> Отправить</button>
                 </form>
             </div>
         )
