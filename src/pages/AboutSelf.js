@@ -8,7 +8,7 @@ export default class AboutSelf extends Component {
         this.state = {
             name: "",
             surname: "",
-            midlename: "",
+            middlename: "",
             isu_id: "",
             gender: "",
             age: "",
@@ -43,11 +43,11 @@ export default class AboutSelf extends Component {
                     const er = res.statusText;
                     return Promise.reject(er)
                 }
-                
+
                 this.setState({
                     name: data["name"],
                     surname: data["surname"],
-                    midlename: data["midlename"],
+                    middlename: data["middlename"],
                     isu_id: data["isu_id"],
                     gender: data["sex"],
                     age: data["age"],
@@ -93,14 +93,14 @@ export default class AboutSelf extends Component {
             body: JSON.stringify(data)
         };
 
-        fetch(save_link, body)
+        await fetch(save_link, body)
     };
 
     render() {
         return (
             <div>
                 <div>
-                    Пользователь {this.state.surname} {this.state.name} {this.state.midlename}
+                    Пользователь {this.state.surname} {this.state.name} {this.state.middlename}
                 </div>
                 <div>
                     Табельный номер {this.state.isu_id}
@@ -111,7 +111,7 @@ export default class AboutSelf extends Component {
                 <form>
                     <div>
                         <p>Пол</p>
-                        <label htmlFor="male">Мужкской</label>
+                        <label htmlFor="male">Мужской</label>
                         <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
                         <label htmlFor="female">Женский</label>
                         <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
@@ -144,8 +144,8 @@ export default class AboutSelf extends Component {
                         <p>Orcid id</p>
                         <input id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
                     </div>
-                    <button onClick={this.sendData}> Отправить</button>
                 </form>
+                <button onClick={this.sendData}> Отправить</button>
             </div>
         )
     }

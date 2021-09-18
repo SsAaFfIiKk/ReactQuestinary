@@ -69,10 +69,3 @@ input:hover+.radio, input:checked+.radio {
     font-size: 18px;
 }
 
-button {
-    color: #FFFFFF;
-    background: #342C9F;
-    border: 1px solid #342C9F;
-    box-sizing: border-box;
-    border-radius: 4px;
-}

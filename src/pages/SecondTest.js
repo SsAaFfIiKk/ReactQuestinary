@@ -182,7 +182,7 @@ fetch(ses_link, {
     .then(out => sesion = out)
 
 
-function sendData(props) {
+async function sendData(props) {
     const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_luscher"
 
     const data = {
@@ -197,7 +197,7 @@ function sendData(props) {
         body: JSON.stringify(data)
     };
 
-    fetch(save_link, body)
+    await fetch(save_link, body)
     props.updateTest()
 }
 

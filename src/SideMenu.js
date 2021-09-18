@@ -25,7 +25,7 @@ class SideMenu extends Component {
         this.signOut = this.signOut.bind(this)
         this.getTestStatus = this.getTestStatus.bind(this)
     }
-    
+
     componentDidMount() {
         this.getTestStatus()
     }
@@ -39,7 +39,6 @@ class SideMenu extends Component {
             })
         })
         const out = await res.json();
-        console.log(out)
         this.setState({ tests: out });
     }
 
@@ -67,7 +66,6 @@ class SideMenu extends Component {
                             Определение индивидуальных особенностей
                             <ul>
                                 <li>
-                                    {/* style={this.state.tests["omo"] ? null : { pointerEvents: "none" }} */}
                                     <Link to={`${match.path}/zaslonins`}>Тест на определение личных интересов</Link>
                                 </li>
                                 <li>

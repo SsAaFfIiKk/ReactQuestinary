@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 import Login from "./pages/Login";
@@ -18,7 +13,7 @@ export default function App() {
                     <Login />
                 </Route>
                 <ProtectedRoute path="/menu">
-                    <Sidemenu/>
+                    <Sidemenu />
                 </ProtectedRoute>
                 <Route exact path="/">
                     <Redirect exact from="/" to="menu" />

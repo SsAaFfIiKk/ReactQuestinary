@@ -43,7 +43,8 @@ export default class OMO extends Component {
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_omo"
-        fetch(get_link)
+        
+        await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
 
@@ -77,8 +78,8 @@ export default class OMO extends Component {
             body: JSON.stringify(data)
         };
 
-        fetch(save_link, body)
-        fetch(iter_link, body)
+        await fetch(save_link, body)
+        await fetch(iter_link, body)
     };
 
     creteButtons(num, qwNum) {

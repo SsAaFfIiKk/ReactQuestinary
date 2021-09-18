@@ -39,7 +39,8 @@ export default class Kompetision extends Component {
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_competence_questions"
-        fetch(get_link)
+        
+        await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
 
@@ -74,7 +75,7 @@ export default class Kompetision extends Component {
         };
 
         console.log(data)
-        fetch(save_link, body)
+        await fetch(save_link, body)
     };
 
     handleChange = ({ target: { checked, value } }) => {

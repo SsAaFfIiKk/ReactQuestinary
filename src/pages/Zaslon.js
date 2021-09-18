@@ -41,10 +41,11 @@ export default class Zaslon extends Component {
         })
 
         const out = await res.json();
+        console.log(out)
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_zaslon_questions"
-        fetch(get_link)
+        await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
                 if (!res.ok) {

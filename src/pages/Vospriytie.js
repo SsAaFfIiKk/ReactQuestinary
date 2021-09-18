@@ -55,7 +55,7 @@ export default class Vospriytie extends Component {
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_sperseption_questions"
-        fetch(get_link)
+        await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
 
@@ -76,7 +76,7 @@ export default class Vospriytie extends Component {
             })
     }
 
-    sendData() {
+    async sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_sperseption"
 
         const data = {
@@ -90,7 +90,7 @@ export default class Vospriytie extends Component {
             body: JSON.stringify(data)
         };
 
-        fetch(save_link, body)
+        await fetch(save_link, body)
     }
 
     creteButtons(num, qwNum, index) {
