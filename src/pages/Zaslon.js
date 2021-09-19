@@ -41,7 +41,6 @@ export default class Zaslon extends Component {
         })
 
         const out = await res.json();
-        console.log(out)
         this.setState({ sesion: out })
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_zaslon_questions"
@@ -77,7 +76,6 @@ export default class Zaslon extends Component {
             body: JSON.stringify(data)
         };
 
-        console.log(data)
         await fetch(save_link, body)
         this.openEND()
     };

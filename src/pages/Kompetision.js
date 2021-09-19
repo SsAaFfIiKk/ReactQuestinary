@@ -72,7 +72,7 @@ export default class Kompetision extends Component {
             method: 'POST',
             body: JSON.stringify(data)
         };
-        console.log(data)
+
         await fetch(save_link, body)
         this.openEND()
     };

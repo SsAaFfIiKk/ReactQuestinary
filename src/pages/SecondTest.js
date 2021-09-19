@@ -182,7 +182,6 @@ async function getSesion() {
         })
             .then(res => res.json())
             .then(out => sesion = out)
-        console.log(sesion)
     }
 }
 
@@ -195,7 +194,6 @@ async function sendData(props) {
         "type": "luscher"
     };
 
-    console.log(data);
     const body = {
         method: 'POST',
         body: JSON.stringify(data)
@@ -240,7 +238,6 @@ function SecondTest(props) {
                 onClick={(event) => {
                     handleClick(image, answerType, props);
                     const buttonToFuckUp = event.target.tagName === 'BUTTON' ? event.target : event.target.parentNode;
-                    // console.log(event.target.tagName)
                     event.target.style.backgroundColor = '#ffffff';
                     buttonToFuckUp.style.cursor = 'auto';
                     buttonToFuckUp.disabled = true

@@ -75,7 +75,6 @@ export default class Vospriytie extends Component {
                     })
                 }
             })
-        // console.log(this.state)
     }
 
     async sendData() {
