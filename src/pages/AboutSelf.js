@@ -68,7 +68,7 @@ export default class AboutSelf extends Component {
         document.getElementById("orcid").value = this.state.orcid
     }
 
-    async sendData() {
+    /*async*/ sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/update_profile"
         const data = {
             "isu_id": localStorage.getItem("id"),
@@ -87,7 +87,7 @@ export default class AboutSelf extends Component {
             body: JSON.stringify(data)
         };
 
-        await fetch(save_link, body)
+        /*await */fetch(save_link, body)
     };
 
     render() {
