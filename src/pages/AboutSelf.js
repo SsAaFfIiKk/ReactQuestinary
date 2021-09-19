@@ -94,11 +94,13 @@ export default class AboutSelf extends Component {
     render() {
         return (
             <div>
+                <div className="prifile">
                 <div>
                     Пользователь: {this.state.surname} {this.state.name} {this.state.middlename}
                 </div>
                 <div>
                     Табельный номер: {this.state.isu_id}
+                    </div>
                 </div>
                 <div>
                     <form className="userform">
