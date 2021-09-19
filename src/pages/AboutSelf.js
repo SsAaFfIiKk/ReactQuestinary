@@ -33,7 +33,7 @@ export default class AboutSelf extends Component {
         const res = await fetch(get_link, {
             method: "POST",
             body: JSON.stringify({
-                "isu_id": localStorage.getItem("id"),
+                "id": localStorage.getItem("id"),
             })
         })
 
