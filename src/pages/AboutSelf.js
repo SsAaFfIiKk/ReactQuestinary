@@ -38,7 +38,7 @@ export default class AboutSelf extends Component {
         })
 
         const data = await res.json()
-        
+
         this.setState({
             name: data["name"],
             surname: data["surname"],
@@ -111,46 +111,47 @@ export default class AboutSelf extends Component {
                     Табельный номер {this.state.isu_id}
                 </div>
                 <div>
-                    Для участия в исследовании заполните, пожалуйста, следующие поля:
+                    <form className="userform">
+                        <h2>Для участия в исследовании заполните, пожалуйста, следующие поля:</h2>
+                        <div className="groulabel">
+                            <label>Пол</label>
+                            <br />
+                            <label htmlFor="">Мужской</label>
+                            <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
+                            <label htmlFor="">Женский</label>
+                            <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label>Возраст</label>
+                            <input className="slefinput" id="age" type="text" name="age" maxLength="3" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label htmlFor="">Ссылка на VK</label>
+                            <input className="slefinput" id="vk" type="text" name="vk" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label htmlFor="">Ссылка на Instagram</label>
+                            <input className="slefinput" id="inst" type="text" name="inst" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label htmlFor="" >Ссылка на Facebook</label>
+                            <input className="slefinput" id="facebook" type="text" name="facebook" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label htmlFor="">Elibray id</label>
+                            <input className="slefinput" id="elib" type="text" name="elib" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label htmlFor="" >Scolabelus id</label>
+                            <input className="slefinput" id="scopus" type="text" name="scopus" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="groulabel">
+                            <label htmlFor="">Orcid id</label>
+                            <input className="slefinput" id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
+                        </div>
+                        <center><button onClick={this.sendData}> Отправить</button></center>
+                    </form>
                 </div>
-                <form>
-                    <div>
-                        <p>Пол</p>
-                        <label htmlFor="male">Мужской</label>
-                        <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
-                        <label htmlFor="female">Женский</label>
-                        <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Возраст</p>
-                        <input id="age" type="text" name="age" maxLength="3" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Ссылка на VK</p>
-                        <input id="vk" type="text" name="vk" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Ссылка на Instagram</p>
-                        <input id="inst" type="text" name="inst" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Ссылка на Facebook</p>
-                        <input id="facebook" type="text" name="facebook" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Elibray id</p>
-                        <input id="elib" type="text" name="elib" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Scopus id</p>
-                        <input id="scopus" type="text" name="scopus" onChange={this.handleChange}></input>
-                    </div>
-                    <div>
-                        <p>Orcid id</p>
-                        <input id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
-                    </div>
-                    <button onClick={this.sendData}> Отправить</button>
-                </form>
             </div>
         )
     }

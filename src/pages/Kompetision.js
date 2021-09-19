@@ -23,7 +23,7 @@ export default class Kompetision extends Component {
         this.openModal = this.openModal.bind(this);
         this.openEND = this.openEND.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
     }
 
 
@@ -79,25 +79,13 @@ export default class Kompetision extends Component {
         this.openEND()
     };
 
-    handleChange = ({ target: { name, checked, value } }) => {
+    handleChange = ({ target: { name, checked, value, key } }) => {
         if (checked) {
-            this.setState(({ values }) => ({ values: [...values, { [name]: [...value] }] }));
+            this.setState(({ values }) => ({ values: [...values, { [name]: value }] }));
         } else {
-            this.setState(({ values }) => ({ values: values.filter(e => e !== value) }));
+            this.setState(({ values }) => ({ values: [...values.filter(e => e !== {[name]: value })] }));
         }
     };
-
-    // handleChange(event) {
-    //     const name = event.target.name
-    //     const value = event.target.value
-    //     const checked = event.target.checked
-
-    //     if (checked) {
-    //         const newAns = { ...this.state.values.name, [name]: value }
-    //         const newVal = { ...this.state.values, value: newAns }
-    //         this.setState({ values: newVal})
-    //     }
-    // }
 
     updateVal(event) {
         const tar = event.target

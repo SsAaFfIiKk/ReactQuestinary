@@ -29,6 +29,14 @@ input {
     border-radius: 8px;
 }
 
+div>p{
+    padding: 10px;
+}
+
+div>p>input {
+    margin-left: 15px;
+}
+
 .float {
     margin-right: 2%;
     position: sticky;
