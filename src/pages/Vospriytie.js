@@ -33,7 +33,7 @@ export default class Vospriytie extends Component {
             this.state.values[value_id][id] -= 1
             this.state.values[value_id][0] -= 1
 
-        } else if (this.state.values[value_id][0] >= 10) {
+        } else if (this.state.values[value_id][0] >= 10 && event.target.value > 0) {
             event.target.value -= 1
         } else if ((Number(this.state.values[value_id][id]) === 0) && (Number(event.target.value) === 0)) {
             event.target.value = 0

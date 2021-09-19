@@ -80,17 +80,17 @@ export default class Zaslon extends Component {
         this.openEND()
     };
 
-    creteButtons(num, qwNum) {
+    creteButtons(num, qwNum, labels) {
         let buttons = []
         for (let i = 0; i < num; i++) {
-            buttons.push(<input
+            buttons.push(<label><input
                 className="radio"
                 key={i + qwNum}
                 type="radio"
                 name={qwNum}
                 value={i}
-                onChange={this.handleChange}
-            ></input>)
+                onChange={this.handleChange}></input>
+                {labels[i]}</label>)
         }
         return buttons
     }
@@ -105,11 +105,11 @@ export default class Zaslon extends Component {
                         {this.state.questions[i]}
                     </div>
                     <div className="buttons">
-                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
+                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i], blabels)}
                     </div>
-                    <div className="buttonsLabels">
+                    {/* <div className="buttonsLabels">
                         {blabels.map((blabels) => <p>{blabels}</p>)}
-                    </div>
+                    </div> */}
                 </div>
             )
         }
@@ -150,7 +150,7 @@ export default class Zaslon extends Component {
                 <button onClick={this.sendData}>Отпрпваить результаты</button>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".
-                    <br/>
+                    <br />
                     <Link to='./luscherins'><button>Следующий тест</button></Link>
                 </Modal>
             </div>

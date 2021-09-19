@@ -108,9 +108,9 @@ export default class AboutSelf extends Component {
                         <div className="groulabel">
                             <label>Пол</label>
                             <br />
-                            <label htmlFor="">Мужской</label>
+                            <label htmlFor="male">Мужской</label>
                             <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
-                            <label htmlFor="">Женский</label>
+                            <label htmlFor="female">Женский</label>
                             <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
                         </div>
                         <div className="groulabel">

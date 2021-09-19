@@ -77,13 +77,13 @@ class SideMenu extends Component {
                             Оценка роли в команде
                             <ul>
                                 <li>
-                                    <Link className="inslink" to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139);" }}>Моя роль в команде</Link>
+                                    <Link className="inslink" to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Моя роль в команде</Link>
                                 </li>
                                 <li>
-                                    <Link className="inslink" to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139);" }}>Межличностные отношения</Link>
+                                    <Link className="inslink" to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Межличностные отношения</Link>
                                 </li>
                                 <li>
-                                    <Link className="inslink" to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139);" }}>Мои профессиональные интересы</Link>
+                                    <Link className="inslink" to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои профессиональные интересы</Link>
                                 </li>
                             </ul>
                         </li>

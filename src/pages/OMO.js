@@ -1,4 +1,3 @@
-import "../css/OMO.css"
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import Modal from "../Modal"
@@ -83,17 +82,18 @@ export default class OMO extends Component {
         this.openEND()
     };
 
-    creteButtons(num, qwNum) {
+    creteButtons(num, qwNum, labels) {
         let buttons = []
         for (let i = 0; i < num; i++) {
-            buttons.push(<input
+            buttons.push(<label><input
                 className="radio"
                 key={i + qwNum}
                 type="radio"
                 name={qwNum}
                 value={i}
-                onChange={this.handleChange}
-            ></input>)
+                onChange={this.handleChange}></input>
+                {labels[i]}</label>
+            )
         }
         return buttons
     }
@@ -108,52 +108,16 @@ export default class OMO extends Component {
                         {this.state.questions[i]}
                     </div>
                     <div className="buttons">
-                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i])}
+                        {this.creteButtons(this.state.answers[i].length, this.state.ids[i], blabels)}
                     </div>
-                    <div className="buttonsLabels">
+                    {/* <div className="buttonsLabels">
                         {blabels.map((blabels) => <p>{blabels}</p>)}
-                    </div>
+                    </div> */}
                 </div>
             )
         }
         return questions
     }
-
-    // createButtons(num, qwNum, index) {
-    //     let buttons = []
-    //     for (let i = 0; i < num; i++) {
-    //         buttons.push(
-    //             <div>
-    //                 <p>{this.state.answers[index][i]}
-    //                     <input
-    //                         key={i + qwNum}
-    //                         type="radio"
-    //                         name={qwNum}
-    //                         value={i}
-    //                         onChange={this.handleChange}
-    //                     ></input></p>
-    //             </div>)
-    //     }
-    //     return buttons
-    // }
-
-    // createQuestions() {
-    //     const question = []
-    //     for (let i = 0; i < this.state.questions.length; i++) {
-    //         const buttons = this.createButtons(this.state.answers[i].length, this.state.ids[i], i)
-    //         question.push(
-    //             <div key={this.state.ids[i]} className="question">
-    //                 <div className="questionLabel">
-    //                     {this.state.questions[i]}
-    //                 </div>
-    //                 <div>
-    //                     {buttons}
-    //                 </div>
-    //             </div>
-    //         )
-    //     }
-    //     return question
-    // }
 
     openModal() {
         this.setState({ activei: true })

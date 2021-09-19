@@ -68,7 +68,6 @@ export default class Kompetision extends Component {
             "type": this.state.type
         };
 
-        console.log(data)
         const body = {
             method: 'POST',
             body: JSON.stringify(data)
@@ -101,14 +100,14 @@ export default class Kompetision extends Component {
         for (let i = 0; i < num; i++) {
             buttons.push(
                 <div>
-                    <p>{this.state.answers[index][i]}
+                    <label>{this.state.answers[index][i]}
                         <input
                             key={i + qwNum}
                             type="checkbox"
                             name={qwNum}
                             value={this.state.answers[index][i]}
                             onChange={this.handleChange}
-                        ></input></p>
+                        ></input></label>
                 </div>)
         }
         if (this.state.is_qustoms[index]) {
