@@ -81,15 +81,20 @@ export default class AboutSelf extends Component {
             "scpous_id": this.state.scopus,
             "orcid_id": this.state.orcid
         };
+        console.log(data)
+        console.log(JSON.stringify(data))
 
         const body = {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
                 // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data)
         };
+
+        console.log(body)
 
         const res = await fetch(save_link, body)
         const data1 = await res.json()
