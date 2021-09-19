@@ -68,6 +68,7 @@ export default class Kompetision extends Component {
             "type": this.state.type
         };
 
+        console.log(data)
         const body = {
             method: 'POST',
             body: JSON.stringify(data)
@@ -114,7 +115,7 @@ export default class Kompetision extends Component {
             buttons.push(<div>
                 <p>Свой вариант:
                     <input id={index} type="text" onChange={this.updateVal}></input>
-                    <input id={"c" + index} type="checkbox" onChange={this.handleChange}></input></p>
+                    <input id={"c" + index} name={qwNum} type="checkbox" onChange={this.handleChange}></input></p>
             </div>)
         }
         return buttons
