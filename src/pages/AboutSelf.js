@@ -91,7 +91,9 @@ export default class AboutSelf extends Component {
             body: JSON.stringify(data)
         };
 
-        await fetch(save_link, body)
+        const res = await fetch(save_link, body)
+        const data1 = await res.json()
+        console.log(data1)
     };
 
     render() {
