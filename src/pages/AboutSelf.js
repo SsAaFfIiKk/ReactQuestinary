@@ -81,34 +81,24 @@ export default class AboutSelf extends Component {
             "scpous_id": this.state.scopus,
             "orcid_id": this.state.orcid
         };
-        console.log(data)
-        console.log(JSON.stringify(data))
 
         const body = {
             method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
             body: JSON.stringify(data)
         };
 
-        console.log(body)
 
-        const res = await fetch(save_link, body)
-        const data1 = await res.json()
-        console.log(data1)
+        fetch(save_link, body)  
     };
 
     render() {
         return (
             <div>
                 <div>
-                    Пользователь {this.state.surname} {this.state.name} {this.state.middlename}
+                    Пользователь: {this.state.surname} {this.state.name} {this.state.middlename}
                 </div>
                 <div>
-                    Табельный номер {this.state.isu_id}
+                    Табельный номер: {this.state.isu_id}
                 </div>
                 <div>
                     <form className="userform">

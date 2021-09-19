@@ -26,7 +26,6 @@ export default class Kompetision extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-
     async componentDidMount() {
         const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
         const res = await fetch(ses_link, {
@@ -61,7 +60,6 @@ export default class Kompetision extends Component {
             })
     }
 
-
     async sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_competence"
         const data = {
@@ -79,11 +77,15 @@ export default class Kompetision extends Component {
         this.openEND()
     };
 
-    handleChange = ({ target: { name, checked, value, key } }) => {
-        if (checked) {
-            this.setState(({ values }) => ({ values: [...values, { [name]: value }] }));
-        } else {
-            this.setState(({ values }) => ({ values: [...values.filter(e => e !== {[name]: value })] }));
+    handleChange (event) {
+        if (event.target.checked) {
+            this.setState({ values: [...this.state.values, { [event.target.name]: event.target.value }] });
+        }
+        else {
+            const oldVal = this.state.values
+            const todelete = { [event.target.name]: event.target.value }
+            oldVal.splice(todelete, 1)
+            this.setState({values: oldVal})
         }
     };
 
