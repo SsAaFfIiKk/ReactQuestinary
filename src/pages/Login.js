@@ -21,7 +21,8 @@ class Login extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit() {
+    onSubmit(e) {
+        e.preventDefault();
         this.setState({ error: false });
 
         const link = 'https://mycandidate.onti.actcognitive.org/questionnaires/backend/check_user';
@@ -70,33 +71,31 @@ class Login extends React.Component {
                     <span>«Исследование личностных и профессиональных характеристик сотрудников и обучающихся» </span>проводится для того, чтобы помочь студентам выбрать наиболее подходящие для них направления научно-исследовательской работы, а также сформировать из студентов коллективы на основании их индивидуальных особенностей и научных интересов.
                 </div>
                 <div>
-                    <div className="loginform">
-                        <form error={error}>
-                            {/* <img className="ava" src={Ava} alt="Вход"></img> */}
-                            <header>
-                                {error && <Message
-                                    error={error}
-                                    content="Неверный данные для входа" />}
-                            </header>
-                            <div className="ftitle">Имя</div>
-                            <div>
-                                <input placeholder="Введите ваше имя" name="name" onChange={this.handleChange}></input>
-                            </div>
-                            <div className="ftitle"> Фамилия</div>
-                            <div>
-                                <input placeholder="Введите вашу фамилию" name="surname" onChange={this.handleChange}></input>
-                            </div>
-                            <div className="ftitle">Номер ИСУ</div>
-                            <div>
-                                <input placeholder="Введите ваш табельный номер ИСУ" name="id" onChange={this.handleChange}></input>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="loginbtn">
-                        <button className="login" onClick={this.onSubmit}>Вход в систему {/*<img className="arrow" src={Arrow} alt=">"></img>*/} </button>
-                    </div>
+                    <form className="loginform" error={error} onSubmit={this.onSubmit}>
+                        <h1>Вход в систему</h1>
+                        <header>
+                            {error && <Message
+                                error={error}
+                                content="Неверные данные для входа" />}
+                        </header>
+                        <div className="group">
+                            <label htmlFor="">Ваша Фамилия </label>
+                            <input className="loginput" placeholder="Введите вашу фамилию" name="surname" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="group">
+                            <label htmlFor="">Ваше Имя</label>
+                            <input className="loginput" placeholder="Введите ваше имя" name="name" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="group">
+                            <label htmlFor="">Ваш ИСУ ID</label>
+                            <input className="loginput" placeholder="Введите ваш табельный номер ИСУ" name="id" onChange={this.handleChange}></input>
+                        </div>
+                        <div className="group">
+                            <center><button className="loginb" type="submit">Вход</button></center>
+                        </div>
+                    </form>
                 </div>
-            </div>
+            </div >
         );
     }
 }

@@ -1,11 +1,60 @@
 .instruction {
+    padding: 10px;
     margin-top: 40px;
-    left: 138px;
+    /* left: 138px;
     right: 180px;
     top: 149px;
-    bottom: 919px;
+    bottom: 919px; */
     background: #FFFFFF;
     border: 1px solid #342C9F;
     box-sizing: border-box;
     border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #5200a5;
+}
+
+.loginform {
+    margin: 0 auto;
+    background: #FFFFFF;
+    width: 450px;
+    height: 500px;
+    /* border: 1px solid #342C9F; */
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.group {
+    margin: 10px;
+    padding: 5px;
+}
+
+.loginput {
+    margin-top: 10px;
+    height: 40px;
+    width: 400px;
+    border-radius: 8px;
+    border: none;
+    padding-left: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.82);
+}
+
+.loginput:focus {
+    border: 2px solid#6c00ff;
+    transform: translateX(15px);
+    width: 385px;
+}
+
+.loginb {
+    cursor: pointer;
+    padding: 10px 30px;
+    height: 50px;
+    text-transform: uppercase;
+    font-size: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.82);
 }
