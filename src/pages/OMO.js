@@ -19,6 +19,7 @@ export default class OMO extends Component {
 
         this.createQuestions = this.createQuestions.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.validForm = this.validForm.bind(this)
         this.sendData = this.sendData.bind(this);
         this.openModal = this.openModal.bind(this);
         this.openEND = this.openEND.bind(this);
@@ -82,17 +83,31 @@ export default class OMO extends Component {
         this.openEND()
     };
 
+    validForm() {
+        if (this.state.answers.length === this.state.values.length) {
+            this.sendData()
+        }
+        else {
+            alert("Вы ответили не на все вопросы!")
+        }
+    }
+
     creteButtons(num, qwNum, labels) {
         let buttons = []
         for (let i = 0; i < num; i++) {
-            buttons.push(<label><input
-                className="radio"
-                key={i + qwNum}
-                type="radio"
-                name={qwNum}
-                value={i}
-                onChange={this.handleChange}></input>
-                {labels[i]}</label>
+            let id = num.toString() + i.toString() + qwNum.toString()
+            buttons.push(
+                <div className="radiobutton">
+                    <input
+                        className="radio"
+                        id ={id}
+                        key={i + qwNum}
+                        type="radio"
+                        name={qwNum}
+                        value={i}
+                        onChange={this.handleChange}></input>
+                    <label htmlFor={id}>{labels[i]}</label>
+                </div>
             )
         }
         return buttons
@@ -110,9 +125,6 @@ export default class OMO extends Component {
                     <div className="buttons">
                         {this.creteButtons(this.state.answers[i].length, this.state.ids[i], blabels)}
                     </div>
-                    {/* <div className="buttonsLabels">
-                        {blabels.map((blabels) => <p>{blabels}</p>)}
-                    </div> */}
                 </div>
             )
         }
@@ -152,7 +164,7 @@ export default class OMO extends Component {
                     <br />
                     <Link to='./kompins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Отпрпваить результаты</button>
             </div>
         )
     }

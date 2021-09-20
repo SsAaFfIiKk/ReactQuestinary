@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
+import Home from "./pages/Homepgae"
 import About from "./pages/AboutSelf"
 import Omoi from "./pages/OmoIns"
 import Omo from "./pages/OMO"
@@ -60,7 +61,7 @@ class SideMenu extends Component {
                 <div className="sidenav">
                     <ul>
                         <li>
-                            <Link className="single" to={`${match.path}`}>О себе</Link>
+                            <Link className="single" to={`${match.path}`}> Главная </Link>
                         </li>
                         <li>
                             Определение индивидуальных особенностей
@@ -71,13 +72,16 @@ class SideMenu extends Component {
                                 <li>
                                     <Link className="inslink" to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои состояние и особенности</Link>
                                 </li>
+                                <li>
+                                    <Link className="inslink" to={`${match.path}/big`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мой характер </Link>
+                                </li>
                             </ul>
                         </li>
                         <li>
                             Оценка роли в команде
                             <ul>
                                 <li>
-                                    <Link className="inslink" to={`${match.path}/vosins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Моя роль в команде</Link>
+                                    <Link className="inslink" to={`${match.path}/vosins`} style={this.state.tests["big5"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Моя роль в команде</Link>
                                 </li>
                                 <li>
                                     <Link className="inslink" to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Межличностные отношения</Link>
@@ -87,6 +91,15 @@ class SideMenu extends Component {
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            О себе
+                            <ul>
+                                <li>
+                                    <Link className="inslink" to={`${match.path}/ank`}>Анкета</Link>
+                                </li>
+                            </ul>
+                        </li>
+                        
                         <li>
                             <Link className="single" to={`${match.path}/inter`}>Интервью</Link>
                         </li>
@@ -98,6 +111,9 @@ class SideMenu extends Component {
                 <main role="main">
                     <div className="main">
                         <Switch>
+                            <Route path={`${match.path}/big`}>
+                                big5
+                            </Route>
                             <Route path={`${match.path}/omoins`}>
                                 <Omoi />
                             </Route>
@@ -131,8 +147,11 @@ class SideMenu extends Component {
                             <Route path={`${match.path}/inter`}>
                                 <Inter/>
                             </Route>
-                            <Route exact path={`${match.path}`}>
+                            <Route path={`${match.path}/ank`}>
                                 <About />
+                            </Route>
+                            <Route exact path={`${match.path}`}>
+                                <Home/>
                             </Route>
                         </Switch>
                     </div>

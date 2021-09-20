@@ -19,6 +19,7 @@ export default class Zaslon extends Component {
 
         this.child = React.createRef();
         this.handleChange = this.handleChange.bind(this);
+        this.validForm = this.validForm.bind(this)
         this.sendData = this.sendData.bind(this);
         this.openModal = this.openModal.bind(this);
         this.openEND = this.openEND.bind(this);
@@ -80,17 +81,32 @@ export default class Zaslon extends Component {
         this.openEND()
     };
 
+    validForm() {
+        if (this.state.answers.length === this.state.values.length) {
+            this.sendData()
+        }
+        else {
+            alert("Вы ответили не на все вопросы!")
+        }
+    }
+
     creteButtons(num, qwNum, labels) {
         let buttons = []
         for (let i = 0; i < num; i++) {
-            buttons.push(<label><input
-                className="radio"
-                key={i + qwNum}
-                type="radio"
-                name={qwNum}
-                value={i}
-                onChange={this.handleChange}></input>
-                {labels[i]}</label>)
+            let id = num.toString() + i.toString() + qwNum.toString()
+            buttons.push(
+                <div className="radiobutton">
+                    <input
+                        className="radio"
+                        id={id}
+                        key={i + qwNum}
+                        type="radio"
+                        name={qwNum}
+                        value={i}
+                        onChange={this.handleChange}></input>
+                    <label htmlFor={id}>{labels[i]}</label>
+                </div>
+            )
         }
         return buttons
     }
@@ -107,9 +123,7 @@ export default class Zaslon extends Component {
                     <div className="buttons">
                         {this.creteButtons(this.state.answers[i].length, this.state.ids[i], blabels)}
                     </div>
-                    {/* <div className="buttonsLabels">
-                        {blabels.map((blabels) => <p>{blabels}</p>)}
-                    </div> */}
+
                 </div>
             )
         }
@@ -147,7 +161,7 @@ export default class Zaslon extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Отпрпваить результаты</button>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".
                     <br />

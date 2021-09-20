@@ -2,8 +2,6 @@ import React from 'react';
 import { Message } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import "../css/Login.css"
-// import Arrow from "../img/arrow.svg"
-// import Ava from "../img/Ava.svg"
 
 class Login extends React.Component {
     constructor(props) {
@@ -79,15 +77,15 @@ class Login extends React.Component {
                                 content="Неверные данные для входа" />}
                         </header>
                         <div className="group">
-                            <label htmlFor="">Ваша Фамилия </label>
+                            <label htmlFor="">Фамилия: </label>
                             <input className="loginput" placeholder="Введите вашу фамилию" name="surname" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="">Ваше Имя</label>
+                            <label htmlFor="">Имя: </label>
                             <input className="loginput" placeholder="Введите ваше имя" name="name" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="">Ваш ИСУ ID</label>
+                            <label htmlFor="">ИСУ ID: </label>
                             <input className="loginput" placeholder="Введите ваш табельный номер ИСУ" name="id" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">

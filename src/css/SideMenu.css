@@ -17,13 +17,14 @@ li {
 .sidenav {
     flex-grow: 1;
     height: 100%;
-    width: 160px;
+    width: 140px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     overflow-x: hidden;
     background-color: #342C9F;
+    padding: 0 20px;
 }
 
 .single {
@@ -51,7 +52,7 @@ li {
 
 main {
     flex-grow: 1;
-    margin-left: 160px;
+    margin-left: 200px;
 }
 
 .sidenav button {

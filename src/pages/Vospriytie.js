@@ -19,6 +19,7 @@ export default class Vospriytie extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.validForm = this.validForm.bind(this);
         this.sendData = this.sendData.bind(this);
         this.openModal = this.openModal.bind(this);
         this.openEND = this.openEND.bind(this);
@@ -95,12 +96,32 @@ export default class Vospriytie extends Component {
         this.openEND();
     }
 
+    validForm() {
+        const values = this.state.values
+        const reducer = (previousValue, currentValue) => previousValue + currentValue;
+        let sum = 0;
+        for (let key in values) {
+            let ans = values[key]
+            ans = ans.slice(1)
+            sum += ans.reduce(reducer)
+        }
+
+        console.log(sum)
+        if (sum !== this.state.answers.length * 10) {
+            alert("Вы распределили не все очки")
+        }
+        else {
+            this.sendData()
+        }
+
+    }
+
     creteButtons(num, qwNum, index) {
         let buttons = []
         let blabels = this.state.answers[index]
         for (let i = 0; i < num; i++) {
             buttons.push(
-                <div>
+                <div className="row">
                     <p>{blabels[i]}
                         <input
                             key={i + qwNum}
@@ -172,7 +193,7 @@ export default class Vospriytie extends Component {
                     <br />
                     <Link to='./omoins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Отпрпваить результаты</button>
             </div>
         )
     }

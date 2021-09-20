@@ -68,7 +68,7 @@ export default class AboutSelf extends Component {
         document.getElementById("orcid").value = this.state.orcid
     }
 
-    async sendData() {
+    sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/update_profile"
         const data = {
             "isu_id": localStorage.getItem("id"),
@@ -88,61 +88,68 @@ export default class AboutSelf extends Component {
         };
 
 
-        fetch(save_link, body)  
+        fetch(save_link, body)
     };
 
     render() {
         return (
             <div>
-                <div className="prifile">
-                <div>
-                    Пользователь: {this.state.surname} {this.state.name} {this.state.middlename}
-                </div>
-                <div>
-                    Табельный номер: {this.state.isu_id}
+                <div className="profile">
+                    <div>
+                        Пользователь: {this.state.surname} {this.state.name} {this.state.middlename}
+                    </div>
+                    <div>
+                        Табельный номер: {this.state.isu_id}
                     </div>
                 </div>
                 <div>
                     <form className="userform">
                         <h2>Для участия в исследовании заполните, пожалуйста, следующие поля:</h2>
-                        <div className="groulabel">
+                        <div className="group">
                             <label>Пол</label>
-                            <br />
-                            <label htmlFor="male">Мужской</label>
-                            <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
-                            <label htmlFor="female">Женский</label>
-                            <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
+                            <div className='genderradiobuttons'>
+                                <div className='radiobutton'>
+                                    <label htmlFor="male">Мужской</label>
+                                    <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
+                                </div>
+                                <div className='radiobutton'>
+                                    <label htmlFor="female">Женский</label>
+                                    <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
+                                </div>
+                            </div>
                         </div>
-                        <div className="groulabel">
-                            <label>Возраст</label>
+                        <div className="group">
+                            <label htmlFor="age">Возраст</label>
                             <input className="slefinput" id="age" type="text" name="age" maxLength="3" onChange={this.handleChange}></input>
                         </div>
-                        <div className="groulabel">
-                            <label htmlFor="">Ссылка на VK</label>
+                        <div className="group">
+                            <label htmlFor="vk">Ссылка на VK</label>
                             <input className="slefinput" id="vk" type="text" name="vk" onChange={this.handleChange}></input>
                         </div>
-                        <div className="groulabel">
-                            <label htmlFor="">Ссылка на Instagram</label>
+                        <div className="group">
+                            <label htmlFor="inst">Ссылка на Instagram</label>
                             <input className="slefinput" id="inst" type="text" name="inst" onChange={this.handleChange}></input>
                         </div>
-                        <div className="groulabel">
-                            <label htmlFor="" >Ссылка на Facebook</label>
+                        <div className="group">
+                            <label htmlFor="facebook" >Ссылка на Facebook</label>
                             <input className="slefinput" id="facebook" type="text" name="facebook" onChange={this.handleChange}></input>
                         </div>
-                        <div className="groulabel">
-                            <label htmlFor="">Elibray id</label>
+                        <div className="group">
+                            <label htmlFor="elib">Elibrary id</label>
                             <input className="slefinput" id="elib" type="text" name="elib" onChange={this.handleChange}></input>
                         </div>
-                        <div className="groulabel">
-                            <label htmlFor="" >Scolabelus id</label>
+                        <div className="group">
+                            <label htmlFor="scopus" >Scopus id</label>
                             <input className="slefinput" id="scopus" type="text" name="scopus" onChange={this.handleChange}></input>
                         </div>
-                        <div className="groulabel">
-                            <label htmlFor="">Orcid id</label>
+                        <div className="group">
+                            <label htmlFor="orcid">Orcid id</label>
                             <input className="slefinput" id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
                         </div>
-                        <center><button onClick={this.sendData}> Отправить</button></center>
                     </form>
+                    <div className="group">
+                        <center><button className="loginb" onClick={this.sendData}> Отправить</button></center>
+                    </div>
                 </div>
             </div>
         )
