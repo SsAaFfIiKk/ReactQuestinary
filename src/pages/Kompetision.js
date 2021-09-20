@@ -119,17 +119,20 @@ export default class Kompetision extends Component {
     createCheckBox(num, qwNum, index) {
         let buttons = []
         for (let i = 0; i < num; i++) {
+            let id = num.toString() + i.toString() + qwNum.toString()
             buttons.push(
                 <div className="row">
                     <p>
                         <input
+                            id={id}
                             className="flags"
-                            key={i + qwNum}
+                            key={id}
                             type="checkbox"
                             name={qwNum}
                             value={this.state.answers[index][i]}
-                            onChange={this.handleChange}
-                        ></input><label>{this.state.answers[index][i]}</label></p>
+                            onChange={this.handleChange}>
+                            </input>
+                        <label htmlFor={id}>{this.state.answers[index][i]}</label></p>
                 </div>)
         }
         if (this.state.is_qustoms[index]) {

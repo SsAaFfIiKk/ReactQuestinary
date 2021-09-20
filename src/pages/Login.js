@@ -74,11 +74,11 @@ class Login extends React.Component {
                                 content="Неверные данные для входа" />}
                         </header>
                         <div className="group">
-                            <label htmlFor="">фамилия: </label>
+                            <label htmlFor="">Фамилия: </label>
                             <input className="loginput" placeholder="Введите вашу фамилию" name="surname" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="">имя: </label>
+                            <label htmlFor="">Имя: </label>
                             <input className="loginput" placeholder="Введите ваше имя" name="name" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
