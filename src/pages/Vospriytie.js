@@ -122,7 +122,7 @@ export default class Vospriytie extends Component {
         for (let i = 0; i < num; i++) {
             buttons.push(
                 <div className="row">
-                    <p>{blabels[i]}
+                    <p>
                         <input
                             key={i + qwNum}
                             type="number"
@@ -135,7 +135,7 @@ export default class Vospriytie extends Component {
                             onKeyDown={(event) => {
                                 event.preventDefault();
                             }}
-                        ></input></p>
+                        ></input>{blabels[i]}</p>
                 </div>)
         }
         return buttons

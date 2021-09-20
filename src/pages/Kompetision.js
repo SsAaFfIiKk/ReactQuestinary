@@ -97,7 +97,7 @@ export default class Kompetision extends Component {
         const check = "c" + document.getElementById(tar.id).id
         const box = document.getElementById(check)
         box.value = tar.value
-        box.checked=true
+        box.checked = true
         this.setState({ values: [...this.state.values, { [box.name]: box.value }] });
     }
 
@@ -120,8 +120,8 @@ export default class Kompetision extends Component {
         let buttons = []
         for (let i = 0; i < num; i++) {
             buttons.push(
-                <div>
-                    <p><label>{this.state.answers[index][i]}
+                <div className="row">
+                    <p>
                         <input
                             className="flags"
                             key={i + qwNum}
@@ -129,15 +129,19 @@ export default class Kompetision extends Component {
                             name={qwNum}
                             value={this.state.answers[index][i]}
                             onChange={this.handleChange}
-                        ></input></label></p>
+                        ></input><label>{this.state.answers[index][i]}</label></p>
                 </div>)
         }
         if (this.state.is_qustoms[index]) {
-            buttons.push(<div>
-                <p><label htmlFor={"c" + index}>Свой вариант: </label>
-                    <input id={index} type="text" onChange={this.updateVal}></input>
-                    <input className="flags" id={"c" + index} name={qwNum} value="" type="checkbox" onChange={this.handleChange}></input></p>
-            </div>)
+            buttons.push(
+                <div>
+                    <p>
+                        <input className="flags" id={"c" + index} name={qwNum} value="" type="checkbox" onChange={this.handleChange}></input>
+                        <label htmlFor={"c" + index}>Свой вариант: </label>
+                        <input id={index} type="text" onChange={this.updateVal}></input>
+                    </p>
+                </div>
+            )
         }
         return buttons
     }

@@ -46,4 +46,5 @@ h2 {
 
 .genderradiobuttons {
     display: flex;
+    align-items: center;
 }

@@ -82,7 +82,7 @@ class Login extends React.Component {
                             <input className="loginput" placeholder="Введите ваше имя" name="name" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="">ИСУ ID: </label>
+                            <label htmlFor="">Ваш ИСУ ID: </label>
                             <input className="loginput" placeholder="Введите ваш табельный номер ИСУ" name="id" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">

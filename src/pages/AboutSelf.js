@@ -106,8 +106,9 @@ export default class AboutSelf extends Component {
                     <form className="userform">
                         <h2>Для участия в исследовании заполните, пожалуйста, следующие поля:</h2>
                         <div className="group">
-                            <label>Пол</label>
+                            
                             <div className='genderradiobuttons'>
+                                Пол: 
                                 <div className='radiobutton'>
                                     <label htmlFor="male">Мужской</label>
                                     <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
@@ -123,15 +124,15 @@ export default class AboutSelf extends Component {
                             <input className="slefinput" id="age" type="text" name="age" maxLength="3" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="vk">Ссылка на VK</label>
+                            <label htmlFor="vk">Ссылка на профиль ВКонтакте</label>
                             <input className="slefinput" id="vk" type="text" name="vk" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="inst">Ссылка на Instagram</label>
+                            <label htmlFor="inst">Ссылка на профиль в Instagram</label>
                             <input className="slefinput" id="inst" type="text" name="inst" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="facebook" >Ссылка на Facebook</label>
+                            <label htmlFor="facebook" >Ссылка на профиль в FaceBook</label>
                             <input className="slefinput" id="facebook" type="text" name="facebook" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
