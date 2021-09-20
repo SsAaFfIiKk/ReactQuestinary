@@ -7,6 +7,7 @@ body {
     font-family: Arial, helvetica, sans-serif;
     font-size: 16px;
     margin: 0;
+    margin-bottom: 15px;
 }
 
 span {
@@ -14,6 +15,7 @@ span {
 }
 
 button {
+    padding: 5px;
     width: auto;
     color: #FFFFFF;
     background: #342C9F;
@@ -33,16 +35,25 @@ input {
     background: #FFFFFF;
     border: 1px solid #E6E6E6;
     box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 10px 1px rgba(226, 226, 226, 0.82);
     border-radius: 4px;
 }
 
 div>p {
+    /* text-align: center; */
     padding: 10px;
 }
 
 div>p>input {
     margin-left: 15px;
+}
+
+.info {
+    margin-top: 20px;
+    margin-right: 30px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 10px 1px rgba(226, 226, 226, 0.82);
 }
 
 .group {
@@ -86,10 +97,20 @@ div>p>input {
 }
 
 .float {
+    text-align: center;
     margin-right: 2%;
     position: sticky;
     float: right;
     top: 0px;
+}
+
+.insbutton {
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px;
+    position: sticky;
+    top: 50px;
+    max-width: 150px;
 }
 
 .question {
@@ -109,7 +130,7 @@ div>p>input {
     margin-left: 30px;
     margin-right: 30px;
     background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 10px 1px rgba(226, 226, 226, 0.82);
     border-radius: 8px;
     font-style: normal;
     font-weight: 600;

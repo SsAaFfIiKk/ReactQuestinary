@@ -266,7 +266,7 @@ function SecondTest(props) {
             <Modal id="end" active={modalEnd} setActive={setEndActive}>
                 Спасибо за прохождение теста. Теперь вам доступен тест "Моя роль в команде".
                 <br />
-                <Link to='./vosins'><button>Следующий тест</button></Link>
+                <Link to='./big'><button>Следующий тест</button></Link>
             </Modal>
             <div className={classes.mainContent}>
                 <Container maxWidth="md">

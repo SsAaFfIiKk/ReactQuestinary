@@ -1,7 +1,17 @@
 .Timer {
+    margin-top: 10px;
     border: 1px solid #342C9F;
     border-radius: 4px;
     text-align: center;
     color: #342C9F;
     width: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.tmimg{
+    text-align: center;
+    width: 20px;
+    height: auto;
+    margin: 5px;
 }

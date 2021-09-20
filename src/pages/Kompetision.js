@@ -97,10 +97,8 @@ export default class Kompetision extends Component {
         const check = "c" + document.getElementById(tar.id).id
         const box = document.getElementById(check)
         box.value = tar.value
-        // box.checked = true
-        // let e = document.createEvent('HTMLEvents');
-        // e.initEvent('change', true, false);
-        // box.dispatchEvent(e)
+        box.checked=true
+        this.setState({ values: [...this.state.values, { [box.name]: box.value }] });
     }
 
     validForm() {

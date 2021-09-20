@@ -65,9 +65,6 @@ class Login extends React.Component {
         const { error } = this.state;
         return (
             <div>
-                <div className="instruction">
-                    <span>«Исследование личностных и профессиональных характеристик сотрудников и обучающихся» </span>проводится для того, чтобы помочь студентам выбрать наиболее подходящие для них направления научно-исследовательской работы, а также сформировать из студентов коллективы на основании их индивидуальных особенностей и научных интересов.
-                </div>
                 <div>
                     <form className="loginform" error={error} onSubmit={this.onSubmit}>
                         <h1>Вход в систему</h1>
@@ -77,11 +74,11 @@ class Login extends React.Component {
                                 content="Неверные данные для входа" />}
                         </header>
                         <div className="group">
-                            <label htmlFor="">Фамилия: </label>
+                            <label htmlFor="">фамилия: </label>
                             <input className="loginput" placeholder="Введите вашу фамилию" name="surname" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
-                            <label htmlFor="">Имя: </label>
+                            <label htmlFor="">имя: </label>
                             <input className="loginput" placeholder="Введите ваше имя" name="name" onChange={this.handleChange}></input>
                         </div>
                         <div className="group">

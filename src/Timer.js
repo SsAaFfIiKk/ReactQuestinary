@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "./css/Timer.css"
+import tm from "./img/time.png"
 
 export default class Timer extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ export default class Timer extends Component {
     }
 
     stopTimer() {
-        this.setState({stop: true})
+        this.setState({ stop: true })
     }
 
     countDown() {
@@ -71,7 +72,7 @@ export default class Timer extends Component {
     render() {
         return (
             <div className="Timer">
-                Осталось {this.state.time.m} минут {this.state.time.s} секунд
+                <img className="tmimg" src={tm}/> {this.state.time.m} : {this.state.time.s}
             </div>
         );
     }
