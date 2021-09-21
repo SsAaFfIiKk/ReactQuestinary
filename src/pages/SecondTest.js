@@ -209,7 +209,9 @@ async function sendData(props) {
 }
 
 let answers = { first: [], second: [] }
+
 function SecondTest(props) {
+    answers = { first: [], second: [] }
     useEffect(() => { getSesion() })
 
     function handleClick(item, answerType, props) {
@@ -233,6 +235,13 @@ function SecondTest(props) {
     const classes = useStyles();
     const [modalActive, setModalActive] = useState(false)
     const [modalEnd, setEndActive] = useState(false)
+    // let modalEnd = false
+
+    // function setEndActive() {
+    //     modalEnd = true;
+    //     return true;
+    // }
+    
 
     function createButton(image, answerType) {
         return (
@@ -259,10 +268,10 @@ function SecondTest(props) {
     return (
         <div>
             <button className="insbutton" onClick={() => setModalActive(true)}> Инструкция</button>
-            <Modal active={modalActive} setActive={setModalActive}>
+            <Modal active={modalActive} setActive={setModalActive} notClosable={false}>
                 {Instructions.luscjerIns()}
             </Modal>
-            <Modal id="end" active={modalEnd} setActive={setEndActive}>
+            <Modal id="end" active={modalEnd} setActive={setEndActive} notClosable={true}>
                 <p>Спасибо за прохождение теста. Теперь вам доступен тест "Мой характер".</p>
                 <Link to="/menu"> <button>На главную</button></Link>
                 <Link to='./bigins'><button>Следующий тест</button></Link>
