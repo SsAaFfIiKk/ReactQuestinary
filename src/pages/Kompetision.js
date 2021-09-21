@@ -198,7 +198,7 @@ export default class Kompetision extends Component {
                     <br/>
                     <Link to='/menu'><button>На главную</button></Link>
                 </Modal>
-                <button onClick={this.validForm}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }

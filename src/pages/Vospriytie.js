@@ -196,7 +196,7 @@ export default class Vospriytie extends Component {
                     <br />
                     <Link to='./omoins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.validForm}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }

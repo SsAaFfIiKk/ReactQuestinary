@@ -19,6 +19,7 @@ export default class Big5 extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.validForm = this.validForm.bind(this);
         this.sendData = this.sendData.bind(this);
         this.openModal = this.openModal.bind(this);
         this.openEND = this.openEND.bind(this);
@@ -96,6 +97,19 @@ export default class Big5 extends Component {
         this.openEND()
     };
 
+    validForm() {
+        const values = this.state.values
+        const reducer = (previousValue, currentValue) => previousValue + currentValue;
+        let sum = 0;
+        sum += values.reduce(reducer)
+        if (sum <= this.state.answers.length) {
+            alert("Хотя бы одно утверждение должно быть больше 1")
+        }
+        else (
+            this.sendData()
+        )
+    }
+
     createNumbers() {
         let buttons = []
         let blabels = this.state.answers
@@ -171,7 +185,7 @@ export default class Big5 extends Component {
                     <br />
                     <Link to='./vosins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.sendData}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }

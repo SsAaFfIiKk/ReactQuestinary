@@ -85,7 +85,7 @@ export default class OMO extends Component {
     };
 
     validForm() {
-        if (this.state.answers.length === this.state.values.length) {
+        if (this.state.answers.length === Object.values(this.state.values).length) {
             this.sendData()
         }
         else {
@@ -162,7 +162,7 @@ export default class OMO extends Component {
                     <br />
                     <Link to='./kompins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.validForm}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }

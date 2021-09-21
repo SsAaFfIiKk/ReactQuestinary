@@ -89,7 +89,9 @@ export default class Zaslon extends Component {
     };
 
     validForm() {
-        if (this.state.answers.length === this.state.values.length) {
+        console.log(this.state.answers.length)
+        console.log(this.state.values)
+        if (this.state.answers.length === Object.values(this.state.values).length) {
             this.sendData()
         }
         else {
@@ -164,7 +166,7 @@ export default class Zaslon extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.validForm}>Отпрпваить результаты</button>
+                <button onClick={this.validForm}>Оправить результаты</button>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".
                     <br />
