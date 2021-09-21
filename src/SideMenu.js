@@ -44,7 +44,7 @@ class SideMenu extends Component {
             const elLink = currentEl.href.split('/').pop()
             if (elLink === currentPath || elLink.substring(0, elLink.length - 3) === currentPath) {
                 links[linkIndex].style.setProperty('background', 'rgba(0,0,0,0.25)', '');
-                links[linkIndex].style.setProperty('color', '#49dfb9', '');
+                links[linkIndex].style.setProperty('color', 'rgb(228, 227, 235)', '');
             }
             else {
                 links[linkIndex].style.setProperty('background', '', '');
@@ -73,17 +73,43 @@ class SideMenu extends Component {
         this.setState({ islogout: true });
     }
 
-    generatePersLinks(match) {
+    generatePersLinks(match, cn) {
         return (
             <ul>
                 <li>
-                    <Link className="inslink inslink-page" to={`${match.path}/zaslonins`}>Мои взгляды и интересы</Link>
+                    <Link className={cn} to={`${match.path}/zaslonins`}>Мои взгляды и интересы</Link>
                 </li>
                 <li>
-                    <Link className="inslink inslink-page" to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои состояние и особенности</Link>
+                    <Link className={cn} to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои состояние и особенности</Link>
                 </li>
                 <li>
-                    <Link className="inslink inslink-page" to={`${match.path}/bigins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мой характер </Link>
+                    <Link className={cn} to={`${match.path}/bigins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мой характер </Link>
+                </li>
+            </ul>
+        )
+    }
+
+    generateTeamLinks(match, cn) {
+        return (
+            <ul>
+                <li>
+                    <Link className={cn} to={`${match.path}/vosins`} style={this.state.tests["big5"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Моя роль в команде</Link>
+                </li>
+                <li>
+                    <Link className={cn} to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Межличностные отношения</Link>
+                </li>
+                <li>
+                    <Link className={cn} to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои проф. интересы</Link>
+                </li>
+            </ul>
+        )
+    }
+
+    generateAbout(match, cn) {
+        return (
+            <ul>
+                <li>
+                    <Link className={cn} to={`${match.path}/ank`}>Анкета</Link>
                 </li>
             </ul>
         )
@@ -104,31 +130,16 @@ class SideMenu extends Component {
                         </li>
                         <li>
                             <Link className="single" to={`${match.path}/personal`}> Определение индивидуальных особенностей</Link>
-                            {this.generatePersLinks(match)}
+                            {this.generatePersLinks(match, "inslink")}
                         </li>
                         <li>
-                            Оценка роли в команде
-                            <ul>
-                                <li>
-                                    <Link className="inslink" to={`${match.path}/vosins`} style={this.state.tests["big5"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Моя роль в команде</Link>
-                                </li>
-                                <li>
-                                    <Link className="inslink" to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Межличностные отношения</Link>
-                                </li>
-                                <li>
-                                    <Link className="inslink" to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои проф. интересы</Link>
-                                </li>
-                            </ul>
+                            <Link className="single" to={`${match.path}/team`}> Оценка роли в команде </Link>
+                            {this.generateTeamLinks(match, "inslink")}
                         </li>
                         <li>
-                            О себе
-                            <ul>
-                                <li>
-                                    <Link className="inslink" to={`${match.path}/ank`}>Анкета</Link>
-                                </li>
-                            </ul>
+                            <Link className="single" to={`${match.path}/about`}> О себе </Link>
+                            {this.generateAbout(match, "inslink")}
                         </li>
-
                         <li>
                             <Link className="single" to={`${match.path}/inter`}>Интервью</Link>
                         </li>
@@ -141,7 +152,13 @@ class SideMenu extends Component {
                     <div className="main">
                         <Switch>
                             <Route path={`${match.path}/personal`}>
-                                {Sections.personal(this.generatePersLinks(match))}
+                                {Sections.personal(this.generatePersLinks(match, "inslink-page"))}
+                            </Route>
+                            <Route path={`${match.path}/team`}>
+                                {Sections.team(this.generateTeamLinks(match, "inslink-page"))}
+                            </Route>
+                            <Route path={`${match.path}/about`}>
+                                {Sections.about(this.generateAbout(match, "inslink-page"))}
                             </Route>
                             <Route path={`${match.path}/bigins`}>
                                 <Bigi />

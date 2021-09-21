@@ -80,7 +80,10 @@ export default class OMO extends Component {
         };
 
         await fetch(save_link, body)
-        await fetch(iter_link, body)
+        await fetch(iter_link, {
+            method: "POST",
+            body: JSON.stringify({ "session_id": this.state.sesion })
+        })
         this.openEND()
     };
 

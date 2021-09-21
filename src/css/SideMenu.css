@@ -17,14 +17,13 @@ li {
 .sidenav {
     flex-grow: 1;
     height: 100%;
-    width: 140px;
+    width: 180px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     overflow-x: hidden;
     background-color: #342C9F;
-    padding: 0 20px;
 }
 
 .single {
@@ -32,14 +31,7 @@ li {
     font-size: 18px;
     color: #FFFFFF;
     display: block;
-}
-
-.single:hover {
-    color: #49dfb9;
-}
-
-.inslink:hover {
-    color: #49dfb9;
+    padding: 10px 10px;
 }
 
 .inslink {
@@ -52,6 +44,20 @@ li {
 
 .inslink-page {
     color: #342C9F;
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.inslink-page:hover {
+    color: #fff;
+    opacity: 0.75;
+    background-color: #342C9F;
+    padding-right: 16px;
+    border-radius: 4px;
+    width: fit-content;
+    transition: 0.1s;
 }
 
 main {

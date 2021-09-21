@@ -11,7 +11,23 @@ class Sections extends Component {
         )
     }
 
+    static team(fun) {
+        return (
+            <div>
+                <p><span>Оценка роли в команде</span></p>
+                {fun}
+            </div>
+        )
+    }
 
+    static about(fun) {
+        return (
+            <div>
+                <p><span>О себе</span></p>
+                {fun}
+            </div>
+        )
+    }
 }
 
 export default Sections
