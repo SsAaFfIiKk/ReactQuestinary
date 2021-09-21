@@ -161,8 +161,8 @@ export default class OMO extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    Спасибо за прохождение теста. Теперь вам доступен тест "Мои профессиональные интересы".
-                    <br />
+                    <p>Спасибо за прохождение теста. Теперь вам доступен тест "Мои проф. интересы".</p>
+                    <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./kompins'><button>Следующий тест</button></Link>
                 </Modal>
                 <button onClick={this.validForm}>Оправить результаты</button>

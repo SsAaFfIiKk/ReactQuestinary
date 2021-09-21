@@ -89,8 +89,6 @@ export default class Zaslon extends Component {
     };
 
     validForm() {
-        console.log(this.state.answers.length)
-        console.log(this.state.values)
         if (this.state.answers.length === Object.values(this.state.values).length) {
             this.sendData()
         }
@@ -168,8 +166,8 @@ export default class Zaslon extends Component {
                 </form>
                 <button onClick={this.validForm}>Оправить результаты</button>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".
-                    <br />
+                    <p>Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".</p>
+                    <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./luscherins'><button>Следующий тест</button></Link>
                 </Modal>
             </div>

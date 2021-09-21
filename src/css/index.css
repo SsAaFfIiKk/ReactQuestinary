@@ -15,6 +15,7 @@ span {
 }
 
 button {
+    margin-left: 5px;
     padding: 5px;
     width: auto;
     color: rgb(228, 227, 235);

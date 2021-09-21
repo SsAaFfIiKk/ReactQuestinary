@@ -64,7 +64,9 @@ export default class Kompetision extends Component {
     }
 
     async sendData() {
+        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_compitence_interpritation"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_competence"
+        
         const data = {
             "answers": this.state.values,
             "session_id": this.state.sesion,
@@ -77,6 +79,11 @@ export default class Kompetision extends Component {
         };
 
         await fetch(save_link, body)
+        await fetch(iter_link, {
+            method: "POST",
+            body: JSON.stringify({ "session_id": this.state.sesion })
+        })
+
         this.openEND()
     };
 
@@ -194,8 +201,7 @@ export default class Kompetision extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    Вы прошли все тесты, спасибо
-                    <br/>
+                    <p>Вы прошли все тесты, спасибо</p>
                     <Link to='/menu'><button>На главную</button></Link>
                 </Modal>
                 <button onClick={this.validForm}>Оправить результаты</button>

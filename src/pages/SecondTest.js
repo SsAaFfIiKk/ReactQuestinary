@@ -186,6 +186,7 @@ async function getSesion() {
 }
 
 async function sendData(props) {
+    const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_lusher_interpritation"
     const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_luscher"
 
     const data = {
@@ -200,6 +201,10 @@ async function sendData(props) {
     };
 
     await fetch(save_link, body)
+    await fetch(iter_link, {
+        method: "POST",
+        body: JSON.stringify({ "session_id": sesion })
+    })
     props.updateTest()
 }
 
@@ -258,9 +263,9 @@ function SecondTest(props) {
                 {Instructions.luscjerIns()}
             </Modal>
             <Modal id="end" active={modalEnd} setActive={setEndActive}>
-                Спасибо за прохождение теста. Теперь вам доступен тест "Моя роль в команде".
-                <br />
-                <Link to='./big'><button>Следующий тест</button></Link>
+                <p>Спасибо за прохождение теста. Теперь вам доступен тест "Мой характер".</p>
+                <Link to="/menu"> <button>На главную</button></Link>
+                <Link to='./bigins'><button>Следующий тест</button></Link>
             </Modal>
             <div className={classes.mainContent}>
                 <Container maxWidth="md">

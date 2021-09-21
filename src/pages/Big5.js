@@ -30,7 +30,7 @@ export default class Big5 extends Component {
         const id = event.target.id
         const val = event.target.value
         const newVal = this.state.values
-    
+
         newVal[id] = Number(val)
         this.setState({ values: newVal })
     }
@@ -58,7 +58,7 @@ export default class Big5 extends Component {
                     return Promise.reject(er)
                 }
 
- 
+
                 this.setState({
                     ids: data["id"],
                     questions: data["q_text"],
@@ -77,7 +77,6 @@ export default class Big5 extends Component {
     }
 
     async sendData() {
-        // const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/calculate_answers_degree"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_big5"
 
         const data = {
@@ -93,7 +92,7 @@ export default class Big5 extends Component {
         };
 
         await fetch(save_link, body)
-        // await fetch(iter_link, body)
+
         this.openEND()
     };
 
@@ -113,7 +112,7 @@ export default class Big5 extends Component {
     createNumbers() {
         let buttons = []
         let blabels = this.state.answers
-        for (let i = 0; i < this.state.answers.length; i++){
+        for (let i = 0; i < this.state.answers.length; i++) {
             buttons.push(
                 <div className="row">
                     <p>
@@ -151,7 +150,7 @@ export default class Big5 extends Component {
                     {butons}
                 </div>
             </div>
-            )
+        )
         return qw
     }
 
@@ -181,8 +180,8 @@ export default class Big5 extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    Спасибо за прохождение теста. Теперь вам доступен тест "Моя роль в команде".
-                    <br />
+                    <p>Спасибо за прохождение теста. Теперь вам доступен тест "Моя роль в команде".</p>
+                    <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./vosins'><button>Следующий тест</button></Link>
                 </Modal>
                 <button onClick={this.validForm}>Оправить результаты</button>

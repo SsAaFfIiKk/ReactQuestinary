@@ -192,8 +192,8 @@ export default class Vospriytie extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    Спасибо за прохождение теста. Теперь вам доступен тест "Межличностные отношения".
-                    <br />
+                    <p>Спасибо за прохождение теста. Теперь вам доступен тест "Межличностные отношения".</p>
+                    <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./omoins'><button>Следующий тест</button></Link>
                 </Modal>
                 <button onClick={this.validForm}>Оправить результаты</button>
