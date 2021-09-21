@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Modal from "../Modal"
 import { Link } from "react-router-dom"
+import Instructions from '../Instructions';
 
 export default class Kompetision extends Component {
     constructor(props) {
@@ -84,11 +85,10 @@ export default class Kompetision extends Component {
             this.setState({ values: [...this.state.values, { [event.target.name]: event.target.value }] });
         }
         else {
-            const oldVal = this.state.values
-            console.log(oldVal)
+            const newVal = this.state.values
             const todelete = { [event.target.name]: event.target.value }
-            oldVal.splice(todelete, 1)
-            this.setState({ values: oldVal })
+            newVal.splice(todelete, 1)
+            this.setState({ values: newVal })
         }
     };
 
@@ -188,15 +188,14 @@ export default class Kompetision extends Component {
                     <button className="insbutton" onClick={this.openModal}>Инструкция</button>
                 </div>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
-                    <p><span>Время прохождения не ограничено</span></p>
-                    <p>Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на порядок расположения тем научных работ в перечне, предложенном испытуемому.
-                    </p>
+                    {Instructions.kompIns()}
                 </Modal>
                 <form>
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     Вы прошли все тесты, спасибо
+                    <br/>
                     <Link to='/menu'><button>На главную</button></Link>
                 </Modal>
                 <button onClick={this.validForm}>Отпрпваить результаты</button>

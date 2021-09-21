@@ -34,6 +34,14 @@ li {
     display: block;
 }
 
+.single:hover {
+    color: #49dfb9;
+}
+
+.inslink:hover {
+    color: #49dfb9;
+}
+
 .inslink {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -42,12 +50,8 @@ li {
     display: block;
 }
 
-.single:hover {
-    color: #49dfb9;
-}
-
-.inslink:hover {
-    color: #49dfb9;
+.inslink-page {
+    color: #342C9F;
 }
 
 main {

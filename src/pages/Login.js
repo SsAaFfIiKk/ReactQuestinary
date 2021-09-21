@@ -49,11 +49,13 @@ class Login extends React.Component {
 
                 else {
                     this.setState({ error: true });
+                
                 }
             })
     };
 
     handleChange(event) {
+        this.setState({ error: false });
         this.setState({ [event.target.name]: event.target.value })
     };
 
@@ -68,7 +70,7 @@ class Login extends React.Component {
                 <div>
                     <form className="loginform" error={error} onSubmit={this.onSubmit}>
                         <h1>Вход в систему</h1>
-                        <header>
+                        <header className={this.state.error ? 'warning warning-active': 'warning'}>
                             {error && <Message
                                 error={error}
                                 content="Неверные данные для входа" />}

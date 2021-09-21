@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Timer from "../Timer"
 import Modal from "../Modal"
 import { Link } from "react-router-dom"
+import Instructions from '../Instructions'
 
 export default class Zaslon extends Component {
     constructor(props) {
@@ -64,6 +65,7 @@ export default class Zaslon extends Component {
     }
 
     async sendData() {
+        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_zaslone_interpritation"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_zaslon"
 
         const data = {
@@ -78,6 +80,11 @@ export default class Zaslon extends Component {
         };
 
         await fetch(save_link, body)
+        await fetch(iter_link, {
+            method: "POST",
+            body: JSON.stringify({ "session_id": this.state.sesion })
+        })
+        
         this.openEND()
     };
 
@@ -152,11 +159,7 @@ export default class Zaslon extends Component {
                     <button className="insbutton" onClick={this.openModal}>Инструкция</button>
                 </div>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
-                    <p><span>Ограничение по времени: 15 минут</span></p>
-                    <p>В этой брошюре содержатся вопросы, цель которых выяснить Ваши взгляды и интересы,что крайне важно для командной работы.
-                    </p>
-                    <p>Отвечая на вопрос, Вы можете выбрать только один из четырех предложенных вариантов ответов.
-                    </p>
+                    {Instructions.zaslonIns()}
                 </Modal>
                 <form>
                     {this.createQuestions()}

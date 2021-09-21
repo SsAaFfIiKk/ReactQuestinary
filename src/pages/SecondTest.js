@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { Link } from 'react-router-dom';
 import Modal from '../Modal';
+import Instructions from '../Instructions';
 
 const useStyles = makeStyles((theme) => ({
     luscherMain: {
@@ -18,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     },
     mainContent: {
         marginTop: theme.spacing(12),
-        // width: '100%'
     },
     card: {
         marginBottom: theme.spacing(10)
@@ -255,13 +255,7 @@ function SecondTest(props) {
         <div>
             <button className="insbutton" onClick={() => setModalActive(true)}> Инструкция</button>
             <Modal active={modalActive} setActive={setModalActive}>
-                <p><span>Время прохождения не ограничено</span></p>
-                <p>Тест Люшера с высокой степенью достоверности продиагностирует Ваше психофизиологическое состояние, стрессоустойчивость, активность и коммуникативные способности. Процедура тестирования состоит в упорядочивании цветов по степени их субъективной приятности. Тестирование проводится при естественном освещении -
-                </p>
-                <p>Вам необходимо отвлечься от ассоциаций, связанных с модой, традициями, общепринятыми вкусами и постараться выбирать цвета только исходя из своего личного отношения.
-                </p>
-                <p>Во время прохождения теста Вам необходимо выбрать из предложенных восьми цветов тот, который больше всего нравится. Вы должны выбрать цвет как таковой, не пытаясь соотнести его с любимым цветом в одежде, цветом глаз и т. п. Выберите наиболее приятный цвет из восьми и нажмите на него. После нажатия прямоугольник сменит цвет на белый. Повторяйте эту процедуру до тех пор, пока все прямоугольники не перекрасятся в белый. Затем повторите прохождение для второго набора карточек, представленного ниже.
-                </p>
+                {Instructions.luscjerIns()}
             </Modal>
             <Modal id="end" active={modalEnd} setActive={setEndActive}>
                 Спасибо за прохождение теста. Теперь вам доступен тест "Моя роль в команде".
@@ -286,7 +280,7 @@ function SecondTest(props) {
                                 </CardActions>
                             </Card>
                             <Card id="2" className={classes.card} hidden>
-                                <Typography variant="h6" align="center" color="#000000" gutterBottom> Перевернем карточку с цветами </Typography>
+                                <Typography variant="h6" align="center" color="#000000" gutterBottom> Второй набор карточек</Typography>
                                 <CardActions>
                                     <div className={classes.root}>
                                         {Card2.map((image) => createButton(image, 'second'))}

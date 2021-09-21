@@ -72,7 +72,7 @@ export default class Timer extends Component {
     render() {
         return (
             <div className="Timer">
-                <img className="tmimg" src={tm}/> {this.state.time.m} : {this.state.time.s}
+                <img className="tmimg" src={tm} alt="Осталось"/> {this.state.time.m} : {this.state.time.s}
             </div>
         );
     }

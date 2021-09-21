@@ -27,6 +27,17 @@ h1 {
     border-radius: 8px;
 }
 
+.warning-active {
+    border: 1px solid #342C9F;
+}
+
+.warning {
+    color: rgba(0, 0, 0, 0.85);
+    text-align: center;
+    background-color: rgba(180, 34, 238, 0.15);
+    border-radius: 8px;
+}
+
 .loginput {
     margin-top: 0px;
     font-size: 14px;

@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import Instructions from '../Instructions';
 
-export default class ZaslonIns extends Component {
-
-
+export default class KompIns extends Component {
     render() {
         return (
             <div className="info">
-                <p><span>Время прохождения не ограничено</span></p>
-                <p>Настоящее тестирование предназначено для определения сферы научных интересов. Результаты, полученные в ходе данного тестирования, будут влиять на порядок расположения тем научных работ в перечне, предложенном испытуемому.
-                </p>
+                {Instructions.kompIns()}
                 <Link to='./komp'><button>Начать тест</button></Link>
             </div>
         )

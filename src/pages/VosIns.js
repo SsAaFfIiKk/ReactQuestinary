@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import Instructions from '../Instructions';
 
-export default class ZaslonIns extends Component {
-
+export default class VosIns extends Component {
 
     render() {
         return (
             <div className="info">
-                <p><span>Время прохождения не ограничено</span></p>
-                <p>Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
-                </p>
+                {Instructions.vosIns()}
                 <Link to='./vos'><button>Начать тест</button></Link>
             </div>
         )

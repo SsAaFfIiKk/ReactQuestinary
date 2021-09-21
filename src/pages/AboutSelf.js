@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import Modal from "../Modal"
+import Instructions from '../Instructions'
 import "../css/AboutSelf.css"
+
 
 export default class AboutSelf extends Component {
     constructor(props) {
@@ -17,11 +20,14 @@ export default class AboutSelf extends Component {
             facebook: "",
             elib: "",
             scopus: "",
-            orcid: ""
+            orcid: "",
+            activei: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleChange(event) {
@@ -91,6 +97,15 @@ export default class AboutSelf extends Component {
         fetch(save_link, body)
     };
 
+    openModal() {
+        this.setState({ activei: true })
+    }
+
+
+    closeModal() {
+        this.setState({ activei: false })
+    }
+
     render() {
         return (
             <div>
@@ -102,13 +117,18 @@ export default class AboutSelf extends Component {
                         Табельный номер: {this.state.isu_id}
                     </div>
                 </div>
+                <div className="float">
+                    <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                </div>
+                <Modal active={this.state.activei} setActive={this.closeModal}>
+                    {Instructions.ankIns()}
+                </Modal>
                 <div>
                     <form className="userform">
                         <h2>Для участия в исследовании заполните, пожалуйста, следующие поля:</h2>
                         <div className="group">
-                            
                             <div className='genderradiobuttons'>
-                                Пол: 
+                                Пол:
                                 <div className='radiobutton'>
                                     <label htmlFor="male">Мужской</label>
                                     <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>

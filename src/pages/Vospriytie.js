@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Modal from "../Modal"
 import { Link } from "react-router-dom"
+import Instructions from '../Instructions';
 
 export default class Vospriytie extends Component {
     constructor(props) {
@@ -79,6 +80,7 @@ export default class Vospriytie extends Component {
     }
 
     async sendData() {
+        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/self_perception_calculate"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_sperseption"
 
         const data = {
@@ -93,6 +95,10 @@ export default class Vospriytie extends Component {
         };
 
         await fetch(save_link, body)
+        await fetch(iter_link, {
+            method: "POST",
+            body: JSON.stringify({ "session_id": this.state.sesion })
+        })
         this.openEND();
     }
 
@@ -129,7 +135,7 @@ export default class Vospriytie extends Component {
                             name={qwNum}
                             id={i}
                             min="0"
-                            placeholder="0"
+                            defaultValue="0"
                             max="10"
                             onChange={this.handleChange}
                             onKeyDown={(event) => {
@@ -169,7 +175,6 @@ export default class Vospriytie extends Component {
         this.props.updateTest()
     }
 
-
     closeModal() {
         this.setState({ activei: false })
     }
@@ -181,9 +186,7 @@ export default class Vospriytie extends Component {
                     <button className="insbutton" onClick={this.openModal}>Инструкция</button>
                 </div>
                 <Modal active={this.state.activei} setActive={this.closeModal}>
-                    <p><span>Время прохождения не ограничено</span></p>
-                    <p>Опросник самовосприятия предназначен для оценки соответствия участников исполняемым ими командным ролям.  На каждый блок утверждений Вам дается 10 баллов. Распределите их по нескольким утверждениям в рамках каждого блока. В исключительных случаях баллы можно распределить между всеми утверждениями или все десять баллов поставить напротив одного утверждения.
-                    </p>
+                    {Instructions.vosIns()}
                 </Modal>
                 <form>
                     {this.createQuestions()}
