@@ -99,7 +99,7 @@ class SideMenu extends Component {
                     <Link className={!this.state.tests["self_perception"] ? "inslinkd" :cn} to={`${match.path}/omoins`}>Межличностные отношения</Link>
                 </li>
                 <li>
-                    <Link className={!this.state.tests["omo"] ? "inslinkd" : cn} to={`${match.path}/kompins`}>Мои проф. интересы</Link>
+                    <Link className={!this.state.tests["omo"] ? "inslinkd" : cn} to={`${match.path}/kompins`}>Мои профессиональные интересы</Link>
                 </li>
             </ul>
         )

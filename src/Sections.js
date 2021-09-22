@@ -4,27 +4,33 @@ class Sections extends Component {
 
     static personal(fun) {
         return (
-            <div>
-                <p><span>Определение индивидуальных особенностей</span></p>
-                {fun}
+            <div className="central">
+                <div className="midle">
+                    <p className="ctitle"><span>Определение индивидуальных особенностей</span></p>
+                    {fun}
+                </div>
             </div>
         )
     }
 
     static team(fun) {
         return (
-            <div>
-                <p><span>Оценка роли в команде</span></p>
-                {fun}
+            <div className="central">
+                <div className="midle">
+                    <p className="ctitle"><span>Оценка роли в команде</span></p>
+                    {fun}
+                </div>
             </div>
         )
     }
 
     static about(fun) {
         return (
-            <div>
-                <p><span>О себе</span></p>
-                {fun}
+            <div className="central">
+                <div className="midle">
+                    <p className="ctitle"><span>О себе</span></p>
+                    {fun}
+                </div>
             </div>
         )
     }
