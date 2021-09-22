@@ -140,7 +140,7 @@ export default class Vospriytie extends Component {
                             onKeyDown={(event) => {
                                 event.preventDefault();
                             }}
-                        ></input>{blabels[i]}</p>
+                        ></input><div>{blabels[i]}</div></p>
                 </div>)
         }
         return buttons

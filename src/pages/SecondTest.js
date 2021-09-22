@@ -194,7 +194,7 @@ async function sendData(props) {
         "session_id": sesion,
         "type": "luscher"
     };
-
+    
     const body = {
         method: 'POST',
         body: JSON.stringify(data)
@@ -216,8 +216,8 @@ function SecondTest(props) {
     useEffect(() => { getSesion() })
 
     function handleClick(item, answerType, props) {
-        if (!answers[answerType].includes(item.id_color)) {
-            answers[answerType].push(item.id_color);
+        if (!answers[answerType].includes(item.namecolor)) {
+            answers[answerType].push(item.namecolor);
         }
 
         if (answers[answerType].length === 8) {
@@ -236,13 +236,6 @@ function SecondTest(props) {
     const classes = useStyles();
     const [modalActive, setModalActive] = useState(false)
     const [modalEnd, setEndActive] = useState(false)
-    // let modalEnd = false
-
-    // function setEndActive() {
-    //     modalEnd = true;
-    //     return true;
-    // }
-    
 
     function createButton(image, answerType) {
         return (
