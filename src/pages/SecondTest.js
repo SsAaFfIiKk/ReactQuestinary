@@ -212,6 +212,7 @@ let answers = { first: [], second: [] }
 
 function SecondTest(props) {
     answers = { first: [], second: [] }
+    sesion = undefined
     useEffect(() => { getSesion() })
 
     function handleClick(item, answerType, props) {
