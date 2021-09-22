@@ -112,7 +112,6 @@ export default class Vospriytie extends Component {
             sum += ans.reduce(reducer)
         }
 
-        console.log(sum)
         if (sum !== this.state.answers.length * 10) {
             alert("Вы распределили не все очки")
         }

@@ -10,7 +10,7 @@ export default class InterIns extends Component {
     createAction() {
         let record_url = "https://teachingquality.onti.actcognitive.org/record"
         document.getElementById("fio").action = record_url
-        console.log(document.getElementById("fio").action);
+        // console.log(document.getElementById("fio").action);
     }
 
     render() {

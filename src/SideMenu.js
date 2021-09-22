@@ -80,10 +80,10 @@ class SideMenu extends Component {
                     <Link className={cn} to={`${match.path}/zaslonins`}>Мои взгляды и интересы</Link>
                 </li>
                 <li>
-                    <Link className={cn} to={`${match.path}/luscherins`} style={this.state.tests["zaslon"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои состояние и особенности</Link>
+                    <Link className={!this.state.tests["zaslon"] ? "inslinkd" : cn} to={`${match.path}/luscherins`}>Мои состояние и особенности</Link>
                 </li>
                 <li>
-                    <Link className={cn} to={`${match.path}/bigins`} style={this.state.tests["luscher"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мой характер </Link>
+                    <Link className={!this.state.tests["luscher"] ? "inslinkd" : cn} to={`${match.path}/bigins`} >Мой характер </Link>
                 </li>
             </ul>
         )
@@ -93,13 +93,13 @@ class SideMenu extends Component {
         return (
             <ul>
                 <li>
-                    <Link className={cn} to={`${match.path}/vosins`} style={this.state.tests["big5"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Моя роль в команде</Link>
+                    <Link className={!this.state.tests["big5"] ? "inslinkd" : cn } to={`${match.path}/vosins`}>Моя роль в команде</Link>
                 </li>
                 <li>
-                    <Link className={cn} to={`${match.path}/omoins`} style={this.state.tests["self_perception"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Межличностные отношения</Link>
+                    <Link className={!this.state.tests["self_perception"] ? "inslinkd" :cn} to={`${match.path}/omoins`}>Межличностные отношения</Link>
                 </li>
                 <li>
-                    <Link className={cn} to={`${match.path}/kompins`} style={this.state.tests["omo"] ? null : { pointerEvents: "none", color: "rgb(141, 139, 139)" }}>Мои проф. интересы</Link>
+                    <Link className={!this.state.tests["omo"] ? "inslinkd" : cn} to={`${match.path}/kompins`}>Мои проф. интересы</Link>
                 </li>
             </ul>
         )

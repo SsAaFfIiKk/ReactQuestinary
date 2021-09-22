@@ -85,7 +85,6 @@ export default class Big5 extends Component {
             "type": this.state.type
         };
 
-        console.log(data)
         const body = {
             method: 'POST',
             body: JSON.stringify(data)

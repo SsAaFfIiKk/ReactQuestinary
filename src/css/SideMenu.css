@@ -42,6 +42,16 @@ li {
     display: block;
 }
 
+.inslinkd {
+    color: #342C9F;
+    opacity: 0.75;
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    pointer-events: none;
+    font-size: 16px;
+    display: block;
+}
+
 .inslink-page {
     color: #342C9F;
     padding: 6px 8px 6px 16px;
@@ -70,9 +80,4 @@ main {
     background-color: #342C9F;
     border: 0;
     cursor: pointer;
-}
-
-img {
-    width: 40px;
-    height: 40px;
 }
