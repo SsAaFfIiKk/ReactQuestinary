@@ -93,11 +93,18 @@ class SideMenu extends Component {
         return (
             <ul>
                 <li>
-                    <Link className={!this.state.tests["big5"] ? "inslinkd" : cn } to={`${match.path}/vosins`}>Моя роль в команде</Link>
+                    <Link className={!this.state.tests["big5"] ? "inslinkd" : cn} to={`${match.path}/vosins`}>Моя роль в команде</Link>
                 </li>
                 <li>
-                    <Link className={!this.state.tests["self_perception"] ? "inslinkd" :cn} to={`${match.path}/omoins`}>Межличностные отношения</Link>
+                    <Link className={!this.state.tests["self_perception"] ? "inslinkd" : cn} to={`${match.path}/omoins`}>Межличностные отношения</Link>
                 </li>
+            </ul>
+        )
+    }
+
+    generateInteres(match, cn) {
+        return (
+            <ul>
                 <li>
                     <Link className={!this.state.tests["omo"] ? "inslinkd" : cn} to={`${match.path}/kompins`}>Мои профессиональные интересы</Link>
                 </li>
@@ -137,6 +144,10 @@ class SideMenu extends Component {
                             {this.generateTeamLinks(match, "inslink")}
                         </li>
                         <li>
+                            <Link className="single" to={`${match.path}/interes`}>Интересы</Link>
+                            {this.generateInteres(match, "inslink")}
+                        </li>
+                        <li>
                             <Link className="single" to={`${match.path}/about`}> О себе </Link>
                             {this.generateAbout(match, "inslink")}
                         </li>
@@ -156,6 +167,9 @@ class SideMenu extends Component {
                             </Route>
                             <Route path={`${match.path}/team`}>
                                 {Sections.team(this.generateTeamLinks(match, "inslink-page"))}
+                            </Route>
+                            <Route path={`${match.path}/interes`}>
+                                {Sections.interes(this.generateInteres(match, "inslink-page"))}
                             </Route>
                             <Route path={`${match.path}/about`}>
                                 {Sections.about(this.generateAbout(match, "inslink-page"))}

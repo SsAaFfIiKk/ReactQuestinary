@@ -24,6 +24,17 @@ class Sections extends Component {
         )
     }
 
+    static interes(fun) {
+        return (
+            <div className="central">
+                <div className="midle">
+                    <p className="ctitle"><span>Интересы</span></p>
+                    {fun}
+                </div>
+            </div>
+        )
+    }
+
     static about(fun) {
         return (
             <div className="central">
