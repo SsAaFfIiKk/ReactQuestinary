@@ -38,7 +38,7 @@ export default class OMO extends Component {
             body: JSON.stringify({
                 "isu_id": localStorage.getItem("id"),
                 "test_name": this.state.type
-            })
+            })  
         })
         const out = await res.json();
         this.setState({ sesion: out })

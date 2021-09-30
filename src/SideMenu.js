@@ -16,7 +16,8 @@ import Bigi from './pages/BigIns'
 import Big from "./pages/Big5"
 import Kompi from "./pages/KompIns"
 import Komp from "./pages/Kompetision"
-import Inter from "./pages/InterIns"
+import Interi from "./pages/InterIns"
+import Inter from "./pages/Inter"
 import "./css/SideMenu.css"
 
 class SideMenu extends Component {
@@ -122,6 +123,15 @@ class SideMenu extends Component {
         )
     }
 
+    isAllTestsPassed() {
+            for (let value of Object.values(this.state.tests)) {
+                if (value == 0) {
+                    return false
+                }
+            }
+        return true;
+    }
+
     render() {
         if (this.state.islogout) {
             return <Redirect to="/login" />;
@@ -152,7 +162,7 @@ class SideMenu extends Component {
                             {this.generateAbout(match, "inslink")}
                         </li>
                         <li>
-                            <Link className="single" to={`${match.path}/inter`}>Интервью</Link>
+                            <Link className={this.isAllTestsPassed()?'single':'inslinkd'} to={`${match.path}/interins`}>Интервью</Link>
                         </li>
                         <li>
                             <Link className="single" to={"/login"} onClick={this.signOut}>Выход</Link>
@@ -209,6 +219,9 @@ class SideMenu extends Component {
                             </Route>
                             <Route path={`${match.path}/komp`}>
                                 <Komp updateTest={this.getTestStatus} />
+                            </Route>
+                            <Route path={`${match.path}/interins`}>
+                                <Interi />
                             </Route>
                             <Route path={`${match.path}/inter`}>
                                 <Inter />

@@ -94,7 +94,6 @@ export default class Kompetision extends Component {
         for (let selId in Array.from(selectedAnswers)) {
             let currentOk = false
             let selectedContainer = selectedAnswers[selId]
-            let qId = selectedContainer.id
             let checkboxes = selectedContainer.querySelectorAll('.flags')
             for (let checkboxId in Array.from(checkboxes)) {
                 if (checkboxes[checkboxId].checked) {
@@ -221,7 +220,7 @@ export default class Kompetision extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    <p>Вы прошли все тесты, спасибо</p>
+                    <p>Вы прошли все тесты, спасибо.</p>
                     <Link to='/menu'><button>На главную</button></Link>
                 </Modal>
                 <button onClick={this.validData}>Оправить результаты</button>
