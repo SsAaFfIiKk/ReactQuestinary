@@ -48,7 +48,7 @@ export default class inter extends Component {
 
     componentDidMount() {
         this.getData()
-        this.socket = io("http://localhost:9011")
+        // this.socket = io("http://localhost:9011")
         this.getVideo()
     }
 
@@ -83,7 +83,6 @@ export default class inter extends Component {
             active: out[0]["lie"] ? true : false
         })
         this.filename = `${localStorage.getItem("id")}_${this.state.rec_id}`;
-        console.log(this.state.question)
     }
 
     async sendData() {
@@ -111,7 +110,7 @@ export default class inter extends Component {
                 .then((stream) => {
                     this.video.current.srcObject = stream;
                     this.video.current.play();
-                    this.recordVideo(stream);
+                    // this.recordVideo(stream);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -215,8 +214,8 @@ export default class inter extends Component {
                     </div>
                 </div>
                 <div>
-                    <div className="questionLabel">
-                        {this.state.question[this.state.count]["text"]}
+                    <div className="interLabel">
+                        <label>{this.state.question[this.state.count]["text"]}</label>
                     </div>
                     <div className="changeQw">
                         <button className="nextQw" id="nextQw" onClick={this.state.count == this.state.question.length - 1 ? this.sendData : this.updateCount}>{this.state.count == this.state.question.length - 1 ? "закончить интревью" : "следующий вопрос"}</button>
