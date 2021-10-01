@@ -125,7 +125,7 @@ class SideMenu extends Component {
 
     isAllTestsPassed() {
             for (let value of Object.values(this.state.tests)) {
-                if (value == 0) {
+                if (value === 0) {
                     return false
                 }
             }

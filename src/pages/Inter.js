@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react'
-import io from "socket.io-client"
+import io from 'socket.io-client/dist/socket.io.js';
 import Modal from "../Modal"
 import Instructions from '../Instructions';
 import { Link } from "react-router-dom"
@@ -48,7 +48,7 @@ export default class inter extends Component {
 
     componentDidMount() {
         this.getData()
-        // this.socket = io("http://localhost:9011")
+        this.socket = io("http://localhost:9011")
         this.getVideo()
     }
 
@@ -110,7 +110,7 @@ export default class inter extends Component {
                 .then((stream) => {
                     this.video.current.srcObject = stream;
                     this.video.current.play();
-                    // this.recordVideo(stream);
+                    this.recordVideo(stream);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -181,7 +181,7 @@ export default class inter extends Component {
         this.getTime()
         let count = this.state.count
         count++
-        if (this.state.question[count]["lie"] != this.state.question[count - 1]["lie"]) {
+        if (this.state.question[count]["lie"] !== this.state.question[count - 1]["lie"]) {
             this.toggleClass()
         }
         this.setState({ count: count })
@@ -203,11 +203,11 @@ export default class inter extends Component {
                     <div className="labels-container">
                         <div>
                             <div className={!this.state.active ? "truth" : "disabled"}>
-                                <img src={check}></img>
+                                <img src={check} alt=""></img>
                                 <label>скажите правду</label>
                             </div>
                             <div className={this.state.active ? "lie" : "disabled"}>
-                                <img src={crest}></img>
+                                <img src={crest} alt=""></img>
                                 <label>соврите</label>
                             </div>
                         </div>
@@ -218,7 +218,7 @@ export default class inter extends Component {
                         <label>{this.state.question[this.state.count]["text"]}</label>
                     </div>
                     <div className="changeQw">
-                        <button className="nextQw" id="nextQw" onClick={this.state.count == this.state.question.length - 1 ? this.sendData : this.updateCount}>{this.state.count == this.state.question.length - 1 ? "закончить интревью" : "следующий вопрос"}</button>
+                        <button className="nextQw" id="nextQw" onClick={this.state.count === this.state.question.length - 1 ? this.sendData : this.updateCount}>{this.state.count === this.state.question.length - 1 ? "закончить интревью" : "следующий вопрос"}</button>
                     </div>
                 </div>
                 <Modal active={this.state.activee} setActive={this.openEND}>
