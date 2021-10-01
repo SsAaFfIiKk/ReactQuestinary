@@ -48,7 +48,7 @@ export default class inter extends Component {
 
     componentDidMount() {
         this.getData()
-        this.socket = io("http://localhost:9011")
+        this.socket = io("https://mycandidate.onti.actcognitive.org", {path: '/questionnaires/inter_backend/socket.io'})
         this.getVideo()
     }
 
@@ -57,8 +57,8 @@ export default class inter extends Component {
     }
 
     async getData() {
-        const qw_link = "http://127.0.0.1:5555/get_all_quest"
-        const id_link = "http://127.0.0.1:5555/get_record_id"
+        const qw_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_all_quest"
+        const id_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_record_id"
 
         const r = await fetch(id_link, {
             method: "POST",
@@ -86,7 +86,7 @@ export default class inter extends Component {
     }
 
     async sendData() {
-        const save_link = "http://127.0.0.1:5555/save_answers"
+        const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/save_answers"
 
         const data = {
             rec_id: this.state.rec_id,

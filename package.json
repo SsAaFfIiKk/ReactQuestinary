@@ -2,7 +2,6 @@
   "name": "questinary",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mycandidate.onti.actcognitive.org/questionnaires",
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
@@ -24,7 +23,6 @@
     "react-scripts": "^1.1.5",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "socket.io": "^4.2.0",
     "socket.io-client": "^4.2.0",
     "store": "^2.0.12",
     "styled-components": "^5.3.1",
