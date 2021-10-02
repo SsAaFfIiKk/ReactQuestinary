@@ -222,7 +222,7 @@ export default class inter extends Component {
                     </div>
                 </div>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    <p>Благодорим за прохождение интревью!</p>
+                    <p>Благодарим за прохождение интервью!</p>
                     <Link to='/menu'><button>На главную</button></Link>
                 </Modal>
             </div>
