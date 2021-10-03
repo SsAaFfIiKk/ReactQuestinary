@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Message } from 'semantic-ui-react';
 import Modal from "../Modal"
 import Instructions from '../Instructions'
 import "../css/AboutSelf.css"
@@ -22,6 +23,7 @@ export default class AboutSelf extends Component {
             scopus: "",
             orcid: "",
             activei: false,
+            sended: false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -95,6 +97,7 @@ export default class AboutSelf extends Component {
 
 
         fetch(save_link, body)
+        this.setState({ sended: true })
     };
 
     openModal() {
@@ -107,6 +110,7 @@ export default class AboutSelf extends Component {
     }
 
     render() {
+        const { sended } = this.state
         return (
             <div>
                 <div className="profile">
@@ -125,6 +129,11 @@ export default class AboutSelf extends Component {
                 </Modal>
                 <div>
                     <form className="userform">
+                        <header className={this.state.sended ? 'warning warning-active' : 'warning'}>
+                            {sended && <Message
+                                error={sended}
+                                content="Данные сохраненны" />}
+                        </header>
                         <h2>Для участия в исследовании заполните, пожалуйста, следующие поля:</h2>
                         <div className="group">
                             <div className='genderradiobuttons'>

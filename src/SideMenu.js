@@ -162,7 +162,8 @@ class SideMenu extends Component {
                             {this.generateAbout(match, "inslink")}
                         </li>
                         <li>
-                            <Link className={/*this.isAllTestsPassed()?'single':*/'inslinkd'} to={`${match.path}/interins`}>Интервью</Link>
+                            <Link className="inslinkd" to="#">Интервью</Link>
+                            {/* <Link className={this.isAllTestsPassed()?'single':'inslinkd'} to={`${match.path}/interins`}>Интервью</Link> */}
                         </li>
                         <li>
                             <Link className="single" to={"/login"} onClick={this.signOut}>Выход</Link>
@@ -220,12 +221,12 @@ class SideMenu extends Component {
                             <Route path={`${match.path}/komp`}>
                                 <Komp updateTest={this.getTestStatus} />
                             </Route>
-                            <Route path={`${match.path}/interins`}>
+                            {/* <Route path={`${match.path}/interins`}>
                                 <Interi />
                             </Route>
                             <Route path={`${match.path}/inter`}>
                                 <Inter />
-                            </Route>
+                            </Route> */}
                             <Route path={`${match.path}/ank`}>
                                 <About />
                             </Route>
