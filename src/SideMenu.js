@@ -162,7 +162,7 @@ class SideMenu extends Component {
                             {this.generateAbout(match, "inslink")}
                         </li>
                         <li>
-                            <Link className={this.isAllTestsPassed()?'single':'inslinkd'} to={`${match.path}/interins`}>Интервью</Link>
+                            <Link className={/*this.isAllTestsPassed()?'single':*/'inslinkd'} to={`${match.path}/interins`}>Интервью</Link>
                         </li>
                         <li>
                             <Link className="single" to={"/login"} onClick={this.signOut}>Выход</Link>
