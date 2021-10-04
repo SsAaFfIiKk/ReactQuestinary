@@ -57,22 +57,13 @@ export default class Big5 extends Component {
                     const er = res.statusText;
                     return Promise.reject(er)
                 }
-
-
+                
                 this.setState({
                     ids: data["id"],
                     questions: data["q_text"],
                     answers: Object.values(data["answers"]),
                     values: new Array(data["answers"].length).fill(1)
                 })
-
-                // for (let i in data) {
-                //     this.setState({
-                //         ids: [...this.state.ids, data[i]["id"]],
-                //         questions: [...this.state.questions, data[i]["q_text"]],
-                //         answers: [...this.state.answers, Object.values(data[i]["answers"])]
-                //     })
-                // }
             })
     }
 

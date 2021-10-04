@@ -64,6 +64,18 @@ export default class AboutSelf extends Component {
         })
     }
 
+    async getGender() {
+        const gender_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_gender"
+        await fetch(gender_link, {
+            method: "POSt",
+            body: JSON.stringify({
+                "id": localStorage.getItem('id')
+            })
+        })
+            .then(res => res.json())
+            .then(out => this.setState({ gender: out }))
+    }
+
     async sendData(e) {
         e.preventDefault();
         this.setState({ sended: false })
@@ -180,9 +192,9 @@ export default class AboutSelf extends Component {
                         </div>
                     </form>
                     <Modal active={this.state.activee} setActive={this.endModal}>
-                        Уважаемый {localStorage.getItem("surname")} {localStorage.getItem("name")}, благодарим Вас за прохождение тестов!
+                        {this.state.gender === "f" ? "Уважаемая" : "Уважаемый"} {localStorage.getItem("surname")} {localStorage.getItem("name")}, благодарим Вас за прохождение тестов!
                         В ближайшее время для Вас станет доступно онлайн-интервью, о чем мы оповестим Вас по электронной почте.
-                        Если в процессе прохождения тестов у Вас возникли вопросы или появились предложения, можете написать письмо на почту tolstoy.i.m@yandex.ru
+                        Если в процессе прохождения тестов у Вас возникли вопросы или появились предложения, можете написать письмо на почту <a href="mailto:tolstoy.i.m@yandex.ru">tolstoy.i.m@yandex.ru</a>
                     </Modal>
                 </div>
             </div>
