@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Message } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react'
 import Modal from "../Modal"
 import Instructions from '../Instructions'
 import "../css/AboutSelf.css"
@@ -22,14 +22,15 @@ export default class AboutSelf extends Component {
             elib: "",
             scopus: "",
             orcid: "",
+            error: false,
             activei: false,
-            sended: false
+            activee: false
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.sendData = this.sendData.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.insModal = this.insModal.bind(this)
+        this.endModal = this.endModal.bind(this);
     }
 
     handleChange(event) {
@@ -61,22 +62,12 @@ export default class AboutSelf extends Component {
             scopus: data["scpous_id"],
             orcid: data["orcid_id"]
         })
-        this.insertFilds()
     }
 
-    insertFilds() {
-        document.getElementById("male").checked = this.state.gender === 'm' ? true : false
-        document.getElementById("female").checked = this.state.gender === 'f' ? true : false
-        document.getElementById("age").value = this.state.age
-        document.getElementById("vk").value = this.state.vk
-        document.getElementById("inst").value = this.state.inst
-        document.getElementById("facebook").value = this.state.facebook
-        document.getElementById("elib").value = this.state.elib
-        document.getElementById("scopus").value = this.state.scopus
-        document.getElementById("orcid").value = this.state.orcid
-    }
+    async sendData(e) {
+        e.preventDefault();
+        this.setState({ sended: false })
 
-    sendData() {
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/update_profile"
         const data = {
             "isu_id": localStorage.getItem("id"),
@@ -95,22 +86,30 @@ export default class AboutSelf extends Component {
             body: JSON.stringify(data)
         };
 
-
-        fetch(save_link, body)
-        this.setState({ sended: true })
+        await fetch(save_link, body)
+            .then(res => res.json())
+            .then(out => {
+                if (out.response === "ok") {
+                    this.endModal()
+                }
+                else {
+                    this.setState({ error: true })
+                }
+            })
     };
 
-    openModal() {
-        this.setState({ activei: true })
+    insModal() {
+        let ins = this.state.activei
+        this.setState({activei: !ins})
     }
 
-
-    closeModal() {
-        this.setState({ activei: false })
+    endModal() {
+        let end = this.state.activee
+        this.setState({activee: !end})
     }
 
     render() {
-        const { sended } = this.state
+        const {error} = this.state
         return (
             <div>
                 <div className="profile">
@@ -122,64 +121,69 @@ export default class AboutSelf extends Component {
                     </div>
                 </div>
                 <div className="float">
-                    <button className="insbutton" onClick={this.openModal}>Инструкция</button>
+                    <button className="insbutton" onClick={this.insModal}>Инструкция</button>
                 </div>
-                <Modal active={this.state.activei} setActive={this.closeModal}>
+                <Modal active={this.state.activei} setActive={this.insModal}>
                     {Instructions.ankIns()}
                 </Modal>
                 <div>
                     <form className="userform">
-                        <header className={this.state.sended ? 'warning warning-active' : 'warning'}>
-                            {sended && <Message
-                                error={sended}
-                                content="Данные сохраненны" />}
-                        </header>
                         <h2>Для участия в исследовании заполните, пожалуйста, следующие поля:</h2>
                         <div className="group">
                             <div className='genderradiobuttons'>
                                 Пол:
                                 <div className='radiobutton'>
                                     <label htmlFor="male">Мужской</label>
-                                    <input type="radio" name="gender" value="m" id="male" onChange={this.handleChange}></input>
+                                    <input type="radio" name="gender" value="m" id="male" checked={this.state.gender === 'm' ? true : false} onChange={this.handleChange}></input>
                                 </div>
                                 <div className='radiobutton'>
                                     <label htmlFor="female">Женский</label>
-                                    <input type="radio" name="gender" value="f" id="female" onChange={this.handleChange}></input>
+                                    <input type="radio" name="gender" value="f" id="female" checked={this.state.gender === 'f' ? true : false} onChange={this.handleChange}></input>
                                 </div>
                             </div>
                         </div>
                         <div className="group">
                             <label htmlFor="age">Возраст</label>
-                            <input className="slefinput" id="age" type="text" name="age" maxLength="3" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="age" type="text" name="age" maxLength="3" defaultValue={this.state.age} onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
                             <label htmlFor="vk">Ссылка на профиль ВКонтакте</label>
-                            <input className="slefinput" id="vk" type="text" name="vk" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="vk" type="text" name="vk" defaultValue={this.state.vk} onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
                             <label htmlFor="inst">Ссылка на профиль в Instagram</label>
-                            <input className="slefinput" id="inst" type="text" name="inst" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="inst" type="text" name="inst" defaultValue={this.state.inst} onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
                             <label htmlFor="facebook" >Ссылка на профиль в FaceBook</label>
-                            <input className="slefinput" id="facebook" type="text" name="facebook" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="facebook" type="text" name="facebook" defaultValue={this.state.facebook} onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
                             <label htmlFor="elib">Elibrary id</label>
-                            <input className="slefinput" id="elib" type="text" name="elib" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="elib" type="text" name="elib" defaultValue={this.state.elib} onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
                             <label htmlFor="scopus" >Scopus id</label>
-                            <input className="slefinput" id="scopus" type="text" name="scopus" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="scopus" type="text" name="scopus" defaultValue={this.state.scopus} onChange={this.handleChange}></input>
                         </div>
                         <div className="group">
                             <label htmlFor="orcid">Orcid id</label>
-                            <input className="slefinput" id="orcid" type="text" name="orcid" onChange={this.handleChange}></input>
+                            <input className="slefinput" id="orcid" type="text" name="orcid" defaultValue={this.state.orcid} onChange={this.handleChange}></input>
+                        </div>
+                        <header className={this.state.error ? 'warning warning-active' : 'warning'}>
+                            {error && <Message
+                                error={error}
+                                content="Не удалось сохранить, попробуйте позже" />}
+                        </header>
+                        <div className="group">
+                            <center><button className="loginb" onClick={this.sendData}> Отправить</button></center>
                         </div>
                     </form>
-                    <div className="group">
-                        <center><button className="loginb" onClick={this.sendData}> Отправить</button></center>
-                    </div>
+                    <Modal active={this.state.activee} setActive={this.endModal}>
+                        Уважаемый {localStorage.getItem("surname")} {localStorage.getItem("name")}, благодарим Вас за прохождение тестов!
+                        В ближайшее время для Вас станет доступно онлайн-интервью, о чем мы оповестим Вас по электронной почте.
+                        Если в процессе прохождения тестов у Вас возникли вопросы или появились предложения, можете написать письмо на почту tolstoy.i.m@yandex.ru
+                    </Modal>
                 </div>
             </div>
         )

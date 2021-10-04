@@ -220,8 +220,9 @@ export default class Kompetision extends Component {
                     {this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
-                    <p>Вы прошли все тесты, спасибо.</p>
-                    <Link to='/menu'><button>На главную</button></Link>
+                    <p>Спасибо за прохождения теста. Теперь вам доступно заполнение анкеты.</p>
+                    <Link to="/menu"> <button>На главную</button></Link>
+                    <Link to='./ank'><button>Заполнить анкету</button></Link>
                 </Modal>
                 <button onClick={this.validData}>Оправить результаты</button>
             </div>

@@ -117,7 +117,7 @@ class SideMenu extends Component {
         return (
             <ul>
                 <li>
-                    <Link className={cn} to={`${match.path}/ank`}>Анкета</Link>
+                    <Link className={this.isAllTestsPassed() ? cn : "inslinkd"} to={`${match.path}/ank`}>Анкета</Link>
                 </li>
             </ul>
         )
@@ -162,7 +162,7 @@ class SideMenu extends Component {
                             {this.generateAbout(match, "inslink")}
                         </li>
                         <li>
-                            <Link className="inslinkd" to="#">Интервью</Link>
+                            <Link className="inslinkd" to="">Интервью</Link>
                             {/* <Link className={this.isAllTestsPassed()?'single':'inslinkd'} to={`${match.path}/interins`}>Интервью</Link> */}
                         </li>
                         <li>
