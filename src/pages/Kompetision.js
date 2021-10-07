@@ -63,8 +63,8 @@ export default class Kompetision extends Component {
     }
 
     async sendData() {
-        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_compitence_interpritation"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_competence"
+        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_compitence_interpritation"
 
         const data = {
             "answers": this.state.answers,
@@ -77,13 +77,11 @@ export default class Kompetision extends Component {
             body: JSON.stringify(data)
         };
 
-
         await fetch(save_link, body)
         await fetch(iter_link, {
             method: "POST",
             body: JSON.stringify({ "session_id": this.state.sesion })
         })
-
         this.openEND()
     };
 
@@ -224,7 +222,7 @@ export default class Kompetision extends Component {
                     <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./ank'><button>Заполнить анкету</button></Link>
                 </Modal>
-                <button onClick={this.validData}>Оправить результаты</button>
+                <button id="send" onClick={this.validData}>Оправить результаты</button>
             </div>
         )
     }

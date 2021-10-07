@@ -68,6 +68,8 @@ export default class Big5 extends Component {
     }
 
     async sendData() {
+        document.getElementById('send').onClick = ""
+        const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_big5_intepritation"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_big5"
 
         const data = {
@@ -82,6 +84,10 @@ export default class Big5 extends Component {
         };
 
         await fetch(save_link, body)
+        await fetch(iter_link, {
+            method: "POST",
+            body: JSON.stringify({ "session_id": this.state.sesion })
+        })
 
         this.openEND()
     };
@@ -174,7 +180,7 @@ export default class Big5 extends Component {
                     <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./vosins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.validForm}>Оправить результаты</button>
+                <button id="send" onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }

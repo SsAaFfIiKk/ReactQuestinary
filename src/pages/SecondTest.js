@@ -172,17 +172,15 @@ const cards = [0];
 let sesion;
 async function getSesion() {
     const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
-    if (!sesion) {
-        await fetch(ses_link, {
-            method: "POST",
-            body: JSON.stringify({
-                "isu_id": localStorage.getItem("id"),
-                "test_name": "luscher"
-            })
+    await fetch(ses_link, {
+        method: "POST",
+        body: JSON.stringify({
+            "isu_id": localStorage.getItem("id"),
+            "test_name": "luscher"
         })
-            .then(res => res.json())
-            .then(out => sesion = out)
-    }
+    })
+        .then(res => res.json())
+        .then(out => sesion = out)
 }
 
 async function sendData(props) {
@@ -194,7 +192,7 @@ async function sendData(props) {
         "session_id": sesion,
         "type": "luscher"
     };
-    
+
     const body = {
         method: 'POST',
         body: JSON.stringify(data)
@@ -206,14 +204,19 @@ async function sendData(props) {
         body: JSON.stringify({ "session_id": sesion })
     })
     props.updateTest()
+    sesion = undefined
 }
 
 let answers = { first: [], second: [] }
 
 function SecondTest(props) {
     answers = { first: [], second: [] }
-    sesion = undefined
-    useEffect(() => { getSesion() })
+    useEffect(() => {
+        if(!sesion){getSesion()}
+        return () => {
+            sesion = undefined
+        }
+    }, [])
 
     function handleClick(item, answerType, props) {
         if (!answers[answerType].includes(item.namecolor)) {
@@ -258,7 +261,7 @@ function SecondTest(props) {
             </ButtonBase>
         )
     }
-    
+
     return (
         <div>
             <button className="insbutton" onClick={() => setModalActive(true)}> Инструкция</button>

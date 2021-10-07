@@ -65,6 +65,7 @@ export default class Zaslon extends Component {
     }
 
     async sendData() {
+        document.getElementById('send').onClick = ""
         const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/start_zaslone_interpritation"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_zaslon"
 
@@ -164,7 +165,7 @@ export default class Zaslon extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button onClick={this.validForm}>Оправить результаты</button>
+                <button id="send" onClick={this.validForm}>Оправить результаты</button>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     <p>Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".</p>
                     <Link to="/menu"> <button>На главную</button></Link>

@@ -80,6 +80,7 @@ export default class Vospriytie extends Component {
     }
 
     async sendData() {
+        document.getElementById('send').onClick = ""
         const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/self_perception_calculate"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_sperseption"
 
@@ -195,7 +196,7 @@ export default class Vospriytie extends Component {
                     <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./omoins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.validForm}>Оправить результаты</button>
+                <button id="send" onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }

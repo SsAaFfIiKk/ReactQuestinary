@@ -12,10 +12,11 @@ export default class inter extends Component {
 
         this.state = {
             rec_id: 69,
-            question: [{ "text": "" }],
+            question: [{ "text": "Загружем вопросы" }],
             timestamps: [],
             active: false,
-            count: 0
+            count: 0,
+            btnTxt: "Cледующий вопрос"
         }
         this.constraints = {
             video: {
@@ -57,35 +58,37 @@ export default class inter extends Component {
     }
 
     async getData() {
-        const qw_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_all_quest"
-        const id_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_record_id"
+        const qw_link = "http://127.0.0.1:5555/get_user_quest"
+        const id_link = "http://127.0.0.1:5555/get_record_id"
+        // const qw_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_all_quest"
+        // const id_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_record_id"
+
+        const body = JSON.stringify({
+            "isu_id": localStorage.getItem("id")
+        })
 
         const r = await fetch(id_link, {
             method: "POST",
-            body: JSON.stringify({
-                "isu_id": localStorage.getItem("id")
-            })
+            body: body
         })
-
         const o = await r.json()
-
+        
         const res = await fetch(qw_link, {
             method: "POST",
-            body: JSON.stringify({
-                "isu_id": localStorage.getItem("id")
-            })
+            body: body
         })
-
         const out = await res.json()
+
         this.setState({
             rec_id: o,
             question: out,
-            active: out[0]["lie"] ? true : false
+            active: out[0][3] ? true : false
         })
         this.filename = `${localStorage.getItem("id")}_${this.state.rec_id}`;
     }
 
     async sendData() {
+        this.setState({btnTxt: "Сохранем"})
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/save_answers"
 
         const data = {
@@ -100,7 +103,7 @@ export default class inter extends Component {
         };
 
         await fetch(save_link, body)
-        this.openEND()
+        setTimeout(() => { this.turnof(), this.openEND() }, 2000)
     };
 
     getVideo() {
@@ -138,13 +141,7 @@ export default class inter extends Component {
     }
 
     openEND() {
-        this.setState({ activee: true })
-
-        function exit(tg) {
-            tg.turnof();
-        }
-
-        setTimeout(exit, 2000, this)
+        this.setState({ activee: true, btnTxt: "Готово" })
     }
 
     closeModal() {
@@ -152,18 +149,19 @@ export default class inter extends Component {
     }
 
     turnof() {
-        console.log('turnof')
         const videoElement = this.video.current;
-        const stream = videoElement.srcObject;
-        if (stream) {
-            const tracks = stream.getTracks();
-            tracks.forEach(function (track) {
-                track.stop();
-            });
-        }
+        if (videoElement) {
+            const stream = videoElement.srcObject;
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach(function (track) {
+                    track.stop();
+                });
+            }
 
-        videoElement.srcObject = null;
-        this.socket.disconnect()
+            videoElement.srcObject = null;
+            this.socket.disconnect()
+        }
     }
 
     toggleClass() {
@@ -173,7 +171,7 @@ export default class inter extends Component {
 
     getTime() {
         let data = new Date().toISOString().slice(0, 19).replace('T', ' ')
-        const dct = { [this.state.question[this.state.count]["qw_id"]]: data }
+        const dct = { [this.state.question[this.state.count][0]]: data, "lie": this.state.question[this.state.count][2]}
         this.setState({ timestamps: [...this.state.timestamps, dct] })
     }
 
@@ -181,10 +179,13 @@ export default class inter extends Component {
         this.getTime()
         let count = this.state.count
         count++
-        if (this.state.question[count]["lie"] !== this.state.question[count - 1]["lie"]) {
+        if (this.state.question[count][2] !== this.state.question[count - 1][2]) {
             this.toggleClass()
         }
         this.setState({ count: count })
+        if (count ===this.state.question.length -1 ) {
+            this.setState({ btnTxt: "Закончить интервью" })
+        }
     }
 
     render() {
@@ -215,10 +216,10 @@ export default class inter extends Component {
                 </div>
                 <div>
                     <div className="interLabel">
-                        <label>{this.state.question[this.state.count]["text"]}</label>
+                        <label>{this.state.question[this.state.count][1]}</label>
                     </div>
                     <div className="changeQw">
-                        <button className="nextQw" id="nextQw" onClick={this.state.count === this.state.question.length - 1 ? this.sendData : this.updateCount}>{this.state.count === this.state.question.length - 1 ? "закончить интревью" : "следующий вопрос"}</button>
+                        <button className="nextQw" id="nextQw" onClick={this.state.count === this.state.question.length - 1 ? this.sendData : this.updateCount}>{this.state.btnTxt}</button>
                     </div>
                 </div>
                 <Modal active={this.state.activee} setActive={this.openEND}>

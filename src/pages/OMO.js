@@ -65,6 +65,7 @@ export default class OMO extends Component {
     }
 
     async sendData() {
+        document.getElementById('send').onClick = ""
         const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/calculate_answers_degree"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_omo"
 
@@ -165,7 +166,7 @@ export default class OMO extends Component {
                     <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./kompins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button onClick={this.validForm}>Оправить результаты</button>
+                <button id="send" onClick={this.validForm}>Оправить результаты</button>
             </div>
         )
     }
