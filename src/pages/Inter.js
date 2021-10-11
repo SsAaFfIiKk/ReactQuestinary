@@ -58,10 +58,10 @@ export default class inter extends Component {
     }
 
     async getData() {
-        const qw_link = "http://127.0.0.1:5555/get_user_quest"
-        const id_link = "http://127.0.0.1:5555/get_record_id"
-        // const qw_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_all_quest"
-        // const id_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_record_id"
+//         const qw_link = "http://127.0.0.1:5555/get_user_quest"
+//         const id_link = "http://127.0.0.1:5555/get_record_id"
+        const qw_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_user_quest"
+        const id_link = "https://mycandidate.onti.actcognitive.org/questionnaires/quest_backend/get_record_id"
 
         const body = JSON.stringify({
             "isu_id": localStorage.getItem("id")
