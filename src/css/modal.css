@@ -24,8 +24,10 @@
     border-radius: 0px;
     background-color: #fff;
     width: 50vw;
+    max-height: 90%;
     transform: scale(0.5);
     transition: 0.4s all;
+    overflow: auto;
 }
 
 .modal__content.active {
