@@ -48,7 +48,7 @@ export default class inter extends Component {
     }
 
     componentDidMount() {
-        if(!this.props.available) return;
+        // if(!this.props.available) return;
         this.getData()
         this.socket = io("https://mycandidate.onti.actcognitive.org", {path: '/questionnaires/inter_backend/socket.io'})
         this.getVideo()
@@ -191,7 +191,7 @@ export default class inter extends Component {
     }
 
     render() {
-        if(!this.props.available) return ('');
+        // if(!this.props.available) return ('');
         return (
             <div>
                 <div className="float">

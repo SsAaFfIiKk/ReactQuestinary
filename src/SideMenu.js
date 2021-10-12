@@ -137,7 +137,7 @@ class SideMenu extends Component {
             return <Redirect to="/login" />;
         }
 
-        const interAvailable = this.props.location.search === '?token=7eacb3b572fb9929e28438dfca7ded7a' ? true : false;
+        // const interAvailable = this.props.location.search === '?token=7eacb3b572fb9929e28438dfca7ded7a' ? true : false;
 
         const { match } = this.props;
         return (
@@ -224,12 +224,12 @@ class SideMenu extends Component {
                                 <Komp updateTest={this.getTestStatus} />
                             </Route>
                             <Route path={`${match.path}/interins`}>
-                                <Interi available={interAvailable} />
-                                {/* <Interi /> */}
+                                {/* <Interi available={interAvailable} /> */}
+                                <Interi />
                             </Route>
                             <Route path={`${match.path}/inter`}>
-                                <Inter available={interAvailable} />
-                                {/* <Inter /> */}
+                                {/* <Inter available={interAvailable} /> */}
+                                <Inter />
                             </Route>
                             <Route path={`${match.path}/ank`}>
                                 <About />
