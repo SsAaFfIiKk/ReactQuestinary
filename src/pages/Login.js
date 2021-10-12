@@ -61,7 +61,7 @@ class Login extends React.Component {
 
     render() {
         if (localStorage.getItem("token")) {
-            return <Redirect to="/" />
+            return <Redirect to={this.props.to ? this.props.to : '/'} />
         }
 
         const { error } = this.state;
