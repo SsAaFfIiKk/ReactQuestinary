@@ -57,11 +57,11 @@ input {
 }
 
 .info {
-    margin-top: 20px;
-    margin-right: 30px;
-    padding: 10px;
+    margin: 20px 15px;
+    padding: 10px 30px;
     border-radius: 4px;
     box-shadow: 2px 2px 10px 1px rgba(226, 226, 226, 0.82);
+    hyphens: auto;
 }
 
 div>ol>li {
