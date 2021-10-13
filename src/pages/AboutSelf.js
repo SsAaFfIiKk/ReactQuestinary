@@ -188,7 +188,7 @@ export default class AboutSelf extends Component {
                                 content="Не удалось сохранить, попробуйте позже" />}
                         </header>
                         <div className="group">
-                            <center><button className="loginb" onClick={this.sendData}> Отправить</button></center>
+                            <center><button className="loginb" onClick={this.sendData}> Отправить результаты</button></center>
                         </div>
                     </form>
                     <Modal active={this.state.activee} setActive={this.endModal}>
