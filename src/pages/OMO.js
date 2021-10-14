@@ -166,7 +166,7 @@ export default class OMO extends Component {
                     <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./kompins'><button>Следующий тест</button></Link>
                 </Modal>
-                <button id="send" onClick={this.validForm}>Оправить результаты</button>
+                <button id="send" onClick={this.validForm}>Отправить результаты</button>
             </div>
         )
     }

@@ -165,7 +165,7 @@ export default class Zaslon extends Component {
                 <form>
                     {this.createQuestions()}
                 </form>
-                <button id="send" onClick={this.validForm}>Оправить результаты</button>
+                <button id="send" onClick={this.validForm}>Отправить результаты</button>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     <p>Спасибо за прохождение теста. Теперь вам доступен тест "Мои состояния и особенности".</p>
                     <Link to="/menu"> <button>На главную</button></Link>

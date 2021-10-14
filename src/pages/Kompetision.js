@@ -222,7 +222,7 @@ export default class Kompetision extends Component {
                     <Link to="/menu"> <button>На главную</button></Link>
                     <Link to='./ank'><button>Заполнить анкету</button></Link>
                 </Modal>
-                <button id="send" onClick={this.validData}>Оправить результаты</button>
+                <button id="send" onClick={this.validData}>Отправить результаты</button>
             </div>
         )
     }
