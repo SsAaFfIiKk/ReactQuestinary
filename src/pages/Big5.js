@@ -27,10 +27,10 @@ export default class Big5 extends Component {
     }
 
     handleChange(event) {
+        if (event.target.value > 7) event.target.value = 7
+        let val = event.target.value
         const id = event.target.id
-        const val = event.target.value
         const newVal = this.state.values
-
         newVal[id] = Number(val)
         this.setState({ values: newVal })
     }
@@ -77,7 +77,7 @@ export default class Big5 extends Component {
             "session_id": this.state.sesion,
             "type": this.state.type
         };
-
+        console.log(data)
         const body = {
             method: 'POST',
             body: JSON.stringify(data)
@@ -121,9 +121,7 @@ export default class Big5 extends Component {
                             min="1"
                             max="7"
                             onChange={this.handleChange}
-                            onKeyDown={(event) => {
-                                event.preventDefault();
-                            }}
+
                         >
                         </input>
                         {blabels[i]}
