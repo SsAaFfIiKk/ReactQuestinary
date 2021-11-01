@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Login from "./pages/Login";
 
 const ProtectedRoute = ({ children, ...rest }) => {
@@ -10,12 +10,6 @@ const ProtectedRoute = ({ children, ...rest }) => {
             localStorage.getItem("token") ? (
                     children
                 ) : (
-                    // <Redirect
-                    //     to={{
-                    //         pathname: "/login",
-                    //         state: { from: location }
-                    //     }}
-                    // />
                     <Login to={location} />
                 )}
         />

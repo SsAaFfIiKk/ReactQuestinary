@@ -109,7 +109,7 @@ export default class inter extends Component {
         };
 
         await fetch(save_link, body)
-        setTimeout(() => { this.turnof(), this.openEND() }, 2000)
+        setTimeout(() => { this.turnof(); this.openEND() }, 2000)
     };
 
     getVideo() {

@@ -8,18 +8,14 @@ export default class Vospriytie extends Component {
         super(props);
 
         this.state = {
-            ids: [],
-            questions: [],
-            answers: [],
-            count: [],
-            values: {},
+            questions: null,
+            answers: null,
             sesion: 69,
             type: "self_perception",
             activei: false,
             activee: false
         }
 
-        this.handleChange = this.handleChange.bind(this);
         this.validForm = this.validForm.bind(this);
         this.sendData = this.sendData.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -27,56 +23,33 @@ export default class Vospriytie extends Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
-    handleChange(event) {
-        var value_id = event.target.name
-        var id = Number(event.target.id) + 1
-
-        if ((this.state.values[value_id][id] !== 0) && (this.state.values[value_id][id] > event.target.value)) {
-            this.state.values[value_id][id] -= 1
-            this.state.values[value_id][0] -= 1
-
-        } else if (this.state.values[value_id][0] >= 10 && event.target.value > 0) {
-            event.target.value -= 1
-        } else if ((Number(this.state.values[value_id][id]) === 0) && (Number(event.target.value) === 0)) {
-            event.target.value = 0
-        } else {
-            this.state.values[value_id][0] += 1
-            this.state.values[value_id][id] += 1
-        }
-    }
+    sumAnswers = (array) => array.reduce((prev, cur) => Number(prev) + Number(cur))
 
     async componentDidMount() {
-        const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
-        const res = await fetch(ses_link, {
+        const sessionLink = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+        const sessionRes = await fetch(sessionLink, {
             method: "POST",
             body: JSON.stringify({
                 "isu_id": localStorage.getItem("id"),
                 "test_name": this.state.type
             })
         })
-        const out = await res.json();
-        this.setState({ sesion: out })
+        const sessionId = await sessionRes.json();
 
         const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_sperseption_questions"
-        await fetch(get_link)
-            .then(async res => {
-                const data = await res.json();
-
-                if (!res.ok) {
-                    const er = res.statusText;
-                    return Promise.reject(er)
-                }
-
-                for (let i in data) {
-                    this.setState({
-                        ids: [...this.state.ids, data[i]["id"]],
-                        count: [...this.state.count, 10],
-                        values: { ...this.state.values, [data[i]["id"]]: [0, 0, 0, 0, 0, 0, 0, 0, 0] },
-                        questions: [...this.state.questions, data[i]["text"]],
-                        answers: [...this.state.answers, Object.values(data[i]["answers"])]
-                    })
-                }
-            })
+        const res = await fetch(get_link);
+        const data = await res.json()
+        const answers = data.map(question => ({
+            id: question.id,
+            max: 10,
+            left: 10,
+            answers: Object.keys(question.answers).map(_ => 0)
+        }))
+        this.setState({
+            questions: data,
+            answers: answers,
+            sesion: sessionId
+        })
     }
 
     async sendData() {
@@ -84,8 +57,12 @@ export default class Vospriytie extends Component {
         const iter_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/self_perception_calculate"
         const save_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/save_sperseption"
 
+        const answers = {}
+        this.state.answers.forEach(answerObj => answers[answerObj.id] = answerObj.answers.map(answer => Number(answer)))
+        console.log(answers)
+
         const data = {
-            "answers": this.state.values,
+            "answers": answers,
             "session_id": this.state.sesion,
             "type": this.state.type
         };
@@ -104,65 +81,63 @@ export default class Vospriytie extends Component {
     }
 
     validForm() {
-        const values = this.state.values
-        const reducer = (previousValue, currentValue) => previousValue + currentValue;
-        let sum = 0;
-        for (let key in values) {
-            let ans = values[key]
-            ans = ans.slice(1)
-            sum += ans.reduce(reducer)
+        for (let answer of this.state.answers) {
+            if (this.sumAnswers(answer.answers) < answer.max) {
+                alert('Вы распределили не все очки!')
+                return
+            }
         }
-
-        if (sum !== this.state.answers.length * 10) {
-            alert("Вы распределили не все очки")
-        }
-        else {
-            this.sendData()
-        }
-
+        this.sendData()
     }
 
-    creteButtons(num, qwNum, index) {
-        let buttons = []
-        let blabels = this.state.answers[index]
-        for (let i = 0; i < num; i++) {
-            buttons.push(
-                <div className="row">
-                    <p>
-                        <input
-                            key={i + qwNum}
-                            type="number"
-                            name={qwNum}
-                            id={i}
-                            min="0"
-                            defaultValue="0"
-                            max="10"
-                            onChange={this.handleChange}
-                            onKeyDown={(event) => {
-                                event.preventDefault();
-                            }}
-                        ></input><div>{blabels[i]}</div></p>
-                </div>)
-        }
-        return buttons
+    handleChange = (answer, questionIdx, answerIdx) => {
+        let currentAnswers = [...this.state.answers]
+        const currentAnswer = currentAnswers[questionIdx]
+
+        currentAnswer.answers[answerIdx] = Number(answer) ? answer : 0
+        currentAnswer.answers[answerIdx] = this.sumAnswers(currentAnswer.answers) > currentAnswer.max ? 0 : answer
+
+        currentAnswers[questionIdx] = currentAnswer
+        this.setState({ answers: currentAnswers })
+    }
+
+    checkInputKey = (e) => {
+        const rule = /[0-9]|Backspace|Delete|ArrowRight|ArrowLeft|Tab/;
+        if (!e.key.match(rule)) e.preventDefault();
     }
 
     createQuestions() {
-        const questions = []
-
-        for (let i = 0; i < this.state.questions.length; i++) {
-            const bbuttoms = this.creteButtons(this.state.answers[i].length, this.state.ids[i], i)
-            questions.push(
-                <div key={this.state.ids[i]} className="question">
-                    <div className="questionLabel">
-                        {this.state.questions[i]}
-                    </div>
-                    <div>
-                        {bbuttoms}
-                    </div>
+        const questions = this.state.questions.map((question, questionIdx) => (
+            <div key={question.id} className='question'>
+                <div className='questionLabel'>
+                    {question.text}
                 </div>
-            )
-        }
+                <div>
+                    {Object.keys(question.answers).map((answerId, answerIdx) => (
+                        <div className='row'>
+                            <p>
+                                <input
+                                    type='number'
+                                    key={questionIdx + answerIdx}
+                                    id={question.id}
+                                    min={0}
+                                    max={this.state.answers[questionIdx].max}
+                                    name={answerId}
+                                    value={this.state.answers[questionIdx].answers[answerIdx]}
+                                    onChange={e => this.handleChange(e.target.value, questionIdx, answerIdx)}
+                                    onKeyDown={e => this.checkInputKey(e)}
+                                >
+                                </input>
+                            </p>
+                            <div>
+                                {question.answers[answerId]}
+                            </div>
+                        </div>
+                    )
+                    )}
+                </div>
+            </div>
+        ))
         return questions
     }
 
@@ -189,7 +164,7 @@ export default class Vospriytie extends Component {
                     {Instructions.vosIns()}
                 </Modal>
                 <form>
-                    {this.createQuestions()}
+                    {this.state.questions && this.createQuestions()}
                 </form>
                 <Modal active={this.state.activee} setActive={this.openEND}>
                     <p>Спасибо за прохождение теста. Теперь вам доступен тест "Межличностные отношения".</p>

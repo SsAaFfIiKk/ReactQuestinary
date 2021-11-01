@@ -37,6 +37,8 @@ export default class Big5 extends Component {
 
     async componentDidMount() {
         const ses_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/create_session"
+        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_big5_questions"
+        
         const res = await fetch(ses_link, {
             method: "POST",
             body: JSON.stringify({
@@ -44,11 +46,9 @@ export default class Big5 extends Component {
                 "test_name": this.state.type
             })
         })
-
+        
         const out = await res.json();
-        this.setState({ sesion: out })
-
-        const get_link = "https://mycandidate.onti.actcognitive.org/questionnaires/backend/get_big5_questions"
+        
         await fetch(get_link)
             .then(async res => {
                 const data = await res.json();
@@ -59,6 +59,7 @@ export default class Big5 extends Component {
                 }
                 
                 this.setState({
+                    sesion: out,
                     ids: data["id"],
                     questions: data["q_text"],
                     answers: Object.values(data["answers"]),
@@ -77,7 +78,7 @@ export default class Big5 extends Component {
             "session_id": this.state.sesion,
             "type": this.state.type
         };
-        console.log(data)
+
         const body = {
             method: 'POST',
             body: JSON.stringify(data)
@@ -121,7 +122,6 @@ export default class Big5 extends Component {
                             min="1"
                             max="7"
                             onChange={this.handleChange}
-
                         >
                         </input>
                         {blabels[i]}

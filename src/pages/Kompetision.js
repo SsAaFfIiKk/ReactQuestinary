@@ -108,25 +108,24 @@ export default class Kompetision extends Component {
         } else {
             alert('Вы ответили не на все вопросы!')
         }
-        
     }
 
     getAnswers() {
         const selectedAnswers = document.querySelector('form').querySelectorAll('.question')
         let answers = this.state.answers
-        
+
         for (let selId in Array.from(selectedAnswers)) {
             let selectedContainer = selectedAnswers[selId]
             let qId = selectedContainer.id
             let checkboxes = selectedContainer.querySelectorAll('.flags')
-            
+
             for (let checkboxId in Array.from(checkboxes)) {
                 if (checkboxes[checkboxId].checked) {
                     answers[qId].push(checkboxes[checkboxId].value)
                 }
             }
         }
-        this.setState({answers: answers})
+        this.setState({ answers: answers })
     }
 
     updateVal(event) {
